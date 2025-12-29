@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>燕雲十六聲 - 墨染令配色工具</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a traditional feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background-color: #1c1917; /* stone-900 */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(217, 119, 6, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(231, 229, 228, 0.05) 0%, transparent 20%);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #292524;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #57534e;
+            border-radius: 4px;
+        }
+
+        /* Ink Stain Effect Utility */
+        .ink-border {
+            border: 1px solid rgba(168, 162, 158, 0.2);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        /* Gradient Text Animation */
+        .title-gradient {
+            background: linear-gradient(to right, #d97706, #fcd34d, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Input Range Styling */
+        input[type=color] {
+            -webkit-appearance: none;
+            border: none;
+            width: 100%;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 0;
+            overflow: hidden;
+            background: none;
+        }
+        input[type=color]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type=color]::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+            border: 1px solid #57534e;
+        }
+    </style>
+</head>
+<body class="text-stone-300 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md bg-stone-900/90 backdrop-blur-md rounded-xl ink-border p-6 shadow-2xl relative overflow-hidden">
+        
+        <!-- Decoration: Corner patterns -->
+        <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-amber-700/30 rounded-tl-xl pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-amber-700/30 rounded-tr-xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-amber-700/30 rounded-bl-xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-amber-700/30 rounded-br-xl pointer-events-none"></div>
+
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold title-gradient tracking-widest mb-1">燕雲文字小工具</h1>
+            <p class="text-xs text-stone-500 tracking-wider">這是醋飯提供給燕雲粉絲的小工具。</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex space-x-2 mb-6 bg-stone-800 p-1 rounded-lg">
+            <button id="tab-single" onclick="switchMode('single')" class="flex-1 py-2 text-sm font-bold rounded-md transition-all duration-300 bg-amber-700 text-stone-100 shadow-lg">
+                <i class="fas fa-brush mr-2"></i>單色題字
+            </button>
+            <button id="tab-gradient" onclick="switchMode('gradient')" class="flex-1 py-2 text-sm font-bold rounded-md transition-all duration-300 text-stone-400 hover:text-stone-200">
+                <i class="fas fa-rainbow mr-2"></i>漸層流光
+            </button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="space-y-4">
+            
+            <!-- Text Input -->
+            <div class="relative">
+                <label class="block text-xs text-amber-600/80 mb-1 ml-1">輸入文字</label>
+                <input type="text" id="user-text" placeholder="請在此輸入內容..." 
+                    class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 text-stone-200 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600 transition-colors placeholder-stone-600 text-lg"
+                    oninput="updatePreview()">
+                <button onclick="clearText()" class="absolute right-3 top-8 text-stone-500 hover:text-stone-300">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
+
+            <!-- Controls: Single Color -->
+            <div id="controls-single" class="animate-fade-in">
+                <label class="block text-xs text-amber-600/80 mb-1 ml-1">選擇顏色</label>
+                <div class="flex items-center space-x-3">
+                    <input type="color" id="color-single" value="#d97706" oninput="updatePreview()" class="h-10 flex-grow shadow-inner">
+                    <span id="hex-single" class="text-xs font-mono text-stone-400 bg-stone-800 px-2 py-2 rounded border border-stone-700 w-20 text-center">#D97706</span>
+                </div>
+                <!-- Presets -->
+                <div class="flex justify-between mt-3 gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                    <button onclick="setPreset('#ef4444')" class="w-8 h-8 rounded-full bg-red-500 border border-stone-600 shrink-0"></button>
+                    <button onclick="setPreset('#eab308')" class="w-8 h-8 rounded-full bg-yellow-500 border border-stone-600 shrink-0"></button>
+                    <button onclick="setPreset('#22c55e')" class="w-8 h-8 rounded-full bg-green-500 border border-stone-600 shrink-0"></button>
+                    <button onclick="setPreset('#3b82f6')" class="w-8 h-8 rounded-full bg-blue-500 border border-stone-600 shrink-0"></button>
+                    <button onclick="setPreset('#a855f7')" class="w-8 h-8 rounded-full bg-purple-500 border border-stone-600 shrink-0"></button>
+                    <button onclick="setPreset('#ffffff')" class="w-8 h-8 rounded-full bg-white border border-stone-600 shrink-0"></button>
+                </div>
+            </div>
+
+            <!-- Controls: Gradient -->
+            <div id="controls-gradient" class="hidden animate-fade-in">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-amber-600/80 mb-1 ml-1">起始顏色</label>
+                        <input type="color" id="color-start" value="#ef4444" oninput="updatePreview()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-amber-600/80 mb-1 ml-1">結束顏色</label>
+                        <input type="color" id="color-end" value="#3b82f6" oninput="updatePreview()">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Preview Section -->
+        <div class="mt-6">
+            <div class="flex justify-between items-end mb-1 px-1">
+                <label class="text-xs text-stone-500">視覺預覽</label>
+                <span class="text-[10px] text-stone-600 border border-stone-700 px-1 rounded">遊戲效果</span>
+            </div>
+            <div class="bg-black/40 border border-stone-700 rounded-lg p-4 min-h-[80px] flex items-center justify-center text-center relative overflow-hidden group">
+                <!-- Background visual noise -->
+                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')]"></div>
+                
+                <p id="preview-box" class="text-xl font-bold relative z-10 break-all transition-all duration-300" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                    請輸入文字...
+                </p>
+            </div>
+        </div>
+
+        <!-- Output Code -->
+        <div class="mt-4">
+            <label class="block text-xs text-stone-500 mb-1 ml-1">代碼結果 (可直接貼上)</label>
+            <textarea id="output-code" readonly 
+                class="w-full h-20 bg-stone-950/50 border border-stone-800 rounded-lg p-3 text-xs font-mono text-stone-400 focus:outline-none resize-none scrollbar-thin"></textarea>
+        </div>
+
+        <!-- Action Button -->
+        <button onclick="copyCode()" class="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-stone-100 font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-100 active:scale-95 flex items-center justify-center group">
+            <span class="group-hover:tracking-widest transition-all duration-300">複製代碼</span>
+            <i class="fas fa-copy ml-2 group-hover:rotate-12 transition-transform"></i>
+        </button>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-stone-800 text-amber-500 px-6 py-3 rounded-lg shadow-2xl border border-amber-500/30 opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span class="font-bold">複製成功！</span>
+        </div>
+
+    </div>
+
+    <div class="mt-6 text-stone-600 text-xs text-center">
+        <p>適用於 燕雲十六聲 (Where Winds Meet) 及多數支援 Rich Text 的遊戲</p>
+    </div>
+
+    <script>
+        // State
+        let currentMode = 'single'; // 'single' or 'gradient'
+
+        // DOM Elements
+        const textInput = document.getElementById('user-text');
+        const colorSingle = document.getElementById('color-single');
+        const hexSingle = document.getElementById('hex-single');
+        const colorStart = document.getElementById('color-start');
+        const colorEnd = document.getElementById('color-end');
+        const previewBox = document.getElementById('preview-box');
+        const outputCode = document.getElementById('output-code');
+        const toast = document.getElementById('toast');
+
+        // Mode Switching
+        function switchMode(mode) {
+            currentMode = mode;
+            const tabSingle = document.getElementById('tab-single');
+            const tabGradient = document.getElementById('tab-gradient');
+            const controlsSingle = document.getElementById('controls-single');
+            const controlsGradient = document.getElementById('controls-gradient');
+
+            if (mode === 'single') {
+                tabSingle.classList.replace('text-stone-400', 'text-stone-100');
+                tabSingle.classList.replace('bg-transparent', 'bg-amber-700');
+                tabSingle.classList.add('shadow-lg');
+                
+                tabGradient.classList.replace('text-stone-100', 'text-stone-400');
+                tabGradient.classList.replace('bg-amber-700', 'bg-transparent');
+                tabGradient.classList.remove('shadow-lg');
+
+                controlsSingle.classList.remove('hidden');
+                controlsGradient.classList.add('hidden');
+            } else {
+                tabGradient.classList.replace('text-stone-400', 'text-stone-100');
+                tabGradient.classList.replace('bg-transparent', 'bg-amber-700');
+                tabGradient.classList.add('shadow-lg');
+
+                tabSingle.classList.replace('text-stone-100', 'text-stone-400');
+                tabSingle.classList.replace('bg-amber-700', 'bg-transparent');
+                tabSingle.classList.remove('shadow-lg');
+
+                controlsSingle.classList.add('hidden');
+                controlsGradient.classList.remove('hidden');
+            }
+            updatePreview();
+        }
+
+        // Preset Colors
+        function setPreset(color) {
+            if (currentMode === 'single') {
+                colorSingle.value = color;
+                updatePreview();
+            }
+        }
+
+        function clearText() {
+            textInput.value = '';
+            updatePreview();
+        }
+
+        // Helper: Hex to RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        // Helper: RGB to Hex
+        function componentToHex(c) {
+            const hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + componentToHex(Math.round(r)) + componentToHex(Math.round(g)) + componentToHex(Math.round(b));
+        }
+
+        // Core Logic
+        function updatePreview() {
+            const text = textInput.value || "請輸入文字...";
+            const isPlaceholder = !textInput.value;
+            
+            // Update UI Hex label
+            hexSingle.textContent = colorSingle.value.toUpperCase();
+
+            if (isPlaceholder) {
+                previewBox.innerHTML = text;
+                previewBox.style.color = "#78716c"; // Stone-500
+                outputCode.value = "";
+                return;
+            }
+
+            if (currentMode === 'single') {
+                const color = colorSingle.value;
+                // Preview
+                previewBox.innerHTML = text;
+                previewBox.style.color = color;
+                // Code Generation: #HEXText
+                // Modified based on user request: simplified format for the game
+                outputCode.value = `${color}${text}`;
+            } else {
+                // Gradient Logic
+                const startRgb = hexToRgb(colorStart.value);
+                const endRgb = hexToRgb(colorEnd.value);
+                const cleanText = text; // Keep spaces, they matter for length calc
+                const len = cleanText.length;
+                
+                let previewHtml = "";
+                let codeResult = "";
+
+                for (let i = 0; i < len; i++) {
+                    const char = cleanText[i];
+                    
+                    // Calculate Ratio (0 to 1)
+                    let ratio = 0;
+                    if (len > 1) {
+                        ratio = i / (len - 1);
+                    }
+
+                    // Interpolate RGB
+                    const r = startRgb.r + (endRgb.r - startRgb.r) * ratio;
+                    const g = startRgb.g + (endRgb.g - startRgb.g) * ratio;
+                    const b = startRgb.b + (endRgb.b - startRgb.b) * ratio;
+                    
+                    const hexColor = rgbToHex(r, g, b);
+
+                    // Build Preview
+                    previewHtml += `<span style="color:${hexColor}">${char}</span>`;
+                    
+                    // Build Code (Simplified Method: #HEX+Char)
+                    // Optimization: Space doesn't technically need color, but easier to keep logic consistent
+                    if (char === ' ') {
+                        codeResult += ' '; 
+                    } else {
+                        codeResult += `${hexColor}${char}`;
+                    }
+                }
+
+                // For preview box, we remove the main style color and let spans handle it
+                previewBox.style.color = ""; 
+                previewBox.innerHTML = previewHtml;
+                outputCode.value = codeResult;
+            }
+        }
+
+        // Copy Function
+        function copyCode() {
+            const code = outputCode.value;
+            if (!code) return;
+
+            // Using execCommand for broader compatibility inside generic containers/iframes
+            // Fallback to Clipboard API usually, but execCommand is safer for 'file generation' responses.
+            outputCode.select();
+            outputCode.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Fallback copy failed', err);
+                // Try modern API just in case
+                navigator.clipboard.writeText(code).then(showToast);
+            }
+        }
+
+        function showToast() {
+            toast.style.opacity = '1';
+            toast.style.top = '45%'; // Slight move up animation
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.top = '50%';
+            }, 2000);
+        }
+
+        // Initialize
+        updatePreview();
+
+    </script>
+</body>
+</html>
