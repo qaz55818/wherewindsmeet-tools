@@ -151,4 +151,48 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="card-answer">${item.answer}</div>
                     </div>
                     <button class="copy-btn" title="複製答案" data-answer="${item.answer}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            `;
+
+            // Add copy event
+            const copyBtn = card.querySelector('.copy-btn');
+            copyBtn.addEventListener('click', () => {
+                const text = copyBtn.getAttribute('data-answer');
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.classList.add('copy-success');
+                    const originalHTML = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                    
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copy-success');
+                        copyBtn.innerHTML = originalHTML;
+                    }, 1500);
+                });
+            });
+
+            fragment.appendChild(card);
+        });
+
+        resultsGrid.appendChild(fragment);
+
+        if (data.length > RENDER_LIMIT) {
+            const moreIndicator = document.createElement('div');
+            moreIndicator.className = 'search-stats';
+            moreIndicator.style.gridColumn = '1 / -1';
+            moreIndicator.style.textAlign = 'center';
+            moreIndicator.style.marginTop = '1rem';
+            moreIndicator.textContent = `還有 ${data.length - RENDER_LIMIT} 筆結果... 請輸入更精確的關鍵字`;
+            resultsGrid.appendChild(moreIndicator);
+        }
+    }
+
+    function updateStats(count, total) {
+        if (count === total) {
+            searchStats.textContent = `共 ${total} 題`;
+        } else {
+            searchStats.textContent = `找到 ${count} 筆相關結果 (共 ${total} 題)`;
+        }
+    }
+});
