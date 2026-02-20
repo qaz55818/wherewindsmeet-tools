@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingIndicator = document.getElementById('loading-indicator');
     const noResults = document.getElementById('no-results');
     const themeToggle = document.getElementById('theme-toggle');
+    
+    // Sidebar Elements (新增)
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeSidebar = document.getElementById('close-sidebar');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
 
     // State
     let allData = [];
@@ -34,6 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTheme(isDarkMode);
     });
 
+    // Sidebar Event Listeners (新增)
+    menuToggle.addEventListener('click', toggleSidebar);
+    closeSidebar.addEventListener('click', toggleSidebar);
+    sidebarOverlay.addEventListener('click', toggleSidebar);
+
     // Functions
 
     function updateTheme(dark) {
@@ -41,6 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute('data-theme', 'dark');
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
+        }
+    }
+
+    // Toggle Sidebar Function (新增)
+    function toggleSidebar() {
+        const isActive = sidebar.classList.contains('active');
+        if (isActive) {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // 恢復網頁滾動
+        } else {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 禁止底層網頁滾動 (對行動裝置友善)
         }
     }
 
