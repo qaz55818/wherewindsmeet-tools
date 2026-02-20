@@ -77,25 +77,20 @@ body {
     align-items: center;
 }
 
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .nav-actions {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.discord-link {
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.discord-link:hover {
-    color: #5865F2; /* Discord's Blurple brand color */
-    transform: scale(1.05);
-}
+/* 修復了這裡原本遺失選擇器的 Bug */
+.brand-text {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -109,7 +104,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* Theme Toggle */
+/* Theme Toggle & General Icons */
 .icon-btn {
     background: none;
     border: none;
@@ -205,7 +200,6 @@ body {
     color: var(--text-primary);
     transition: all 0.2s ease;
     font-family: inherit;
-    /* Remove default styling */
     -webkit-appearance: none;
 }
 
@@ -249,7 +243,7 @@ body {
     font-size: 0.875rem;
     color: var(--text-secondary);
     text-align: right;
-    height: 1.25rem; /* Reserve space */
+    height: 1.25rem;
 }
 
 /* Card Styling */
@@ -397,6 +391,102 @@ body {
     font-size: 0.75rem;
     opacity: 0.7;
     margin-top: 0.25rem;
+}
+
+/* --- 新增：側邊導覽選單樣式 --- */
+
+/* 選單背景遮罩 */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 選單主體 */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; /* 預設隱藏在右側畫面外 */
+    width: 280px;
+    max-width: 80vw;
+    height: 100vh;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 100;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--nav-border);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--nav-border);
+}
+
+.sidebar-header h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sidebar-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.sidebar-section {
+    margin-bottom: 2rem;
+}
+
+.sidebar-section h3 {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.sidebar-link:hover {
+    background-color: var(--bg-secondary);
+    transform: translateX(4px);
+    color: var(--accent-color);
 }
 
 /* Keyframes */
