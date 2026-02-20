@@ -1,41 +1,41 @@
 :root {
-    /* Light Mode */
-    --bg-color: #ffffff;
-    --bg-secondary: #f7f9fb;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --accent-color: #3b82f6;
-    --accent-hover: #2563eb;
-    --card-bg: #ffffff;
-    --card-border: #e5e7eb;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --input-bg: #f3f4f6;
+    /* Light Mode - 武俠宣紙風 */
+    --bg-color: #F8F4E6; /* 宣紙底色 */
+    --bg-secondary: #EAE3D2; /* 稍深的底色，用於卡片或選單 */
+    --text-primary: #2B2824; /* 水墨黑 */
+    --text-secondary: #635F59; /* 淡墨灰 */
+    --accent-color: #A73322; /* 硃砂紅 */
+    --accent-hover: #8A2618; /* 深硃砂紅 */
+    --card-bg: #FCFAF2;
+    --card-border: #D8D0C0;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --input-bg: #EAE3D2;
     --input-border: transparent;
-    --input-focus-border: #3b82f6;
-    --input-focus-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    --nav-bg: rgba(255, 255, 255, 0.85);
-    --nav-border: #e5e7eb;
-    --spinner-color: #3b82f6;
+    --input-focus-border: #A73322;
+    --input-focus-shadow: 0 0 0 3px rgba(167, 51, 34, 0.15);
+    --nav-bg: rgba(248, 244, 230, 0.9);
+    --nav-border: #D8D0C0;
+    --spinner-color: #A73322;
 }
 
 [data-theme="dark"] {
-    /* Dark Mode */
-    --bg-color: #0f1115;
-    --bg-secondary: #16181d;
-    --text-primary: #f9fafb;
-    --text-secondary: #9ca3af;
-    --accent-color: #60a5fa;
-    --accent-hover: #93c5fd;
-    --card-bg: #1f2937;
-    --card-border: #374151;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --input-bg: #1f2937;
-    --input-border: #374151;
-    --input-focus-border: #60a5fa;
-    --input-focus-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
-    --nav-bg: rgba(15, 17, 21, 0.85);
-    --nav-border: #374151;
-    --spinner-color: #60a5fa;
+    /* Dark Mode - 夜行夜戰風 */
+    --bg-color: #1A1A1A; /* 暗夜黑 */
+    --bg-secondary: #242424; 
+    --text-primary: #E0DCD3; /* 殘月白 */
+    --text-secondary: #99948A;
+    --accent-color: #C04A3A; /* 亮硃砂 */
+    --accent-hover: #D65A49;
+    --card-bg: #222222;
+    --card-border: #3A3A3A;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --input-bg: #2A2A2A;
+    --input-border: #3A3A3A;
+    --input-focus-border: #C04A3A;
+    --input-focus-shadow: 0 0 0 3px rgba(192, 74, 58, 0.15);
+    --nav-bg: rgba(26, 26, 26, 0.9);
+    --nav-border: #3A3A3A;
+    --spinner-color: #C04A3A;
 }
 
 * {
@@ -53,6 +53,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
     padding-bottom: 2rem;
+}
+
+/* 武俠風專屬標題字型 (明體/宋體) */
+h1, h2, h3, .card-question, .brand-text {
+    font-family: 'Noto Serif TC', serif;
 }
 
 /* Navbar */
@@ -89,15 +94,14 @@ body {
     gap: 0.5rem;
 }
 
-/* 修復了這裡原本遺失選擇器的 Bug */
 .brand-text {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.125rem;
+    font-weight: 900;
+    font-size: 1.2rem;
     color: var(--text-primary);
-    letter-spacing: -0.025em;
+    letter-spacing: 0.05em;
 }
 
 .brand-icon {
@@ -134,7 +138,6 @@ body {
 [data-theme="light"] .icon-sun { display: none; }
 [data-theme="light"] .icon-moon { display: block; }
 
-
 /* Main Container */
 .container {
     max-width: 800px;
@@ -151,20 +154,18 @@ body {
 }
 
 .hero h1 {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2.2rem;
+    font-weight: 900;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 0.05em;
+    color: var(--accent-color); /* 使用硃砂紅突顯標題 */
 }
 
 .subtitle {
     color: var(--text-secondary);
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
 /* Search Section */
@@ -194,7 +195,7 @@ body {
     width: 100%;
     padding: 1rem 1rem 1rem 3rem;
     font-size: 1.1rem;
-    border-radius: 12px;
+    border-radius: 8px; /* 武俠風可稍微方正一點 */
     border: 2px solid var(--input-border);
     background-color: var(--input-bg);
     color: var(--text-primary);
@@ -257,7 +258,7 @@ body {
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 16px;
+    border-radius: 8px; /* 武俠風偏硬朗的邊角 */
     padding: 0;
     overflow: hidden;
     box-shadow: var(--card-shadow);
@@ -268,7 +269,7 @@ body {
 
 .card:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
     border-color: var(--accent-color);
 }
 
@@ -279,10 +280,11 @@ body {
 }
 
 .card-question {
-    font-weight: 700;
-    font-size: 1.15rem;
+    font-weight: 900;
+    font-size: 1.2rem;
     color: var(--text-primary);
     line-height: 1.4;
+    letter-spacing: 0.02em;
 }
 
 .card-body {
@@ -311,7 +313,7 @@ body {
     font-weight: 800;
     color: var(--accent-color);
     font-size: 1.4rem;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.05em;
 }
 
 .copy-btn {
@@ -319,7 +321,7 @@ body {
     border: 1px solid var(--card-border);
     color: var(--text-secondary);
     padding: 0.6rem;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -338,9 +340,9 @@ body {
 }
 
 .copy-success {
-    background-color: #10b981 !important;
+    background-color: #4A7C59 !important; /* 複製成功改用竹綠色 */
     color: white !important;
-    border-color: #10b981 !important;
+    border-color: #4A7C59 !important;
 }
 
 /* States */
@@ -383,7 +385,7 @@ body {
     padding: 2rem 1rem;
     color: var(--text-secondary);
     font-size: 0.875rem;
-    border-top: 1px solid var(--card-border);
+    border-top: 1px dashed var(--card-border); /* 虛線更有古典感 */
     margin-top: auto;
 }
 
@@ -393,16 +395,14 @@ body {
     margin-top: 0.25rem;
 }
 
-/* --- 新增：側邊導覽選單樣式 --- */
-
-/* 選單背景遮罩 */
+/* --- 側邊導覽選單樣式 --- */
 .sidebar-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 90;
     opacity: 0;
     visibility: hidden;
@@ -414,11 +414,10 @@ body {
     visibility: visible;
 }
 
-/* 選單主體 */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -100%; /* 預設隱藏在右側畫面外 */
+    right: -100%; 
     width: 280px;
     max-width: 80vw;
     height: 100vh;
@@ -426,7 +425,7 @@ body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 100;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -446,9 +445,9 @@ body {
 }
 
 .sidebar-header h2 {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--accent-color);
 }
 
 .sidebar-content {
@@ -465,22 +464,29 @@ body {
     font-size: 0.85rem;
     color: var(--text-secondary);
     margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-weight: 900;
 }
 
 .sidebar-link {
     display: flex;
     align-items: center;
+    gap: 0.75rem; /* 讓圖標與文字有適當間距 */
     padding: 0.75rem 1rem;
     color: var(--text-primary);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     margin-bottom: 0.5rem;
     transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
     font-weight: 500;
     font-size: 1rem;
+}
+
+.sidebar-link i {
+    font-size: 1.2rem;
+    width: 1.5rem;
+    text-align: center;
+    color: var(--accent-color);
 }
 
 .sidebar-link:hover {
@@ -517,11 +523,11 @@ body {
     }
     
     .hero h1 {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
     }
     
     .results-grid {
-        grid-template-columns: 1fr; /* Stack on mobile */
+        grid-template-columns: 1fr;
     }
 
     .card {
