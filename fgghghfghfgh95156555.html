@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實況數據視覺化報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 隱藏數字輸入框的上下箭頭 */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-purple-500/30 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-8">
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+                    實況數據視覺化報告
+                </h1>
+                <p class="text-slate-400 mt-2 flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> 統計區間: 2/7 - 2/21
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div id="sync-status" class="flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-full border border-slate-800 text-sm">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    連線中...
+                </div>
+            </div>
+        </header>
+
+        <!-- Overview Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="overview-cards">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- Trend Chart (Mini Bar Chart) -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-6">
+            <div class="flex items-center gap-2 mb-6">
+                <i data-lucide="trending-up" class="w-5 h-5 text-indigo-400"></i>
+                <h2 class="text-lg font-bold">每日觀看趨勢 (含補充數據)</h2>
+            </div>
+            <div class="h-40 flex items-end gap-2 md:gap-4 w-full px-2" id="trend-chart">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-950/50 text-slate-400 text-sm uppercase tracking-wider border-b border-slate-800">
+                            <th class="p-4 font-medium w-16 text-center cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('id')">
+                                <div class="flex items-center justify-center gap-1"># <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                            <th class="p-4 font-medium cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('date')">
+                                <div class="flex items-center gap-1">日期 <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                            <th class="p-4 font-medium w-20 text-center cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('session')">
+                                <div class="flex items-center justify-center gap-1">場次 <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                            <th class="p-4 font-medium min-w-[200px]">標題</th>
+                            <th class="p-4 font-medium cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('durationMins')">
+                                <div class="flex items-center gap-1">實況長度 <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                            <th class="p-4 font-medium cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('views')">
+                                <div class="flex items-center gap-1">原始觀看數 <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                            <th class="p-4 font-medium cursor-pointer hover:bg-slate-800/50 transition-colors select-none group" onclick="requestSort('totalViews')">
+                                <div class="flex items-center gap-1 text-purple-400">補充觀看數 <i data-lucide="arrow-up-down" class="w-3 h-3 opacity-50 group-hover:opacity-100"></i></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/50" id="data-table-body">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-xs text-slate-500 text-center" id="table-footer">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase & Application Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // 原始數據
+        const rawData = [
+            { id: 1, date: '2/7', session: 1, title: '更新後我來還債啦!', durationStr: '5:50:00', viewsStr: '1,586' },
+            { id: 2, date: '2/8', session: 1, title: '再忙也要燕雲（第一場）', durationStr: '4:21:43', viewsStr: '1,609' },
+            { id: 3, date: '2/8', session: 2, title: '再忙也要燕雲（第二場）', durationStr: '1:43:13', viewsStr: '563' },
+            { id: 4, date: '2/10', session: 1, title: '副本', durationStr: '4:04:03', viewsStr: '1,090' },
+            { id: 5, date: '2/11', session: 1, title: '再累都要打', durationStr: '5:34:09', viewsStr: '1,212' },
+            { id: 6, date: '2/12', session: 1, title: '（一般場）', durationStr: '5:09:44', viewsStr: '1,408' },
+            { id: 7, date: '2/13', session: 1, title: '我的燕雲比較好玩', durationStr: '6:53:18', viewsStr: '1,717' },
+            { id: 8, date: '2/14', session: 1, title: '情人節快樂', durationStr: '2:04:38', viewsStr: '660' },
+            { id: 9, date: '2/15', session: 1, title: '（一般場）', durationStr: '5:04:11', viewsStr: '722' },
+            { id: 10, date: '2/16', session: 1, title: '（一般場）', durationStr: '7:27:35', viewsStr: '2,408' },
+            { id: 11, date: '2/17', session: 1, title: '新年快樂', durationStr: '3:13:47', viewsStr: '713' },
+            { id: 12, date: '2/17', session: 2, title: '恭喜發財', durationStr: '2:46:22', viewsStr: '869' },
+            { id: 13, date: '2/18', session: 1, title: '紅包來幾包', durationStr: '6:23:13', viewsStr: '1,656' },
+            { id: 14, date: '2/20', session: 1, title: '偶來了', durationStr: '3:36:12', viewsStr: '856' },
+            { id: 15, date: '2/21', session: 1, title: '百業Day', durationStr: '3:18:36', viewsStr: '782' },
+        ];
+
+        // 應用程式狀態
+        let supplementaryData = {}; // 儲存補充觀看數 { id: number }
+        let sortConfig = { key: 'id', direction: 'asc' };
+        
+        // Firebase 狀態
+        let db, auth, user, unsubscribeData;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const COLLECTION_NAME = 'stream_supp_views';
+
+        // 輔助函式：解析時長
+        const parseDuration = (timeStr) => {
+            const [hours, minutes, seconds] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes + seconds / 60;
+        };
+
+        // 輔助函式：解析原始觀看數
+        const parseViews = (viewsStr) => parseInt(viewsStr.replace(/,/g, ''), 10);
+
+        // 初始化 Firebase (若環境變數存在)
+        async function initFirebase() {
+            if (typeof __firebase_config !== 'undefined') {
+                try {
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    onAuthStateChanged(auth, (currentUser) => {
+                        user = currentUser;
+                        if (user) {
+                            listenToSupplementaryData();
+                            updateSyncStatus('已連線並同步', 'emerald');
+                        } else {
+                            if(unsubscribeData) unsubscribeData();
+                            updateSyncStatus('未登入', 'red');
+                        }
+                    });
+                } catch (e) {
+                    console.error("Firebase init error:", e);
+                    updateSyncStatus('僅本地模式', 'slate');
+                    render(); // Fallback render
+                }
+            } else {
+                updateSyncStatus('僅本地模式', 'slate');
+                render(); // Fallback render
+            }
+        }
+
+        // 監聽雲端數據變化
+        function listenToSupplementaryData() {
+            if (!user) return;
+            const dataCollection = collection(db, 'artifacts', appId, 'users', user.uid, COLLECTION_NAME);
+            
+            unsubscribeData = onSnapshot(dataCollection, (snapshot) => {
+                const newData = {};
+                snapshot.forEach(doc => {
+                    newData[doc.id.replace('row_', '')] = doc.data().suppViews || 0;
+                });
+                supplementaryData = newData;
+                render();
+            }, (error) => {
+                console.error("Firestore listen error:", error);
+            });
+        }
+
+        // 更新數據至雲端
+        window.handleSuppViewChange = async function(id, value) {
+            const numValue = parseInt(value, 10) || 0;
+            
+            // 先樂觀更新本地畫面
+            supplementaryData[id] = numValue;
+            render();
+
+            // 若有連線則寫入雲端
+            if (user && db) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'users', user.uid, COLLECTION_NAME, `row_${id}`);
+                    await setDoc(docRef, { suppViews: numValue }, { merge: true });
+                } catch (e) {
+                    console.error("Error saving to Firestore:", e);
+                }
+            }
+        };
+
+        // UI 更新狀態指示器
+        function updateSyncStatus(text, colorStr) {
+            const el = document.getElementById('sync-status');
+            el.innerHTML = `<span class="w-2 h-2 rounded-full bg-${colorStr}-500 ${colorStr === 'emerald' ? '' : 'animate-pulse'}"></span>${text}`;
+        }
+
+        // 排序處理
+        window.requestSort = function(key) {
+            if (sortConfig.key === key) {
+                sortConfig.direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortConfig.key = key;
+                sortConfig.direction = 'asc';
+            }
+            render();
+        };
+
+        // 核心渲染邏輯
+        function render() {
+            // 1. 處理與合併數據
+            let processedData = rawData.map(item => {
+                const views = parseViews(item.viewsStr);
+                const suppViews = supplementaryData[item.id] || 0;
+                return {
+                    ...item,
+                    durationMins: parseDuration(item.durationStr),
+                    views: views,
+                    suppViews: suppViews,
+                    totalViews: views + suppViews
+                };
+            });
+
+            // 2. 數據統計
+            const maxTotalViews = Math.max(...processedData.map(d => d.totalViews));
+            const maxDuration = Math.max(...processedData.map(d => d.durationMins));
+            const sumOriginalViews = processedData.reduce((acc, curr) => acc + curr.views, 0);
+            const sumSuppViews = processedData.reduce((acc, curr) => acc + curr.suppViews, 0);
+            const absoluteTotalViews = sumOriginalViews + sumSuppViews;
+            const totalDurationMins = processedData.reduce((acc, curr) => acc + curr.durationMins, 0);
+            const totalHours = Math.floor(totalDurationMins / 60);
+
+            // 3. 執行排序
+            processedData.sort((a, b) => {
+                let aValue = a[sortConfig.key];
+                let bValue = b[sortConfig.key];
+                
+                if (sortConfig.key === 'date') {
+                    aValue = parseInt(a.date.split('/')[1]);
+                    bValue = parseInt(b.date.split('/')[1]);
+                }
+
+                if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+                if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            // 4. 渲染總覽卡片
+            const cardsHtml = `
+                ${createStatCard('monitor-play', '總實況場次', `${processedData.length} 場`, 'from-purple-500/20 to-transparent', 'text-purple-400')}
+                ${createStatCard('eye', '總累積觀看 (含補充)', absoluteTotalViews.toLocaleString(), 'from-blue-500/20 to-transparent', 'text-blue-400', `原始: ${sumOriginalViews.toLocaleString()}`)}
+                ${createStatCard('clock', '總實況時長', `約 ${totalHours} 小時`, 'from-emerald-500/20 to-transparent', 'text-emerald-400')}
+                ${createStatCard('trophy', '最高單場觀看 (含補充)', maxTotalViews.toLocaleString(), 'from-amber-500/20 to-transparent', 'text-amber-400')}
+            `;
+            document.getElementById('overview-cards').innerHTML = cardsHtml;
+
+            // 5. 渲染圖表
+            const chartHtml = processedData.map(item => `
+                <div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+                    <div class="opacity-0 group-hover:opacity-100 absolute -top-12 bg-slate-800 text-white text-xs py-1 px-2 rounded pointer-events-none transition-opacity whitespace-nowrap z-10 border border-slate-700 shadow-xl">
+                        ${item.date} 場次${item.session}<br/>
+                        總計: ${item.totalViews.toLocaleString()}
+                    </div>
+                    <div class="w-full flex flex-col-reverse justify-start rounded-t-sm transition-all duration-300 group-hover:opacity-80"
+                         style="height: ${(item.totalViews / maxTotalViews) * 100}%; min-height: 4px;">
+                        <div class="w-full bg-indigo-500 rounded-b-sm" style="height: ${(item.views / item.totalViews) * 100}%"></div>
+                        <div class="w-full bg-purple-400 rounded-t-sm" style="height: ${(item.suppViews / item.totalViews) * 100}%"></div>
+                    </div>
+                    <div class="text-[10px] md:text-xs text-slate-500 mt-2 truncate w-full text-center">
+                        ${item.date}
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('trend-chart').innerHTML = chartHtml;
+
+            // 6. 渲染表格
+            const tableBodyHtml = processedData.map(row => {
+                const isTopView = row.totalViews === maxTotalViews && maxTotalViews > 0;
+                return `
+                    <tr class="hover:bg-slate-800/40 transition-colors duration-200 group ${isTopView ? 'bg-purple-900/10' : ''}">
+                        <td class="p-4 text-center">
+                            <span class="text-slate-500 text-sm">${row.id}</span>
+                        </td>
+                        <td class="p-4 text-slate-300 font-medium whitespace-nowrap">${row.date}</td>
+                        <td class="p-4 text-center">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-800 text-xs font-semibold text-slate-400 border border-slate-700">
+                                ${row.session}
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="play-circle" class="w-4 h-4 ${isTopView ? 'text-purple-400' : 'text-slate-600'} group-hover:text-indigo-400 transition-colors"></i>
+                                <span class="font-medium ${isTopView ? 'text-purple-300' : 'text-slate-200'}">
+                                    ${row.title}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="p-4 w-40">
+                            <div class="flex flex-col gap-1.5">
+                                <span class="text-sm text-slate-300">${row.durationStr}</span>
+                                <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-emerald-500/80 h-full rounded-full" style="width: ${(row.durationMins / maxDuration) * 100}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4 w-40">
+                            <div class="flex flex-col gap-1.5">
+                                <span class="font-medium text-slate-300 text-sm">${row.views.toLocaleString()}</span>
+                                <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-indigo-500/80 h-full rounded-full" style="width: ${(row.views / maxTotalViews) * 100}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4 w-56">
+                            <div class="flex items-center gap-2">
+                                <input 
+                                    type="number" 
+                                    value="${row.suppViews || ''}" 
+                                    placeholder="0"
+                                    class="bg-slate-950 border border-slate-700 text-purple-300 rounded px-3 py-1.5 w-24 text-right focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                                    onchange="handleSuppViewChange(${row.id}, this.value)"
+                                />
+                                <div class="flex flex-col w-full min-w-[60px]">
+                                    <span class="text-xs text-slate-400 mb-1">總計: <span class="${isTopView ? 'text-amber-400 font-bold' : 'text-slate-200'}">${row.totalViews.toLocaleString()}</span></span>
+                                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden flex">
+                                         <div class="bg-indigo-500 h-full" style="width: ${(row.views / row.totalViews) * 100}%"></div>
+                                         <div class="bg-purple-400 h-full" style="width: ${(row.suppViews / row.totalViews) * 100}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            document.getElementById('data-table-body').innerHTML = tableBodyHtml;
+            
+            document.getElementById('table-footer').innerText = `共 ${processedData.length} 筆紀錄 • 點擊標題列可以進行排序 • 雲端即時存檔`;
+
+            // 7. 重新載入 Lucide Icons
+            lucide.createIcons();
+        }
+
+        // 輔助卡片生成函式
+        function createStatCard(iconName, title, value, gradient, iconColor, subtitle = '') {
+            return `
+                <div class="relative overflow-hidden bg-slate-900 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between shadow-lg">
+                    <div class="absolute inset-0 bg-gradient-to-br ${gradient} opacity-50 pointer-events-none"></div>
+                    <div class="relative z-10 flex justify-between items-start mb-4">
+                        <h3 class="text-slate-400 text-sm font-medium">${title}</h3>
+                        <div class="p-2 bg-slate-800/80 rounded-lg border border-slate-700/50 backdrop-blur-sm">
+                            <i data-lucide="${iconName}" class="w-6 h-6 ${iconColor}"></i>
+                        </div>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-2xl font-bold text-slate-100">${value}</p>
+                        ${subtitle ? `<p class="text-xs text-slate-500 mt-1">${subtitle}</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // 啟動應用程式
+        initFirebase();
+
+    </script>
+</body>
+</html>
