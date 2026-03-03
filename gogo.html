@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>五星級港式飲茶 | 專屬團購優惠</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dimsum-red': '#b31b1b',
+                        'dimsum-gold': '#d4af37',
+                        'dimsum-bg': '#fcfaf5',
+                    },
+                    fontFamily: {
+                        'sans': ['"Noto Sans TC"', 'sans-serif'],
+                        'serif': ['"Noto Serif TC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e5e7eb;
+            /* 隱藏原生滾動條使介面更像App */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        /* 移除數字輸入框的上下箭頭 */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .product-shadow {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-dimsum-red selection:text-white pb-28">
+
+    <!-- 手機版主容器 -->
+    <div class="max-w-md mx-auto bg-dimsum-bg min-h-screen relative shadow-2xl overflow-hidden">
+        
+        <!-- 頂部橫幅 (Header) -->
+        <header class="relative bg-dimsum-red text-white pb-6 rounded-b-[2.5rem] shadow-lg">
+            <!-- 裝飾背景圖案 -->
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/food.png')] rounded-b-[2.5rem]"></div>
+            
+            <div class="relative pt-10 px-6 text-center">
+                <p class="text-dimsum-gold font-bold tracking-widest text-sm mb-2">★ 嚴選新鮮食材 ★</p>
+                <h1 class="text-4xl font-serif font-black tracking-wider mb-3 drop-shadow-md">五星級港式飲茶</h1>
+                <p class="text-sm opacity-90 leading-relaxed mb-6 font-medium">
+                    每次團購都好評的港式飲茶<br>
+                    用料新鮮、實在！五星級享受一定你要嘗試
+                </p>
+
+                <!-- 優惠活動卡片 -->
+                <div class="bg-white text-dimsum-red p-4 rounded-2xl shadow-xl border-b-4 border-dimsum-gold transform translate-y-8 mx-2 relative z-10">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-dimsum-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                        限時優惠
+                    </div>
+                    <ul class="text-left text-sm font-bold space-y-2 mt-2">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fa-solid fa-truck text-dimsum-red w-6 text-center"></i>
+                            滿 <span class="text-dimsum-red text-lg mx-1">$2500</span> 免運費
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fa-solid fa-gift text-dimsum-red w-6 text-center"></i>
+                            滿 <span class="text-dimsum-red text-lg mx-1">$3000</span> 再送流沙包乙盒(6入)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- 商品列表區 (Products) -->
+        <main class="pt-14 px-4 pb-6 space-y-5" id="product-list">
+            <!-- 透過 JS 動態生成商品 -->
+        </main>
+
+        <!-- 優惠進度條 (Promo Status) -->
+        <section class="mx-4 mb-6 p-4 bg-red-50 rounded-2xl border border-red-100 shadow-sm transition-all duration-300" id="promo-container">
+            <div class="flex justify-between text-xs font-bold text-gray-500 mb-2">
+                <span>購物進度</span>
+                <span id="promo-text" class="text-dimsum-red">還差 $2500 免運</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden relative">
+                <div id="promo-bar" class="bg-gradient-to-r from-red-400 to-dimsum-red h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-gray-400 mt-1 px-1">
+                <span>$0</span>
+                <span>$2500 (免運)</span>
+                <span>$3000 (送包)</span>
+            </div>
+            
+            <!-- 贈品解鎖提示 -->
+            <div id="gift-unlocked" class="hidden mt-3 p-2 bg-yellow-100 text-yellow-800 rounded-lg text-sm font-bold flex items-center justify-center animate-pulse">
+                <i class="fa-solid fa-face-grin-stars mr-2"></i> 恭喜！已解鎖贈品：流沙包乙盒 (6入)
+            </div>
+        </section>
+
+        <!-- 訂購人資訊 (Customer Form) -->
+        <section class="mx-4 mb-8 bg-white rounded-2xl p-5 product-shadow border border-gray-100">
+            <h2 class="text-lg font-bold mb-4 flex items-center text-gray-800">
+                <div class="w-1.5 h-5 bg-dimsum-red rounded-full mr-2"></div>
+                收件人資訊
+            </h2>
+            <form id="order-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">姓名 <span class="text-red-500">*</span></label>
+                    <input type="text" id="name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dimsum-red focus:bg-white transition-colors" placeholder="請輸入真實姓名">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">聯絡電話 <span class="text-red-500">*</span></label>
+                    <input type="tel" id="phone" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dimsum-red focus:bg-white transition-colors" placeholder="09xx-xxx-xxx">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">收件地址 <span class="text-red-500">*</span></label>
+                    <input type="text" id="address" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dimsum-red focus:bg-white transition-colors" placeholder="請輸入完整收件地址">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">備註 (選填)</label>
+                    <textarea id="memo" rows="2" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-dimsum-red focus:bg-white transition-colors" placeholder="有什麼想告訴我們的嗎？"></textarea>
+                </div>
+            </form>
+        </section>
+
+        <!-- 底部結帳浮動列 (Sticky Checkout Bar) -->
+        <div class="fixed bottom-0 w-full max-w-md glass-effect border-t border-gray-200 p-4 rounded-t-2xl z-50 flex justify-between items-center pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col">
+                <div class="text-xs text-gray-500 mb-1">
+                    小計: $<span id="summary-subtotal">0</span> 
+                    <span id="summary-shipping" class="text-dimsum-red ml-1">(運費 $150)</span>
+                </div>
+                <div class="text-2xl font-black text-dimsum-red leading-none">
+                    $<span id="summary-total">0</span>
+                </div>
+            </div>
+            <button onclick="submitOrder()" id="submit-btn" class="bg-dimsum-red text-white px-8 py-3.5 rounded-full font-bold shadow-lg shadow-red-500/30 active:scale-95 transition-all flex items-center disabled:opacity-50 disabled:active:scale-100">
+                立即結帳 <i class="fa-solid fa-chevron-right ml-2 text-sm"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- 成功彈窗模態框 -->
+    <div id="success-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-[320px] w-full text-center transform scale-95 transition-transform mx-4">
+            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 text-gray-800">訂購成功！</h3>
+            <p class="text-gray-500 mb-6 text-sm">感謝您的購買，我們將盡快為您安排出貨。</p>
+            <button onclick="closeModal()" class="w-full bg-dimsum-red text-white py-3 rounded-full font-bold">
+                確認
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // 商品資料
+        const products = [
+            {
+                id: 'p1',
+                name: '魚子鮮蝦燒賣',
+                price: 350,
+                unit: '12入',
+                img: 'https://i.meee.com.tw/JLDLw1I.png' 
+            },
+            {
+                id: 'p2',
+                name: '蠔油叉燒包',
+                price: 200,
+                unit: '6入',
+                img: 'https://i.meee.com.tw/WcoP9I7.png'
+            },
+            {
+                id: 'p3',
+                name: '美味鳳爪',
+                price: 245,
+                unit: '500克',
+                img: 'https://i.meee.com.tw/7aD1n0y.png'
+            },
+            {
+                id: 'p4',
+                name: '鮮蝦糯米珍珠丸',
+                price: 350,
+                unit: '12入',
+                img: 'https://i.meee.com.tw/3mxNPyp.png'
+            }
+        ];
+
+        // 購物車狀態
+        const cart = {
+            p1: 0,
+            p2: 0,
+            p3: 0,
+            p4: 0
+        };
+
+        const SHIPPING_FEE = 150;
+        const FREE_SHIPPING_THRESHOLD = 2500;
+        const FREE_GIFT_THRESHOLD = 3000;
+
+        // 初始化頁面
+        function init() {
+            renderProducts();
+            updateCartUI();
+        }
+
+        // 渲染商品列表
+        function renderProducts() {
+            const container = document.getElementById('product-list');
+            container.innerHTML = products.map(product => `
+                <div class="bg-white rounded-2xl p-3 flex gap-4 product-shadow border border-gray-50 relative overflow-hidden group">
+                    <!-- 商品圖片 -->
+                    <div class="w-28 h-28 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 relative">
+                        <img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    
+                    <!-- 商品資訊與操作 -->
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                            <h3 class="text-[17px] font-bold text-gray-800 leading-tight">${product.name}</h3>
+                            <div class="inline-block px-2 py-0.5 mt-1 bg-red-50 text-dimsum-red text-[11px] font-bold rounded-md">
+                                每份 ${product.unit}
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-end mt-2">
+                            <div class="text-xl font-black text-dimsum-red">
+                                $${product.price}
+                            </div>
+                            
+                            <!-- 數量控制器 -->
+                            <div class="flex items-center bg-gray-50 rounded-full border border-gray-200 shadow-sm overflow-hidden">
+                                <button onclick="updateQty('${product.id}', -1)" class="w-8 h-8 flex justify-center items-center text-gray-500 hover:bg-gray-200 active:bg-gray-300 transition-colors">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" id="qty-${product.id}" value="0" readonly class="w-8 h-8 text-center bg-transparent text-sm font-bold text-gray-800 outline-none">
+                                <button onclick="updateQty('${product.id}', 1)" class="w-8 h-8 flex justify-center items-center text-dimsum-red font-bold hover:bg-red-50 active:bg-red-100 transition-colors">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新數量
+        function updateQty(id, change) {
+            const newQty = cart[id] + change;
+            if (newQty >= 0 && newQty <= 99) {
+                cart[id] = newQty;
+                document.getElementById(`qty-${id}`).value = cart[id];
+                updateCartUI();
+            }
+        }
+
+        // 更新購物車與金額邏輯
+        function updateCartUI() {
+            let subtotal = 0;
+            let totalItems = 0;
+
+            products.forEach(p => {
+                subtotal += p.price * cart[p.id];
+                totalItems += cart[p.id];
+            });
+
+            // 運費邏輯
+            let shipping = 0;
+            if (totalItems > 0 && subtotal < FREE_SHIPPING_THRESHOLD) {
+                shipping = SHIPPING_FEE;
+            }
+
+            const total = subtotal + shipping;
+
+            // 更新底部顯示
+            document.getElementById('summary-subtotal').innerText = subtotal.toLocaleString();
+            document.getElementById('summary-total').innerText = total.toLocaleString();
+            
+            const shippingLabel = document.getElementById('summary-shipping');
+            if (totalItems === 0) {
+                shippingLabel.innerText = '';
+            } else if (shipping === 0) {
+                shippingLabel.innerText = '(免運費)';
+                shippingLabel.className = 'text-green-600 ml-1 font-bold';
+            } else {
+                shippingLabel.innerText = `(運費 $${SHIPPING_FEE})`;
+                shippingLabel.className = 'text-dimsum-red ml-1';
+            }
+
+            // 更新進度條與提示
+            updatePromoStatus(subtotal);
+
+            // 結帳按鈕防呆
+            const submitBtn = document.getElementById('submit-btn');
+            if (totalItems === 0) {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // 更新促銷進度條
+        function updatePromoStatus(subtotal) {
+            const bar = document.getElementById('promo-bar');
+            const text = document.getElementById('promo-text');
+            const giftBox = document.getElementById('gift-unlocked');
+
+            // 計算百分比 (以3000為滿100%)
+            let percentage = (subtotal / FREE_GIFT_THRESHOLD) * 100;
+            if (percentage > 100) percentage = 100;
+            bar.style.width = `${percentage}%`;
+
+            if (subtotal === 0) {
+                text.innerText = "開始選購享優惠";
+                text.className = "text-gray-500";
+                giftBox.classList.add('hidden');
+            } else if (subtotal < FREE_SHIPPING_THRESHOLD) {
+                const diff = FREE_SHIPPING_THRESHOLD - subtotal;
+                text.innerText = `再買 $${diff} 享免運`;
+                text.className = "text-dimsum-red";
+                giftBox.classList.add('hidden');
+            } else if (subtotal >= FREE_SHIPPING_THRESHOLD && subtotal < FREE_GIFT_THRESHOLD) {
+                const diff = FREE_GIFT_THRESHOLD - subtotal;
+                text.innerText = `已免運！再買 $${diff} 送流沙包`;
+                text.className = "text-dimsum-gold font-bold";
+                giftBox.classList.add('hidden');
+            } else {
+                text.innerText = "已享免運 ＆ 流沙包贈品！";
+                text.className = "text-green-600 font-bold";
+                giftBox.classList.remove('hidden');
+            }
+        }
+
+        // 提交訂單
+        function submitOrder() {
+            // 基本表單驗證
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('請完整填寫 收件人姓名、電話 與 地址！');
+                return;
+            }
+
+            // 顯示成功模態框
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // 彈出動畫
+            setTimeout(() => {
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10);
+        }
+
+        // 關閉模態框並重置
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.querySelector('div').classList.remove('scale-100');
+            modal.querySelector('div').classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                
+                // 重置表單與購物車
+                document.getElementById('order-form').reset();
+                Object.keys(cart).forEach(k => cart[k] = 0);
+                document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+                updateCartUI();
+                
+                // 滾動回頂部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 200);
+        }
+
+        // 啟動
+        window.onload = init;
+    </script>
+</body>
+</html>
