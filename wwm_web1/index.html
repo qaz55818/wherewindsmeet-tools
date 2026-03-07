@@ -2,105 +2,84 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>燕雲十六聲 - 百業成員請假系統</title>
-    <!-- 這裡的警告可以完全忽略，不影響任何功能 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Serif TC', serif;
-            background-color: #eaddcf;
-            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d0c0ad" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            background-color: #d0c0ad;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23a89a8c" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
             color: #3e362e;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
         }
 
-        /* 古風邊框 */
-        .gufeng-border {
-            border: 2px solid #5a4a3f;
+        /* 行動版主容器 */
+        #app-container {
+            width: 100%;
+            max-width: 480px; /* 限制最大寬度如手機 */
+            min-height: 100vh;
+            background-color: #f2e9de;
+            display: flex;
+            flex-direction: column;
             position: relative;
-        }
-        .gufeng-border::before, .gufeng-border::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #5a4a3f;
-        }
-        .gufeng-border::before { top: -2px; left: -2px; }
-        .gufeng-border::after { bottom: -2px; right: -2px; }
-
-        .gufeng-inner-border {
-            border: 1px solid #8e7f70;
-            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* 標題紅底白字設計 */
-        .title-badge {
-            background-color: #8c2a2a;
-            color: #f2e9de;
-            padding: 0.5rem 2rem;
-            display: inline-block;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-            letter-spacing: 0.2em;
+        @media (min-width: 481px) {
+            #app-container {
+                min-height: 85vh;
+                height: 85vh;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+        }
+
+        /* 輸入框樣式 */
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid #a89a8c;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 16px; /* 防止 iOS 縮放 */
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #8c2a2a;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(140, 42, 42, 0.2);
         }
 
         /* 按鈕樣式 */
         .btn-primary {
             background-color: #5a4a3f;
             color: #f2e9de;
-            border: 1px solid #3e362e;
+            border-radius: 6px;
             transition: all 0.3s;
+            border: none;
         }
-        .btn-primary:hover {
+        .btn-primary:active {
             background-color: #8c2a2a;
-            border-color: #8c2a2a;
+            transform: scale(0.98);
         }
         
         .btn-danger {
             background-color: #8c2a2a;
             color: #f2e9de;
-            border: 1px solid #5a1a1a;
-            transition: all 0.3s;
-        }
-        .btn-danger:hover {
-            background-color: #a33535;
-        }
-
-        /* 輸入框樣式 */
-        .form-input {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid #a89a8c;
-            border-radius: 2px;
-            transition: border-color 0.3s;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #8c2a2a;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* 自訂捲軸 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #eaddcf; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #a89a8c; 
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8e7f70; 
+            border-radius: 4px;
         }
 
         /* 提示框動畫 */
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+        @keyframes slideDownUp {
+            0% { opacity: 0; transform: translateY(-30px) translateX(-50%); }
             10% { opacity: 1; transform: translateY(0) translateX(-50%); }
             90% { opacity: 1; transform: translateY(0) translateX(-50%); }
-            100% { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+            100% { opacity: 0; transform: translateY(-30px) translateX(-50%); }
         }
         .toast {
             position: fixed;
@@ -109,144 +88,188 @@
             transform: translateX(-50%);
             background-color: #8c2a2a;
             color: #f2e9de;
-            padding: 10px 24px;
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            z-index: 1000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 9999;
             display: none;
             pointer-events: none;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
         }
         .toast.show {
             display: block;
-            animation: fadeInOut 3s forwards;
+            animation: slideDownUp 3s forwards;
         }
 
-        /* 管理員驗證彈窗 */
-        #adminAuthModal {
-            backdrop-filter: blur(4px);
+        /* 隱藏捲軸但可滾動 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 頁籤切換動畫 */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="p-4 md:p-8 flex flex-col items-center">
+<body>
 
-    <!-- 系統提示框 -->
-    <div id="toastMessage" class="toast">訊息提示</div>
+    <div id="app-container">
+        <!-- 系統提示框 -->
+        <div id="toastMessage" class="toast">訊息提示</div>
 
-    <!-- 管理員驗證彈窗 (預設隱藏) -->
-    <div id="adminAuthModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div class="gufeng-border bg-[#f2e9de] shadow-2xl p-6 max-w-sm w-full text-center">
-            <h3 class="text-xl font-bold text-[#5a4a3f] mb-4">管理員身分驗證</h3>
-            <input type="password" id="adminPwdInput" placeholder="請輸入管理密碼" class="form-input w-full px-4 py-2 mb-4 text-center">
-            <div class="flex space-x-4">
-                <button id="cancelAdminBtn" class="flex-1 px-4 py-2 border border-[#8e7f70] text-[#5a4a3f] hover:bg-[#eaddcf] transition">取消</button>
-                <button id="verifyAdminBtn" class="flex-1 btn-primary px-4 py-2">驗證</button>
+        <!-- 頂部 Header -->
+        <header class="bg-[#8c2a2a] text-[#f2e9de] pt-6 pb-4 px-4 relative shadow-md z-20">
+            <!-- 將此處設為觸發管理員的隱藏按鈕 -->
+            <h1 id="appTitleTrigger" class="text-xl font-black tracking-widest text-center cursor-pointer select-none">
+                百業請假登記
+            </h1>
+        </header>
+
+        <!-- 導覽頁籤 (Tabs) -->
+        <div class="flex border-b border-[#a89a8c]/40 bg-[#eaddcf] shadow-sm z-10">
+            <button id="tabBtnForm" class="flex-1 py-3 text-[15px] font-bold text-[#8c2a2a] border-b-[3px] border-[#8c2a2a] transition">
+                📝 呈交帖文
+            </button>
+            <button id="tabBtnRecords" class="flex-1 py-3 text-[15px] font-bold text-[#8e7f70] border-b-[3px] border-transparent transition">
+                📜 卷宗紀錄
+            </button>
+        </div>
+
+        <!-- 管理員設定面板 (預設隱藏，驗證後顯示在頂部) -->
+        <div id="adminPanel" class="hidden bg-[#5a4a3f] text-[#f2e9de] p-4 shadow-inner text-sm">
+            <div class="flex justify-between items-center mb-3 border-b border-[#8e7f70]/50 pb-2">
+                <span class="font-bold flex items-center">
+                    ⚙️ 管理模式 (已解鎖)
+                </span>
+                <button id="logoutAdminBtn" class="text-xs bg-[#8c2a2a] px-2 py-1 rounded">退出</button>
             </div>
-        </div>
-    </div>
-
-    <!-- 頂部管理員設定面板 (預設隱藏，驗證後顯示) -->
-    <div id="adminPanel" class="hidden w-full max-w-6xl mb-6 gufeng-border bg-[#d0c0ad] shadow-md p-4">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <h2 class="text-lg font-bold text-[#8c2a2a] mb-4 md:mb-0 flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                管理中心 (已解鎖)
-            </h2>
-            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
-                <div class="flex items-center bg-[#f2e9de] p-2 rounded border border-[#a89a8c]">
-                    <span class="text-sm font-bold text-[#5a4a3f] mr-2">請假冷卻(分鐘):</span>
-                    <input type="number" id="cdTimeInput" class="w-16 px-2 py-1 bg-white border border-[#a89a8c] text-center text-sm" min="0">
-                    <button id="saveCdBtn" class="ml-2 text-xs bg-[#5a4a3f] text-[#f2e9de] px-2 py-1 hover:bg-[#8c2a2a] transition">儲存</button>
-                </div>
-                <div class="flex items-center bg-[#f2e9de] p-2 rounded border border-[#a89a8c]">
-                    <span class="text-sm font-bold text-[#5a4a3f] mr-2">封鎖IP:</span>
-                    <input type="text" id="banIpInput" placeholder="輸入要封鎖的IP" class="w-32 px-2 py-1 bg-white border border-[#a89a8c] text-sm">
-                    <button id="banIpBtn" class="ml-2 text-xs btn-danger px-2 py-1 transition">封鎖</button>
-                </div>
-            </div>
-        </div>
-        <div id="bannedIpsContainer" class="mt-4 text-sm text-[#5a4a3f]">
-            <span class="font-bold">已封鎖的 IP：</span>
-            <span id="bannedIpsList" class="italic text-[#8e7f70]">無</span>
-        </div>
-    </div>
-
-    <!-- 主要系統介面 -->
-    <div id="appView" class="w-full max-w-6xl flex flex-col items-center">
-
-        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- 左側：請假表單 -->
-            <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4">
-                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                    <div class="title-badge text-xl font-black">百業請假登記</div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <label class="whitespace-nowrap mr-2">請假冷卻(分):</label>
+                    <div class="flex">
+                        <input type="number" id="cdTimeInput" class="w-16 px-2 py-1 bg-white text-[#3e362e] rounded-l outline-none" min="0">
+                        <button id="saveCdBtn" class="bg-[#8e7f70] px-3 py-1 rounded-r font-bold">儲存</button>
+                    </div>
                 </div>
-                
-                <div class="gufeng-inner-border mt-2 h-full flex flex-col justify-between">
-                    <form id="leaveForm" class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">遊戲名稱 <span class="text-red-600">*</span></label>
-                            <input type="text" id="gameId" required placeholder="請輸入遊戲名稱" 
-                                   class="form-input w-full px-4 py-2 text-[#3e362e] placeholder-[#a89a8c]">
-                        </div>
+                <div class="flex items-center justify-between">
+                    <label class="whitespace-nowrap mr-2">封鎖IP:</label>
+                    <div class="flex flex-1">
+                        <input type="text" id="banIpInput" placeholder="輸入IP" class="w-full min-w-0 px-2 py-1 bg-white text-[#3e362e] rounded-l outline-none">
+                        <button id="banIpBtn" class="btn-danger px-3 py-1 rounded-r rounded-l-none font-bold">封鎖</button>
+                    </div>
+                </div>
+                <div id="bannedIpsContainer" class="pt-2">
+                    <span class="font-bold block mb-1">已封鎖IP清單：</span>
+                    <div id="bannedIpsList" class="flex flex-wrap gap-2 text-xs italic text-[#d0c0ad]">無</div>
+                </div>
+            </div>
+        </div>
 
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">百業戰請假日期 <span class="text-red-600">*</span></label>
-                            <input type="date" id="leaveDate" required 
-                                   class="form-input w-full px-4 py-2 text-[#3e362e]">
-                        </div>
+        <!-- 內容區 -->
+        <main class="flex-1 overflow-y-auto no-scrollbar relative p-4 bg-[#f2e9de]">
+            
+            <!-- 區塊 1：請假表單 -->
+            <div id="viewForm" class="tab-content active h-full flex flex-col justify-between">
+                <form id="leaveForm" class="space-y-5 mt-2">
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">遊戲名稱 <span class="text-red-600">*</span></label>
+                        <input type="text" id="gameId" required placeholder="請輸入完整遊戲名稱" 
+                               class="form-input w-full px-4 py-3 text-[#3e362e] placeholder-[#a89a8c]">
+                    </div>
 
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">請假原因 <span class="text-red-600">*</span></label>
-                            <select id="reasonSelect" required class="form-input w-full px-4 py-2 text-[#3e362e] mb-2 cursor-pointer">
-                                <option value="" disabled selected>請選擇請假原因</option>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">百業戰請假日期 <span class="text-red-600">*</span></label>
+                        <input type="date" id="leaveDate" required 
+                               class="form-input w-full px-4 py-3 text-[#3e362e]">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">請假原因 <span class="text-red-600">*</span></label>
+                        <div class="relative">
+                            <select id="reasonSelect" required class="form-input w-full px-4 py-3 text-[#3e362e] appearance-none">
+                                <option value="" disabled selected>點擊選擇請假原因</option>
                                 <option value="有事無法參加">有事無法參加</option>
                                 <option value="可能晚點才能參加">可能晚點才能參加</option>
                                 <option value="其他">其他 (自行輸入)</option>
                             </select>
-                            <input type="text" id="reasonOther" maxlength="30" placeholder="請輸入其他原因 (限30字內)" 
-                                   class="form-input w-full px-4 py-2 text-[#3e362e] placeholder-[#a89a8c] hidden">
+                            <!-- 下拉箭頭圖示 -->
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#5a4a3f]">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
                         </div>
+                        <input type="text" id="reasonOther" maxlength="30" placeholder="請輸入其他原因 (限30字內)" 
+                               class="form-input w-full px-4 py-3 mt-3 text-[#3e362e] placeholder-[#a89a8c] hidden">
+                    </div>
 
-                        <div class="pt-4 text-center">
-                            <button type="submit" id="submitBtn" class="btn-primary w-full sm:w-auto px-12 py-3 font-bold tracking-widest text-lg cursor-pointer">
-                                呈交請假帖
-                            </button>
-                        </div>
-                    </form>
+                    <div class="pt-8">
+                        <button type="submit" id="submitBtn" class="btn-primary w-full py-3.5 font-bold tracking-widest text-lg shadow-md">
+                            呈交請假帖
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 區塊 2：卷宗紀錄 -->
+            <div id="viewRecords" class="tab-content pb-6">
+                <!-- 讀取中 -->
+                <div id="loadingState" class="text-center py-10 text-[#8e7f70] font-bold">
+                    <svg class="animate-spin h-8 w-8 mx-auto mb-2 text-[#8c2a2a]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    正在翻閱卷宗...
+                </div>
+
+                <div id="recordsContainer" class="hidden space-y-3">
+                    <!-- 紀錄卡片將由 JS 產生 -->
+                </div>
+                
+                <div id="emptyState" class="hidden text-center py-16 text-[#8e7f70] flex flex-col items-center">
+                    <span class="text-4xl mb-2 opacity-50">📜</span>
+                    尚無人告假，江湖一片祥和。
                 </div>
             </div>
 
-            <!-- 右側：請假紀錄 -->
-            <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4 md:mt-4">
-                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                    <div class="title-badge text-xl font-black" style="background-color: #5a4a3f;">近期請假卷宗</div>
-                </div>
+        </main>
+    </div>
 
-                <div class="gufeng-inner-border mt-2 h-full flex flex-col">
-                    <div id="recordsContainer" class="hidden flex-1 overflow-y-auto pr-2 space-y-4 max-h-[500px]">
-                        <!-- 紀錄卡片模板 -->
-                    </div>
-                    
-                    <div id="emptyState" class="hidden text-center py-12 text-[#8e7f70]">
-                        尚無人告假，江湖一片祥和。
-                    </div>
-                </div>
+    <!-- 管理員驗證彈窗 -->
+    <div id="adminAuthModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#f2e9de] rounded-xl shadow-2xl p-6 max-w-xs w-full text-center border border-[#a89a8c]">
+            <h3 class="text-xl font-bold text-[#5a4a3f] mb-2">機密解鎖</h3>
+            <p class="text-xs text-[#8e7f70] mb-4">請輸入管理員密令</p>
+            <input type="password" id="adminPwdInput" placeholder="密令" class="form-input w-full px-4 py-3 mb-5 text-center tracking-[0.2em] font-bold">
+            <div class="flex space-x-3">
+                <button id="cancelAdminBtn" class="flex-1 px-4 py-2.5 rounded-lg border border-[#8e7f70] text-[#5a4a3f] hover:bg-[#eaddcf] transition font-bold">取消</button>
+                <button id="verifyAdminBtn" class="flex-1 btn-primary px-4 py-2.5 font-bold">驗證</button>
             </div>
         </div>
     </div>
 
-    <!-- 底部管理員入口 -->
-    <div class="fixed bottom-4 right-4">
-        <button id="openAdminBtn" class="text-sm text-[#8e7f70] hover:text-[#5a4a3f] transition font-bold px-2 py-1 bg-[#eaddcf]/80 rounded">⚙️ 管理模式</button>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 將 JS 直接合併進來，解決所有本地雙擊的 CORS 錯誤 -->
-    <!-- ========================================== -->
+    <!-- Firebase 邏輯區 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // ==========================================
+        // Firebase 專案設定
+        // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyBb8FCyP4bT8zkNXZymqkhXL7CU8QaDp_U",
             authDomain: "wwm-web-142a4.firebaseapp.com",
@@ -268,37 +291,93 @@
         let systemConfig = { cdTimeMinutes: 0, bannedIps: [] };
         let allRecords = [];
 
+        // DOM 元素
         const form = document.getElementById('leaveForm');
         const reasonSelect = document.getElementById('reasonSelect');
         const reasonOther = document.getElementById('reasonOther');
         const submitBtn = document.getElementById('submitBtn');
+        
         const recordsContainer = document.getElementById('recordsContainer');
         const emptyState = document.getElementById('emptyState');
+        const loadingState = document.getElementById('loadingState');
         const toastEl = document.getElementById('toastMessage');
 
-        const openAdminBtn = document.getElementById('openAdminBtn');
+        // UI Tabs 控制
+        const tabBtnForm = document.getElementById('tabBtnForm');
+        const tabBtnRecords = document.getElementById('tabBtnRecords');
+        const viewForm = document.getElementById('viewForm');
+        const viewRecords = document.getElementById('viewRecords');
+
+        function switchTab(target) {
+            if (target === 'form') {
+                viewForm.classList.add('active');
+                viewRecords.classList.remove('active');
+                tabBtnForm.classList.replace('text-[#8e7f70]', 'text-[#8c2a2a]');
+                tabBtnForm.classList.replace('border-transparent', 'border-[#8c2a2a]');
+                tabBtnRecords.classList.replace('text-[#8c2a2a]', 'text-[#8e7f70]');
+                tabBtnRecords.classList.replace('border-[#8c2a2a]', 'border-transparent');
+            } else {
+                viewRecords.classList.add('active');
+                viewForm.classList.remove('active');
+                tabBtnRecords.classList.replace('text-[#8e7f70]', 'text-[#8c2a2a]');
+                tabBtnRecords.classList.replace('border-transparent', 'border-[#8c2a2a]');
+                tabBtnForm.classList.replace('text-[#8c2a2a]', 'text-[#8e7f70]');
+                tabBtnForm.classList.replace('border-[#8c2a2a]', 'border-transparent');
+            }
+        }
+        tabBtnForm.addEventListener('click', () => switchTab('form'));
+        tabBtnRecords.addEventListener('click', () => switchTab('records'));
+
+        // 隱藏管理員觸發器 (連點標題 5 次)
+        const appTitleTrigger = document.getElementById('appTitleTrigger');
         const adminAuthModal = document.getElementById('adminAuthModal');
         const adminPwdInput = document.getElementById('adminPwdInput');
         const verifyAdminBtn = document.getElementById('verifyAdminBtn');
         const cancelAdminBtn = document.getElementById('cancelAdminBtn');
         const adminPanel = document.getElementById('adminPanel');
+        const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+        
+        let titleClickCount = 0;
+        let titleClickTimer = null;
+
+        appTitleTrigger.addEventListener('click', () => {
+            titleClickCount++;
+            if (titleClickTimer) clearTimeout(titleClickTimer);
+            
+            // 1.5 秒內沒有繼續點擊就重置
+            titleClickTimer = setTimeout(() => {
+                titleClickCount = 0;
+            }, 1500);
+
+            if (titleClickCount >= 5) {
+                titleClickCount = 0; // 重置計數器
+                if (!isAdmin) {
+                    adminAuthModal.classList.remove('hidden');
+                    setTimeout(() => adminPwdInput.focus(), 100);
+                } else {
+                    showToast('提示：您目前已是管理模式');
+                }
+            }
+        });
+
         const cdTimeInput = document.getElementById('cdTimeInput');
         const saveCdBtn = document.getElementById('saveCdBtn');
         const banIpInput = document.getElementById('banIpInput');
         const banIpBtn = document.getElementById('banIpBtn');
         const bannedIpsList = document.getElementById('bannedIpsList');
 
+        // 獲取使用者 IP
         async function fetchIp() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
                 currentIp = data.ip;
             } catch (error) {
-                console.warn("無法取得 IP 資訊", error);
-                currentIp = "Unknown_" + Math.random().toString(36).substr(2, 9);
+                currentIp = "Unknown_" + Math.random().toString(36).substring(2, 9);
             }
         }
 
+        // 提示功能
         function showToast(message, isError = false) {
             toastEl.textContent = message;
             toastEl.style.backgroundColor = isError ? '#5a4a3f' : '#8c2a2a';
@@ -319,6 +398,7 @@
             }
         });
 
+        // 載入系統設定
         async function initSystemConfig() {
             const configRef = doc(db, CONFIG_COLLECTION, CONFIG_DOC);
             const docSnap = await getDoc(configRef);
@@ -338,6 +418,7 @@
             });
         }
 
+        // 載入請假資料
         function loadData() {
             const q = query(collection(db, COLLECTION_NAME), orderBy('submitTime', 'desc'));
 
@@ -348,22 +429,22 @@
                 });
                 renderRecords(allRecords);
             }, (error) => {
-                console.error("讀取失敗:", error);
-                showToast("無法連接卷宗庫，請檢查權限", true);
+                loadingState.innerHTML = "無法連接卷宗庫";
+                showToast("讀取失敗，請檢查網路", true);
             });
         }
 
         function renderBannedIps() {
             if (!systemConfig.bannedIps || systemConfig.bannedIps.length === 0) {
-                bannedIpsList.innerHTML = '<span class="italic text-[#8e7f70]">無</span>';
+                bannedIpsList.innerHTML = '無';
                 return;
             }
             
             bannedIpsList.innerHTML = '';
             systemConfig.bannedIps.forEach(ip => {
                 const span = document.createElement('span');
-                span.className = 'inline-flex items-center bg-[#8c2a2a] text-[#f2e9de] px-2 py-0.5 rounded mr-2 mb-2 text-xs';
-                span.innerHTML = `${escapeHTML(ip)} <button data-ip="${escapeHTML(ip)}" class="ml-1 text-[#eaddcf] hover:text-white unban-btn">×</button>`;
+                span.className = 'bg-[#8c2a2a] text-[#f2e9de] px-2 py-1 rounded flex items-center shadow-sm';
+                span.innerHTML = `${escapeHTML(ip)} <button data-ip="${escapeHTML(ip)}" class="ml-2 text-[#eaddcf] active:text-white unban-btn px-1">✕</button>`;
                 bannedIpsList.appendChild(span);
             });
 
@@ -372,13 +453,13 @@
                     const ipToRemove = e.target.getAttribute('data-ip');
                     const newBannedList = systemConfig.bannedIps.filter(ip => ip !== ipToRemove);
                     await updateDoc(doc(db, CONFIG_COLLECTION, CONFIG_DOC), { bannedIps: newBannedList });
-                    showToast(`已解除封鎖 ${ipToRemove}`);
+                    showToast(`已解除封鎖`);
                 });
             });
         }
 
         window.deleteRecord = async function(id) {
-            if(confirm("確定要銷毀這份請假卷宗嗎？此操作無法復原。")) {
+            if(confirm("確定要銷毀這份請假卷宗嗎？")) {
                 try {
                     await deleteDoc(doc(db, COLLECTION_NAME, id));
                     showToast("卷宗已銷毀");
@@ -389,6 +470,8 @@
         };
 
         function renderRecords(records) {
+            loadingState.classList.add('hidden');
+
             if (records.length === 0) {
                 recordsContainer.classList.add('hidden');
                 emptyState.classList.remove('hidden');
@@ -419,7 +502,7 @@
                     if (dateParts.length === 3) {
                         const localDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
                         const days = ['日', '一', '二', '三', '四', '五', '六'];
-                        weekdayStr = ` (星期${days[localDate.getDay()]})`;
+                        weekdayStr = `(星期${days[localDate.getDay()]})`;
                     }
                 }
 
@@ -431,29 +514,28 @@
                 const safeIp = escapeHTML(record.ipAddress || '無紀錄');
 
                 const adminHtml = isAdmin ? `
-                    <div class="mt-3 pt-2 border-t border-[#a89a8c]/30 flex justify-between items-center">
-                        <span class="text-xs text-[#8c2a2a] font-bold">來源 IP: ${safeIp}</span>
-                        <button onclick="deleteRecord('${record.id}')" class="text-xs bg-[#8c2a2a] text-white px-3 py-1 rounded hover:bg-[#a33535] transition">撤回/刪除</button>
+                    <div class="mt-3 pt-3 border-t border-[#a89a8c]/40 flex justify-between items-center">
+                        <span class="text-[11px] text-[#8c2a2a] font-bold tracking-wider">IP: ${safeIp}</span>
+                        <button onclick="deleteRecord('${record.id}')" class="text-xs bg-[#8c2a2a] text-[#f2e9de] px-3 py-1.5 rounded shadow active:scale-95 transition">銷毀</button>
                     </div>
                 ` : '';
 
                 const card = document.createElement('div');
-                card.className = 'bg-white/40 p-4 border-l-4 border-[#8c2a2a] shadow-sm mb-3 relative';
+                card.className = 'bg-white/50 p-4 border-l-[4px] border-[#8c2a2a] rounded-r-lg shadow-sm';
                 
                 card.innerHTML = `
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                        <span class="font-bold text-lg text-[#8c2a2a] flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                            ${safeGameId}
-                            <span class="text-xs bg-[#eaddcf] text-[#5a4a3f] px-2 py-0.5 rounded ml-2 font-normal border border-[#a89a8c]">累計請假 ${totalLeaves} 次</span>
-                        </span>
-                        <span class="text-xs text-[#8e7f70] mt-1 sm:mt-0">呈交於: ${dateStr}</span>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex flex-col">
+                            <span class="font-black text-lg text-[#8c2a2a] leading-none mb-1">${safeGameId}</span>
+                            <span class="text-[10px] bg-[#eaddcf] text-[#5a4a3f] px-1.5 py-0.5 rounded border border-[#a89a8c] inline-block w-max">累計請假 ${totalLeaves} 次</span>
+                        </div>
+                        <span class="text-[10px] text-[#8e7f70] mt-1">${dateStr}</span>
                     </div>
-                    <div class="text-sm mb-2 text-[#5a4a3f] border-b border-[#a89a8c]/30 pb-2">
-                        <span class="font-bold">請假日期：</span> ${record.leaveDate}${weekdayStr}
+                    <div class="text-sm mb-2 text-[#5a4a3f] border-b border-[#a89a8c]/20 pb-2">
+                        <span class="font-bold">日期：</span> ${record.leaveDate} <span class="text-xs text-[#8e7f70]">${weekdayStr}</span>
                     </div>
-                    <div class="text-sm text-[#3e362e] bg-white/60 p-3 rounded leading-relaxed">
-                        <span class="font-bold text-[#5a4a3f]">事由：</span><br/>
+                    <div class="text-sm text-[#3e362e] bg-white/60 p-3 rounded leading-relaxed border border-white">
+                        <span class="font-bold text-[#5a4a3f] text-xs">原因：</span><br/>
                         ${safeReason}
                     </div>
                     ${adminHtml}
@@ -466,7 +548,7 @@
             e.preventDefault();
 
             if (systemConfig.bannedIps && systemConfig.bannedIps.includes(currentIp)) {
-                showToast('您已被禁止呈交請假帖，請聯繫管理員。', true);
+                showToast('您已被禁止呈交，請聯繫管理員。', true);
                 return;
             }
 
@@ -476,7 +558,7 @@
                     const diffMinutes = (Date.now() - myLastRecord.submitTime) / 60000;
                     if (diffMinutes < systemConfig.cdTimeMinutes) {
                         const remain = Math.ceil(systemConfig.cdTimeMinutes - diffMinutes);
-                        showToast(`請假冷卻中，請於 ${remain} 分鐘後再試。`, true);
+                        showToast(`請於 ${remain} 分鐘後再試。`, true);
                         return;
                     }
                 }
@@ -491,7 +573,7 @@
             }
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="animate-pulse">呈交中...</span>';
+            submitBtn.innerHTML = '飛鴿傳書中...';
 
             try {
                 await addDoc(collection(db, COLLECTION_NAME), {
@@ -502,38 +584,23 @@
                     ipAddress: currentIp
                 });
 
-                showToast('請假帖已飛鴿傳書呈交！');
+                showToast('呈交成功！');
                 form.reset();
                 reasonOther.classList.add('hidden');
                 reasonOther.required = false;
                 
+                // 送出後自動切換到紀錄頁面方便查看
+                switchTab('records');
+                
             } catch (error) {
-                console.error("寫入失敗:", error);
-                showToast('呈交失敗，請檢查資料庫權限設定', true);
+                showToast('呈交失敗，請檢查網路或權限', true);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '呈交請假帖';
             }
         });
 
-        openAdminBtn.addEventListener('click', () => {
-            if (isAdmin) {
-                isAdmin = false;
-                adminPanel.classList.add('hidden');
-                openAdminBtn.innerHTML = "⚙️ 管理模式";
-                showToast("已退出管理模式");
-                renderRecords(allRecords);
-            } else {
-                adminAuthModal.classList.remove('hidden');
-                adminPwdInput.value = '';
-                adminPwdInput.focus();
-            }
-        });
-
-        cancelAdminBtn.addEventListener('click', () => {
-            adminAuthModal.classList.add('hidden');
-        });
-
+        // 登入驗證
         verifyAdminBtn.addEventListener('click', async () => {
             const inputPwd = adminPwdInput.value.trim();
             if (!inputPwd) return;
@@ -546,7 +613,6 @@
                 const adminSnap = await getDoc(adminAuthRef);
                 
                 let dbPassword = "admin888"; 
-                
                 if (adminSnap.exists()) {
                     dbPassword = adminSnap.data().password;
                 } else {
@@ -557,30 +623,39 @@
                     isAdmin = true;
                     adminAuthModal.classList.add('hidden');
                     adminPanel.classList.remove('hidden');
-                    openAdminBtn.innerHTML = "🔒 退出管理";
                     
                     cdTimeInput.value = systemConfig.cdTimeMinutes || 0;
                     renderBannedIps();
                     renderRecords(allRecords); 
                     
-                    showToast("身分驗證成功，管理模式已開啟");
+                    showToast("解鎖成功");
                 } else {
-                    showToast("密碼錯誤，請重新輸入", true);
+                    showToast("密令錯誤", true);
                 }
             } catch (error) {
-                console.error("密碼驗證異常:", error);
-                showToast("驗證異常，請確認資料庫連線或規則", true);
+                showToast("連線異常", true);
             } finally {
                 verifyAdminBtn.disabled = false;
                 verifyAdminBtn.innerHTML = "驗證";
             }
         });
 
+        cancelAdminBtn.addEventListener('click', () => {
+            adminAuthModal.classList.add('hidden');
+        });
+        
+        logoutAdminBtn.addEventListener('click', () => {
+            isAdmin = false;
+            adminPanel.classList.add('hidden');
+            renderRecords(allRecords);
+            showToast("已退出管理模式");
+        });
+
         saveCdBtn.addEventListener('click', async () => {
             const newCd = parseInt(cdTimeInput.value) || 0;
             try {
                 await updateDoc(doc(db, CONFIG_COLLECTION, CONFIG_DOC), { cdTimeMinutes: newCd });
-                showToast("冷卻時間更新成功");
+                showToast("冷卻更新成功");
             } catch(e) { showToast("更新失敗", true); }
         });
 
@@ -598,7 +673,7 @@
                 currentBanned.push(ipToBan);
                 await updateDoc(doc(db, CONFIG_COLLECTION, CONFIG_DOC), { bannedIps: currentBanned });
                 banIpInput.value = '';
-                showToast(`已封鎖 IP: ${ipToBan}`);
+                showToast(`已封鎖`);
             } catch(e) { showToast("封鎖失敗", true); }
         });
 
