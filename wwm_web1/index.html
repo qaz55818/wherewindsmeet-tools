@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>燕雲十六聲 - 百業成員請假系統</title>
-    <!-- 已修正 CDN 網址 -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <link href="[https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap](https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap)" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Serif TC', serif;
             background-color: #eaddcf;
-            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d0c0ad" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d0c0ad" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
             color: #3e362e;
             min-height: 100vh;
         }
@@ -129,10 +128,8 @@
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
 
-    <!-- 系統提示框 -->
     <div id="toastMessage" class="toast">訊息提示</div>
 
-    <!-- 管理員驗證彈窗 (預設隱藏) -->
     <div id="adminAuthModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
         <div class="gufeng-border bg-[#f2e9de] shadow-2xl p-6 max-w-sm w-full text-center">
             <h3 class="text-xl font-bold text-[#5a4a3f] mb-4">管理員身分驗證</h3>
@@ -144,7 +141,6 @@
         </div>
     </div>
 
-    <!-- 頂部管理員設定面板 (預設隱藏，驗證後顯示) -->
     <div id="adminPanel" class="hidden w-full max-w-6xl mb-6 gufeng-border bg-[#d0c0ad] shadow-md p-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
             <h2 class="text-lg font-bold text-[#8c2a2a] mb-4 md:mb-0 flex items-center">
@@ -170,12 +166,10 @@
         </div>
     </div>
 
-    <!-- 主要系統介面 -->
     <div id="appView" class="w-full max-w-6xl flex flex-col items-center">
 
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- 左側：請假表單 -->
             <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4">
                 <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
                     <div class="title-badge text-xl font-black">百業請假登記</div>
@@ -216,7 +210,6 @@
                 </div>
             </div>
 
-            <!-- 右側：請假紀錄 -->
             <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4 md:mt-4">
                 <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
                     <div class="title-badge text-xl font-black" style="background-color: #5a4a3f;">近期請假卷宗</div>
@@ -224,8 +217,7 @@
 
                 <div class="gufeng-inner-border mt-2 h-full flex flex-col">
                     <div id="recordsContainer" class="hidden flex-1 overflow-y-auto pr-2 space-y-4 max-h-[500px]">
-                        <!-- 紀錄卡片模板 -->
-                    </div>
+                        </div>
                     
                     <div id="emptyState" class="hidden text-center py-12 text-[#8e7f70]">
                         尚無人告假，江湖一片祥和。
@@ -235,12 +227,10 @@
         </div>
     </div>
 
-    <!-- 底部管理員入口 -->
     <div class="fixed bottom-4 right-4">
         <button id="openAdminBtn" class="text-sm text-[#8e7f70] hover:text-[#5a4a3f] transition font-bold px-2 py-1 bg-[#eaddcf]/80 rounded">⚙️ 管理模式</button>
     </div>
 
-    <!-- ★ 重點：這裡改為載入外部的 JS 檔案，並且 type 必須設定為 module ★ -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
