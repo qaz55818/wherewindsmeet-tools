@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>燕雲十六聲 - 百業成員請假系統</title>
+    <!-- 已修正 CDN 網址 -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap](https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap)" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background-color: #eaddcf;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d0c0ad" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            color: #3e362e;
+            min-height: 100vh;
+        }
+
+        /* 古風邊框 */
+        .gufeng-border {
+            border: 2px solid #5a4a3f;
+            position: relative;
+        }
+        .gufeng-border::before, .gufeng-border::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #5a4a3f;
+        }
+        .gufeng-border::before { top: -2px; left: -2px; }
+        .gufeng-border::after { bottom: -2px; right: -2px; }
+
+        .gufeng-inner-border {
+            border: 1px solid #8e7f70;
+            padding: 2rem;
+        }
+
+        /* 標題紅底白字設計 */
+        .title-badge {
+            background-color: #8c2a2a;
+            color: #f2e9de;
+            padding: 0.5rem 2rem;
+            display: inline-block;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            letter-spacing: 0.2em;
+        }
+
+        /* 按鈕樣式 */
+        .btn-primary {
+            background-color: #5a4a3f;
+            color: #f2e9de;
+            border: 1px solid #3e362e;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #8c2a2a;
+            border-color: #8c2a2a;
+        }
+        
+        .btn-danger {
+            background-color: #8c2a2a;
+            color: #f2e9de;
+            border: 1px solid #5a1a1a;
+            transition: all 0.3s;
+        }
+        .btn-danger:hover {
+            background-color: #a33535;
+        }
+
+        /* 輸入框樣式 */
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid #a89a8c;
+            border-radius: 2px;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #8c2a2a;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 自訂捲軸 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #eaddcf; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a89a8c; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8e7f70; 
+        }
+
+        /* 提示框動畫 */
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+            10% { opacity: 1; transform: translateY(0) translateX(-50%); }
+            90% { opacity: 1; transform: translateY(0) translateX(-50%); }
+            100% { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8c2a2a;
+            color: #f2e9de;
+            padding: 10px 24px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+            pointer-events: none;
+        }
+        .toast.show {
+            display: block;
+            animation: fadeInOut 3s forwards;
+        }
+
+        /* 管理員驗證彈窗 */
+        #adminAuthModal {
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex flex-col items-center">
+
+    <!-- 系統提示框 -->
+    <div id="toastMessage" class="toast">訊息提示</div>
+
+    <!-- 管理員驗證彈窗 (預設隱藏) -->
+    <div id="adminAuthModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="gufeng-border bg-[#f2e9de] shadow-2xl p-6 max-w-sm w-full text-center">
+            <h3 class="text-xl font-bold text-[#5a4a3f] mb-4">管理員身分驗證</h3>
+            <input type="password" id="adminPwdInput" placeholder="請輸入管理密碼" class="form-input w-full px-4 py-2 mb-4 text-center">
+            <div class="flex space-x-4">
+                <button id="cancelAdminBtn" class="flex-1 px-4 py-2 border border-[#8e7f70] text-[#5a4a3f] hover:bg-[#eaddcf] transition">取消</button>
+                <button id="verifyAdminBtn" class="flex-1 btn-primary px-4 py-2">驗證</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頂部管理員設定面板 (預設隱藏，驗證後顯示) -->
+    <div id="adminPanel" class="hidden w-full max-w-6xl mb-6 gufeng-border bg-[#d0c0ad] shadow-md p-4">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <h2 class="text-lg font-bold text-[#8c2a2a] mb-4 md:mb-0 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
+                管理中心 (已解鎖)
+            </h2>
+            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+                <div class="flex items-center bg-[#f2e9de] p-2 rounded border border-[#a89a8c]">
+                    <span class="text-sm font-bold text-[#5a4a3f] mr-2">請假冷卻(分鐘):</span>
+                    <input type="number" id="cdTimeInput" class="w-16 px-2 py-1 bg-white border border-[#a89a8c] text-center text-sm" min="0">
+                    <button id="saveCdBtn" class="ml-2 text-xs bg-[#5a4a3f] text-[#f2e9de] px-2 py-1 hover:bg-[#8c2a2a] transition">儲存</button>
+                </div>
+                <div class="flex items-center bg-[#f2e9de] p-2 rounded border border-[#a89a8c]">
+                    <span class="text-sm font-bold text-[#5a4a3f] mr-2">封鎖IP:</span>
+                    <input type="text" id="banIpInput" placeholder="輸入要封鎖的IP" class="w-32 px-2 py-1 bg-white border border-[#a89a8c] text-sm">
+                    <button id="banIpBtn" class="ml-2 text-xs btn-danger px-2 py-1 transition">封鎖</button>
+                </div>
+            </div>
+        </div>
+        <div id="bannedIpsContainer" class="mt-4 text-sm text-[#5a4a3f]">
+            <span class="font-bold">已封鎖的 IP：</span>
+            <span id="bannedIpsList" class="italic text-[#8e7f70]">無</span>
+        </div>
+    </div>
+
+    <!-- 主要系統介面 -->
+    <div id="appView" class="w-full max-w-6xl flex flex-col items-center">
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- 左側：請假表單 -->
+            <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                    <div class="title-badge text-xl font-black">百業請假登記</div>
+                </div>
+                
+                <div class="gufeng-inner-border mt-2 h-full flex flex-col justify-between">
+                    <form id="leaveForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">遊戲名稱 <span class="text-red-600">*</span></label>
+                            <input type="text" id="gameId" required placeholder="請輸入遊戲名稱" 
+                                   class="form-input w-full px-4 py-2 text-[#3e362e] placeholder-[#a89a8c]">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">百業戰請假日期 <span class="text-red-600">*</span></label>
+                            <input type="date" id="leaveDate" required 
+                                   class="form-input w-full px-4 py-2 text-[#3e362e]">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-[#5a4a3f]">請假原因 <span class="text-red-600">*</span></label>
+                            <select id="reasonSelect" required class="form-input w-full px-4 py-2 text-[#3e362e] mb-2 cursor-pointer">
+                                <option value="" disabled selected>請選擇請假原因</option>
+                                <option value="有事無法參加">有事無法參加</option>
+                                <option value="可能晚點才能參加">可能晚點才能參加</option>
+                                <option value="其他">其他 (自行輸入)</option>
+                            </select>
+                            <input type="text" id="reasonOther" maxlength="30" placeholder="請輸入其他原因 (限30字內)" 
+                                   class="form-input w-full px-4 py-2 text-[#3e362e] placeholder-[#a89a8c] hidden">
+                        </div>
+
+                        <div class="pt-4 text-center">
+                            <button type="submit" id="submitBtn" class="btn-primary w-full sm:w-auto px-12 py-3 font-bold tracking-widest text-lg cursor-pointer">
+                                呈交請假帖
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 右側：請假紀錄 -->
+            <div class="gufeng-border bg-[#f2e9de] shadow-xl relative mt-4 md:mt-4">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                    <div class="title-badge text-xl font-black" style="background-color: #5a4a3f;">近期請假卷宗</div>
+                </div>
+
+                <div class="gufeng-inner-border mt-2 h-full flex flex-col">
+                    <div id="recordsContainer" class="hidden flex-1 overflow-y-auto pr-2 space-y-4 max-h-[500px]">
+                        <!-- 紀錄卡片模板 -->
+                    </div>
+                    
+                    <div id="emptyState" class="hidden text-center py-12 text-[#8e7f70]">
+                        尚無人告假，江湖一片祥和。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部管理員入口 -->
+    <div class="fixed bottom-4 right-4">
+        <button id="openAdminBtn" class="text-sm text-[#8e7f70] hover:text-[#5a4a3f] transition font-bold px-2 py-1 bg-[#eaddcf]/80 rounded">⚙️ 管理模式</button>
+    </div>
+
+    <!-- ★ 重點：這裡改為載入外部的 JS 檔案，並且 type 必須設定為 module ★ -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
