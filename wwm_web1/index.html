@@ -304,8 +304,8 @@
         const CONFIG_COLLECTION = 'system_config';
         const CONFIG_DOC = 'settings';
         
-        // 透過 CORS Proxy 發送 Discord Webhook
-        const DISCORD_WEBHOOK_URL = "https://corsproxy.io/?https://discord.com/api/webhooks/1479942576650981568/l3DN8iqbhyFSpBo_SVfV-JwtcnG767cYZGKH8eESDOLZJ-LN5S5u1dqGYpcxQ77eFai1";
+        // 移除代理伺服器，改為直接使用原始 Discord Webhook 網址
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1479942576650981568/l3DN8iqbhyFSpBo_SVfV-JwtcnG767cYZGKH8eESDOLZJ-LN5S5u1dqGYpcxQ77eFai1";
 
         let currentIp = "Unknown";
         let isAdmin = false;
@@ -693,9 +693,10 @@
             });
         }
         
-        // 傳送 Discord Webhook
+        // ==========================================
+        // 核心修改：利用 FormData + no-cors 模式繞過預檢請求
+        // ==========================================
         async function sendDiscordWebhook(gameId, leaveDate, reason) {
-            // 處理星期幾
             let weekdayStr = "";
             if (leaveDate) {
                 const dateParts = leaveDate.split('-');
@@ -710,38 +711,32 @@
                 username: "百業請假系統",
                 embeds: [{
                     title: "📜 新的請假帖呈交",
-                    color: 9185834, // 對應系統 #8c2a2a 顏色
+                    color: 9185834,
                     fields: [
-                        {
-                            name: "👤 遊戲名稱",
-                            value: gameId,
-                            inline: true
-                        },
-                        {
-                            name: "📅 請假日期",
-                            value: `${leaveDate} ${weekdayStr}`,
-                            inline: true
-                        },
-                        {
-                            name: "📝 請假原因",
-                            value: reason
-                        }
+                        { name: "👤 遊戲名稱", value: gameId, inline: true },
+                        { name: "📅 請假日期", value: `${leaveDate} ${weekdayStr}`, inline: true },
+                        { name: "📝 請假原因", value: reason }
                     ],
                     timestamp: new Date().toISOString()
                 }]
             };
 
             try {
+                // 將 JSON 放入 FormData 中，這樣發送時就是 multipart/form-data，
+                // 這是一種 "簡單請求"，不會觸發瀏覽器先發送 OPTIONS 檢查 CORS，
+                // 從而成功將資料單向送入 Discord。
+                const formData = new FormData();
+                formData.append('payload_json', JSON.stringify(payload));
+
                 await fetch(DISCORD_WEBHOOK_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
+                    body: formData,
+                    mode: 'no-cors' // 告訴瀏覽器這是一個單向的發送，不要管 CORS 回傳結果
                 });
-                console.log("Discord Webhook 發送成功");
+                
+                console.log("Discord Webhook 請求已發送 (繞過 CORS)");
             } catch (error) {
-                console.error("Discord Webhook 發送失敗:", error);
+                console.error("Discord Webhook 發送異常:", error);
             }
         }
 
@@ -767,7 +762,6 @@
 
             const gameId = gameIdInput.value.trim();
             
-            // 獲取所有選取的日期
             const selectedDateInputs = document.querySelectorAll('input[name="leaveDates"]:checked');
             if (selectedDateInputs.length === 0) {
                 dateError.classList.remove('hidden');
@@ -783,11 +777,9 @@
             submitBtn.innerHTML = '飛鴿傳書中...';
 
             try {
-                // 將每個選取的日期拆分為獨立的紀錄寫入 Firebase 並發送 Discord
                 const promises = Array.from(selectedDateInputs).map(async (input) => {
                     const leaveDate = input.value;
                     
-                    // 1. 寫入 Firebase
                     await addDoc(collection(db, COLLECTION_NAME), {
                         gameId: gameId,
                         leaveDate: leaveDate,
@@ -796,7 +788,7 @@
                         ipAddress: currentIp
                     });
                     
-                    // 2. 發送 Discord 通知
+                    // 發送 Discord 請求 (不會因為 CORS 報錯中斷)
                     await sendDiscordWebhook(gameId, leaveDate, finalReason);
                 });
 
@@ -804,7 +796,6 @@
 
                 showToast('呈交成功！');
                 
-                // 重置表單，但不清空記住的名稱
                 const currentName = gameIdInput.value;
                 form.reset();
                 if (rememberNameCheckbox.checked) {
@@ -812,13 +803,10 @@
                     rememberNameCheckbox.checked = true;
                 }
                 
-                // 清空日期選擇樣式
                 document.querySelectorAll('input[name="leaveDates"]').forEach(cb => cb.checked = false);
-                
                 reasonOther.classList.add('hidden');
                 reasonOther.required = false;
                 
-                // 送出後自動切換到紀錄頁面方便查看
                 switchTab('records');
                 
             } catch (error) {
