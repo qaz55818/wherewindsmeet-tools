@@ -124,6 +124,13 @@
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 自訂 Checkbox 樣式 */
+        .custom-checkbox input:checked + div {
+            background-color: #8c2a2a;
+            border-color: #8c2a2a;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -188,15 +195,26 @@
             <div id="viewForm" class="tab-content active h-full flex flex-col justify-between">
                 <form id="leaveForm" class="space-y-5 mt-2">
                     <div>
-                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">遊戲名稱 <span class="text-red-600">*</span></label>
+                        <div class="flex justify-between items-end mb-1.5">
+                            <label class="block text-sm font-bold text-[#5a4a3f]">遊戲名稱 <span class="text-red-600">*</span></label>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="rememberName" class="form-checkbox h-4 w-4 text-[#8c2a2a] rounded border-[#a89a8c]">
+                                <span class="ml-2 text-xs text-[#8e7f70]">記住名稱</span>
+                            </label>
+                        </div>
                         <input type="text" id="gameId" required placeholder="請輸入完整遊戲名稱" 
                                class="form-input w-full px-4 py-3 text-[#3e362e] placeholder-[#a89a8c]">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">百業戰請假日期 <span class="text-red-600">*</span></label>
-                        <input type="date" id="leaveDate" required 
-                               class="form-input w-full px-4 py-3 text-[#3e362e]">
+                        <label class="block text-sm font-bold mb-1.5 text-[#5a4a3f]">百業戰請假日期 (可複選) <span class="text-red-600">*</span></label>
+                        <div id="dateOptionsContainer" class="grid grid-cols-2 gap-2">
+                            <!-- 這裡由 JS 動態生成即將到來的百業戰日期 -->
+                        </div>
+                        <button type="button" id="loadMoreDatesBtn" class="w-full mt-2 py-2 text-sm text-[#8e7f70] border border-[#a89a8c]/50 rounded-md hover:bg-[#eaddcf] transition">
+                            顯示更多場次 🔽
+                        </button>
+                        <div id="dateError" class="text-xs text-red-600 mt-1 hidden">請至少選擇一個請假日期</div>
                     </div>
 
                     <div>
@@ -286,8 +304,8 @@
         const CONFIG_COLLECTION = 'system_config';
         const CONFIG_DOC = 'settings';
         
-        // Discord Webhook URL
-        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1479942576650981568/l3DN8iqbhyFSpBo_SVfV-JwtcnG767cYZGKH8eESDOLZJ-LN5S5u1dqGYpcxQ77eFai1";
+        // 透過 CORS Proxy 發送 Discord Webhook
+        const DISCORD_WEBHOOK_URL = "https://corsproxy.io/?https://discord.com/api/webhooks/1479942576650981568/l3DN8iqbhyFSpBo_SVfV-JwtcnG767cYZGKH8eESDOLZJ-LN5S5u1dqGYpcxQ77eFai1";
 
         let currentIp = "Unknown";
         let isAdmin = false;
@@ -296,6 +314,11 @@
 
         // DOM 元素
         const form = document.getElementById('leaveForm');
+        const gameIdInput = document.getElementById('gameId');
+        const rememberNameCheckbox = document.getElementById('rememberName');
+        const dateOptionsContainer = document.getElementById('dateOptionsContainer');
+        const loadMoreDatesBtn = document.getElementById('loadMoreDatesBtn');
+        const dateError = document.getElementById('dateError');
         const reasonSelect = document.getElementById('reasonSelect');
         const reasonOther = document.getElementById('reasonOther');
         const submitBtn = document.getElementById('submitBtn');
@@ -330,6 +353,129 @@
         }
         tabBtnForm.addEventListener('click', () => switchTab('form'));
         tabBtnRecords.addEventListener('click', () => switchTab('records'));
+
+        // ==========================================
+        // 遊戲名稱記憶功能
+        // ==========================================
+        const savedName = localStorage.getItem('yanyun_saved_name');
+        if (savedName) {
+            gameIdInput.value = savedName;
+            rememberNameCheckbox.checked = true;
+        }
+
+        gameIdInput.addEventListener('input', () => {
+            if (rememberNameCheckbox.checked) {
+                localStorage.setItem('yanyun_saved_name', gameIdInput.value.trim());
+            }
+        });
+
+        rememberNameCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                localStorage.setItem('yanyun_saved_name', gameIdInput.value.trim());
+            } else {
+                localStorage.removeItem('yanyun_saved_name');
+            }
+        });
+
+        // ==========================================
+        // 百業戰日期生成邏輯 (週六、日)
+        // ==========================================
+        let nextBattleDates = [];
+        let datesShowingCount = 0;
+        const INITIAL_DATES_TO_SHOW = 4;
+        const DATES_TO_LOAD_MORE = 4;
+
+        function generateNextBattleDates() {
+            nextBattleDates = [];
+            let currentDate = new Date();
+            // 將時間設定為今天的 00:00:00，避免時間干擾判斷
+            currentDate.setHours(0, 0, 0, 0);
+
+            // 尋找未來的 12 場百業戰 (作為庫存)
+            while (nextBattleDates.length < 12) {
+                const day = currentDate.getDay(); // 0=週日, 6=週六
+                if (day === 0 || day === 6) {
+                    const year = currentDate.getFullYear();
+                    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                    const date = String(currentDate.getDate()).padStart(2, '0');
+                    const dateString = `${year}-${month}-${date}`;
+                    const weekdayString = day === 0 ? '日' : '六';
+                    
+                    nextBattleDates.push({
+                        value: dateString,
+                        display: `${month}/${date} (週${weekdayString})`
+                    });
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        }
+
+        function renderDateOptions() {
+            const fragment = document.createDocumentFragment();
+            const endIndex = Math.min(datesShowingCount + INITIAL_DATES_TO_SHOW, nextBattleDates.length);
+            
+            for (let i = datesShowingCount; i < endIndex; i++) {
+                const dateObj = nextBattleDates[i];
+                const label = document.createElement('label');
+                label.className = 'custom-checkbox cursor-pointer relative';
+                label.innerHTML = `
+                    <input type="checkbox" name="leaveDates" value="${dateObj.value}" class="peer sr-only">
+                    <div class="px-3 py-2 border border-[#a89a8c] rounded-md text-center text-[#5a4a3f] text-sm bg-white/60 transition-colors duration-200">
+                        ${dateObj.display}
+                    </div>
+                `;
+                fragment.appendChild(label);
+            }
+            
+            dateOptionsContainer.appendChild(fragment);
+            datesShowingCount = endIndex;
+
+            if (datesShowingCount >= nextBattleDates.length) {
+                loadMoreDatesBtn.style.display = 'none';
+            } else {
+                loadMoreDatesBtn.textContent = '顯示更多場次 🔽';
+            }
+
+            // 綁定 checkbox 變更事件來消除錯誤提示
+            document.querySelectorAll('input[name="leaveDates"]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    dateError.classList.add('hidden');
+                });
+            });
+        }
+
+        loadMoreDatesBtn.addEventListener('click', () => {
+            const endIndex = Math.min(datesShowingCount + DATES_TO_LOAD_MORE, nextBattleDates.length);
+            const fragment = document.createDocumentFragment();
+            for (let i = datesShowingCount; i < endIndex; i++) {
+                const dateObj = nextBattleDates[i];
+                const label = document.createElement('label');
+                label.className = 'custom-checkbox cursor-pointer relative';
+                label.innerHTML = `
+                    <input type="checkbox" name="leaveDates" value="${dateObj.value}" class="peer sr-only">
+                    <div class="px-3 py-2 border border-[#a89a8c] rounded-md text-center text-[#5a4a3f] text-sm bg-white/60 transition-colors duration-200">
+                        ${dateObj.display}
+                    </div>
+                `;
+                fragment.appendChild(label);
+            }
+            dateOptionsContainer.appendChild(fragment);
+            datesShowingCount = endIndex;
+            
+            if (datesShowingCount >= nextBattleDates.length) {
+                loadMoreDatesBtn.style.display = 'none';
+            }
+
+             document.querySelectorAll('input[name="leaveDates"]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    dateError.classList.add('hidden');
+                });
+            });
+        });
+
+        // 初始化日期選項
+        generateNextBattleDates();
+        renderDateOptions();
 
         // 隱藏管理員觸發器 (連點標題 5 次)
         const appTitleTrigger = document.getElementById('appTitleTrigger');
@@ -619,8 +765,14 @@
                 }
             }
 
-            const gameId = document.getElementById('gameId').value.trim();
-            const leaveDate = document.getElementById('leaveDate').value;
+            const gameId = gameIdInput.value.trim();
+            
+            // 獲取所有選取的日期
+            const selectedDateInputs = document.querySelectorAll('input[name="leaveDates"]:checked');
+            if (selectedDateInputs.length === 0) {
+                dateError.classList.remove('hidden');
+                return;
+            }
             
             let finalReason = reasonSelect.value;
             if (finalReason === '其他') {
@@ -631,20 +783,38 @@
             submitBtn.innerHTML = '飛鴿傳書中...';
 
             try {
-                // 1. 寫入 Firebase
-                await addDoc(collection(db, COLLECTION_NAME), {
-                    gameId: gameId,
-                    leaveDate: leaveDate,
-                    reason: finalReason,
-                    submitTime: Date.now(),
-                    ipAddress: currentIp
+                // 將每個選取的日期拆分為獨立的紀錄寫入 Firebase 並發送 Discord
+                const promises = Array.from(selectedDateInputs).map(async (input) => {
+                    const leaveDate = input.value;
+                    
+                    // 1. 寫入 Firebase
+                    await addDoc(collection(db, COLLECTION_NAME), {
+                        gameId: gameId,
+                        leaveDate: leaveDate,
+                        reason: finalReason,
+                        submitTime: Date.now(),
+                        ipAddress: currentIp
+                    });
+                    
+                    // 2. 發送 Discord 通知
+                    await sendDiscordWebhook(gameId, leaveDate, finalReason);
                 });
-                
-                // 2. 發送 Discord 通知
-                sendDiscordWebhook(gameId, leaveDate, finalReason);
+
+                await Promise.all(promises);
 
                 showToast('呈交成功！');
+                
+                // 重置表單，但不清空記住的名稱
+                const currentName = gameIdInput.value;
                 form.reset();
+                if (rememberNameCheckbox.checked) {
+                    gameIdInput.value = currentName;
+                    rememberNameCheckbox.checked = true;
+                }
+                
+                // 清空日期選擇樣式
+                document.querySelectorAll('input[name="leaveDates"]').forEach(cb => cb.checked = false);
+                
                 reasonOther.classList.add('hidden');
                 reasonOther.required = false;
                 
