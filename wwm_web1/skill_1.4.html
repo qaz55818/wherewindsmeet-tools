@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🌸 燕雲十六聲 - 奇術突破資訊查詢</title>
+  <!-- 引入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入 Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* 隱藏橫向滾動條 */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    /* 點擊特效 */
+    .active-scale:active {
+        transform: scale(0.98);
+    }
+    /* 展開動畫 */
+    .expand-animate {
+        animation: slideDown 0.3s ease-out forwards;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#fff5f8] font-sans text-gray-800 selection:bg-pink-200">
+
+  <div class="w-full max-w-md mx-auto relative pb-20">
+    
+    <!-- 頂部固定區域 -->
+    <div class="sticky top-0 z-20 bg-white/80 backdrop-blur-md shadow-sm rounded-b-[2rem] pt-6 pb-4 px-5 mb-6">
+      <div class="mb-4">
+        <h1 class="text-2xl font-black text-pink-500 tracking-wide">
+          🌸 燕雲十六聲
+        </h1>
+        <p class="text-xs text-pink-400 font-medium mt-1">奇術突破資訊查詢</p>
+      </div>
+
+      <!-- 搜尋列 -->
+      <div class="relative">
+        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-pink-300 w-5 h-5"></i>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="搜尋奇術、功用、材料..."
+          class="w-full bg-pink-50 text-gray-700 placeholder-pink-300 rounded-full py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-pink-300 transition-all font-medium text-sm"
+        />
+      </div>
+
+      <!-- 分類標籤 (橫向滑動) -->
+      <div id="categoryContainer" class="flex gap-2 overflow-x-auto mt-4 pb-2 scrollbar-hide -mx-2 px-2">
+        <!-- 分類按鈕將由 JS 動態生成 -->
+      </div>
+    </div>
+
+    <!-- 列表內容區 -->
+    <div id="cardsContainer" class="px-4">
+      <!-- 卡片將由 JS 動態生成 -->
+    </div>
+
+    <!-- 頁尾署名 -->
+    <div class="fixed bottom-0 w-full max-w-md bg-gradient-to-t from-pink-100 to-transparent pt-10 pb-4 pointer-events-none">
+      <div class="text-center text-pink-500 font-bold text-sm drop-shadow-sm flex items-center justify-center gap-1">
+        <span>🍙</span> 製作：醋飯
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 讀取最新提供的資料庫更新
+    const skillsData = [
+      // ==== 解謎 ====
+      { category: "解謎", name: "太極", material: "惡相果", func: "太極, 卸盾", cost: "0／12(戰鬥)20(打魚)", effects: ["弱點擊破時，卸盾傷害增加20%", "弱點擊破後10秒，降低20%防禦", "弱點擊破時，卸盾傷害再增加30%", "弱點擊破時，回復10精元", "技能類傷害增加6%"] },
+      { category: "解謎", name: "金玉手", material: "唐宮羽楹", func: "點穴, 破氣", cost: "0／10(戰鬥)", effects: ["弱點擊破時，額外傷害增加20%", "弱點擊破後10秒，提升20%受真氣傷害", "弱點擊破時，額外傷害再增加30%", "弱點擊破時，回復10精元", "技能類傷害增加6%"] },
+      { category: "解謎", name: "攝星拿月", material: "惡相果", func: "取物, 卸武", cost: "0／40(戰鬥)", effects: ["弱點擊破時，額外傷害增加20%", "弱點擊破後10秒，降低20%攻擊", "弱點擊破時，額外傷害再增加30%", "弱點擊破時，回復10精元", "技能類傷害增加6%"] },
+      { category: "解謎", name: "凌雲踏", material: "唐宮羽楹", func: "輕功, 下盤", cost: "0／8(戰鬥)", effects: ["弱點擊破時，額外傷害增加20%", "弱點擊破後10秒，提升20%受氣血傷害", "弱點擊破時，額外傷害再增加30%", "弱點擊破時，回復10精元", "技能類傷害增加6%"] },
+      { category: "解謎", name: "縮骨功", material: "無", func: "縮骨, 下盤", cost: "0／1，無法升級", effects: ["無", "無", "無", "無", "無"] },
+      
+      // ==== 群體異常 ====
+      { category: "群體異常", name: "獅吼正聲", material: "佛淚鬚", func: "擊退", cost: "30／12", effects: ["強韌效果提升", "造成5次(含)以上吼叫傷害，目標沉默3秒", "傷害減免增加25%", "每段吼叫造成4點耐力傷", "技能類傷害增加6%"] },
+      { category: "群體異常", name: "金蟾騰躍", material: "唐宮羽楹", func: "傷害", cost: "25／8", effects: ["釋放技能10秒內，蟾毒真氣傷害增加30%", "蟾毒爆炸時，傳染次級蟾毒(不會再傳染)", "蟾毒爆炸範圍增加50%", "技能命中有蟾毒目標，觸發次級蟾毒爆炸", "技能類傷害增加6%"] },
+
+      // ==== 群體傷害 ====
+      { category: "群體傷害", name: "百鬼打穴手", material: "玉樓珠", func: "控制, 破氣", cost: "30／15(10)", effects: ["定身延長2秒", "定身結束時，產生期間受傷害的12%傷害", "調息減少5秒", "選中一單位，10秒內傷害增加2.5%，上限6層", "技能類傷害增加6%"] },
+      { category: "群體傷害", name: "韋陀正法", material: "佛淚鬚", func: "傷害", cost: "30／8", effects: ["地面掌法，前兩下命中，掌印傷害增加20%", "高空掌法(5米以上)，各種增加傷害", "地面掌法，掌印範圍增加60%", "隨高度傷害增加，上限80米240%增傷", "技能類傷害增加6%"] },
+      { category: "群體傷害", name: "流星墬火", material: "佛淚鬚", func: "傷害", cost: "60／30", effects: ["長槍命中一單位，退還3精元，上限3層", "落地範圍有一單位，增加10%傷害，上限5層", "傷害減免增加25%", "投出長槍1秒後，形成半徑8米火焰旋渦", "技能類傷害增加6%"] },
+      { category: "群體傷害", name: "簫吟千浪", material: "霈骨花", func: "傷害", cost: "60(50)／25", effects: ["該奇術對非玩家的傷害額外提升100%", "與聲漪的距離差增傷，於10米達最大值10%", "精元降低10點消耗", "超過5米強化增傷，於10米時達最大值20%", "技能類傷害增加6%"] },
+
+      // ==== 單體控制 ====
+      { category: "單體控制", name: "鷹爪連鑿", material: "惡相果", func: "破防", cost: "15／2", effects: ["增加1.5米位移距離", "破防成功後5秒，降低10%防禦50%回耐速率", "額外再增加1.5米位移距離", "破防成功後，回復15精元", "技能類傷害增加6%"] },
+      { category: "單體控制", name: "藥叉破魔", material: "佛淚鬚", func: "破防", cost: "15／2", effects: ["對玩家額外造成10%傷害", "破防成功，目標沉默3秒", "增加2米位移距離", "破防成功後，6秒內傷害增加15%", "技能類傷害增加6%"] },
+      { category: "單體控制", name: "自在無礙", material: "佛淚鬚", func: "連段", cost: "35(30)／3", effects: ["對玩家額外造成10%傷害", "對氣血護盾目標，造成額外20%傷害", "精元降低5點消耗", "對氣血護盾目標，造成3點真氣傷，上限7層", "技能類傷害增加6%"] },
+      { category: "單體控制", name: "狗嘴奪食", material: "玉樓珠", func: "連段, 下盤", cost: "35(30)／3", effects: ["對玩家額外造成10%傷害", "命中目標造成斷筋，5秒內無法輕功", "精元降低5點消耗", "斷筋效果延長2秒，且目標閃避消耗增加40%", "技能類傷害增加6%"] },
+      { category: "單體控制", name: "騎龍回馬", material: "耶悉蕊", func: "位移", cost: "15／12", effects: ["對玩家額外造成10%傷害", "第一段突刺後，可中斷技能", "增加2米位移距離", "後跳具閃避，閃避成功後傷害不可閃不可卸", "技能類傷害增加6%"] },
+
+      // ==== 單體爆發 ====
+      { category: "單體爆發", name: "神龍吐火", material: "玉樓珠", func: "灼燒", cost: "20／6", effects: ["強韌效果提升", "爆燃可疊層，上限10層(吐火接太白一次2層)", "傷害減免增加25%", "兩段噴火均命中，造成額外傷害與1層爆燃", "技能類傷害增加6%"] },
+      { category: "單體爆發", name: "太白醉月", material: "惡相果", func: "傷害", cost: "10／0.1", effects: ["釋放技能獲得傷害減免15%與強韌", "命中施加酒氣，若有爆然，則產生額外傷害", "強韌效果提升", "每段醉拳，提升最後一段醉拳20%，上限4層", "技能類傷害增加6%"] },
+      { category: "單體爆發", name: "茶龍驤首", material: "玉樓珠", func: "傷害", cost: "100／120", effects: ["增加10%技能傷害", "依損失血量，增加技能傷害，上限25%", "三重的效果，上限再增加20%", "造成傷害的80%，治療自身", "技能類傷害增加6%"] },
+
+      // ==== 輔助 ====
+      { category: "輔助", name: "紅塵障目", material: "惡相果", func: "暗殺", cost: "80(70)／45", effects: ["迷霧延長2秒", "期間凌虛一指傷害增加20%", "精元降低10點消耗", "技能命中一單位，回復5精元5調息，上限3層", "技能類傷害增加6%"] },
+      { category: "輔助", name: "清風齋月", material: "唐宮羽楹", func: "解控", cost: "0／40(35)(30)", effects: ["止戈中，有條件被動解控，獲得短暫霸體", "調息減少5秒", "解控反擊命中玩家時，額外10點真氣傷害", "調息減少5秒", "技能類傷害增加6%"] },
+      { category: "輔助", name: "無相金身", material: "玉樓珠", func: "護盾", cost: "60(50)／20", effects: ["變減傷25%與持續10秒，50%餘盾回氣血", "精元100以上時，變為群體護盾", "精元降低10點消耗", "獲得的護燉量增加20%，額外回復10真氣", "技能類護盾增加6%"] },
+      { category: "輔助", name: "陰陽迷蹤步", material: "寒菌絨", func: "閃避", cost: "50(40)(35)／60", effects: ["迷蹤延長10秒", "全技能耐力消耗降低10%", "精元降低10點消耗", "完美閃避後，8秒內傷害增加15%", "精元降低5點消耗"] },
+      { category: "輔助", name: "以鵝之鳴", material: "惡相果", func: "屏息", cost: "70(60)／40", effects: ["屏息延長1.5秒", "第二次鳴叫對非玩家造成衝擊力", "精元降低10點消耗", "屏息期間造成傷害增加20%", "技能類傷害增加6%"] },
+      { category: "輔助", name: "螢光暉夜", material: "無", func: "光照", cost: "0／30，無法升級", effects: ["無", "無", "無", "無", "無"] },
+      { category: "輔助", name: "沓無形", material: "無", func: "潛行", cost: "20／30，無法升級", effects: ["無", "無", "無", "無", "無"] },
+
+      // ==== 娛戲 ====
+      { category: "娛戲", name: "相攜照影", material: "無", func: "特殊", cost: "0／5，無法升級", effects: ["無", "無", "無", "無", "無"] },
+      { category: "娛戲", name: "風火掄", material: "無", func: "特殊", cost: "0／5，無法升級", effects: ["無", "無", "無", "無", "無"] },
+
+      // ==== 通用 ====
+      { category: "通用", name: "移星換斗", material: "酒棗", func: "輔助卸勢", cost: "0／0，巔峰三重零段", effects: ["提升一格洞識值上限", "提升一格洞識值上限", "無", "無", "無"] },
+      { category: "通用", name: "凌虛一指", material: "唐宮羽楹", func: "暗殺", cost: "0／0", effects: ["暗殺傷害提升", "暗殺傷害提升", "暗殺傷害提升", "暗殺傷害提升", "暗殺傷害提升"] }
+    ];
+
+    // 突破階級的標籤
+    const tierLabels = ['二階', '三階', '四階', '五階', '六階'];
+    
+    // 狀態變數
+    let currentCategory = '全部';
+    let searchQuery = '';
+    const expandedCards = new Set(); // 記錄展開的卡片索引
+
+    // 初始化
+    function init() {
+      renderCategories();
+      renderCards();
+      
+      // 綁定搜尋事件
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        renderCards();
+      });
+    }
+
+    // 渲染分類按鈕
+    function renderCategories() {
+      // 取得所有不重複的分類
+      const categories = ['全部', ...new Set(skillsData.map(d => d.category))];
+      const container = document.getElementById('categoryContainer');
+      
+      container.innerHTML = categories.map(cat => {
+        const isActive = currentCategory === cat;
+        const activeClass = isActive 
+          ? 'bg-pink-400 text-white shadow-md shadow-pink-200' 
+          : 'bg-white border border-pink-100 text-pink-400 hover:bg-pink-50';
+          
+        return `
+          <button 
+            onclick="setCategory('${cat}')" 
+            class="px-4 py-1.5 rounded-full text-sm font-bold whitespace-nowrap transition-all ${activeClass}"
+          >
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    // 設定當前分類
+    function setCategory(cat) {
+      currentCategory = cat;
+      renderCategories();
+      renderCards();
+    }
+
+    // 切換展開/收起狀態
+    function toggleExpand(name) {
+      if (expandedCards.has(name)) {
+        expandedCards.delete(name);
+      } else {
+        expandedCards.add(name);
+      }
+      renderCards();
+    }
+
+    // 渲染卡片列表
+    function renderCards() {
+      const container = document.getElementById('cardsContainer');
+      
+      // 根據搜尋與分類過濾資料
+      const filteredData = skillsData.filter(item => {
+        const matchCategory = currentCategory === '全部' || item.category === currentCategory;
+        const searchStr = `${item.name} ${item.func} ${item.material}`.toLowerCase();
+        const matchSearch = searchStr.includes(searchQuery);
+        return matchCategory && matchSearch;
+      });
+
+      if (filteredData.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-20 flex flex-col items-center">
+            <span class="text-5xl mb-4">🥺</span>
+            <p class="text-pink-400 font-bold">找不到相關奇術喔...</p>
+            <p class="text-xs text-pink-300 mt-2">換個關鍵字或分類試試看！</p>
+          </div>
+        `;
+        return;
+      }
+
+      // 產生卡片 HTML
+      container.innerHTML = filteredData.map((skill) => {
+        // 使用資料的名稱作為唯一識別碼來控制展開狀態
+        const isExpanded = expandedCards.has(skill.name);
+        
+        // 判斷是否具有實質的突破效果 (過濾掉空白或"無")
+        const hasEffects = skill.effects.some(effect => effect && effect !== '無');
+        
+        // 組合突破階級 HTML
+        const effectsHtml = (isExpanded && hasEffects) ? `
+          <div class="mt-3 space-y-2 p-3 bg-pink-50/50 rounded-2xl border border-pink-100 text-sm expand-animate">
+            ${skill.effects.map((effect, i) => {
+              if (!effect || effect === '無') return ''; // 如果沒有資料或為無則略過
+              return `
+                <div class="flex gap-2 items-start">
+                  <span class="font-bold text-pink-400 shrink-0 mt-0.5">${tierLabels[i]}</span>
+                  <span class="text-gray-700 leading-relaxed">${effect}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        ` : '';
+
+        // 動態決定按鈕區塊
+        const actionHtml = hasEffects ? `
+          <button 
+            onclick="toggleExpand('${skill.name}')"
+            class="w-full py-2 flex items-center justify-center gap-1 text-sm font-medium text-pink-500 bg-pink-50 rounded-2xl hover:bg-pink-100 transition-colors"
+          >
+            ${isExpanded ? '收起突破效果' : '查看突破效果'}
+            <i data-lucide="${isExpanded ? 'chevron-up' : 'chevron-down'}" class="w-4 h-4"></i>
+          </button>
+          ${effectsHtml}
+        ` : `
+          <div class="w-full py-2 flex items-center justify-center gap-1 text-sm font-medium text-pink-300 bg-pink-50/50 rounded-2xl border border-pink-100/50">
+            此奇術無突破效果
+          </div>
+        `;
+
+        return `
+          <div class="bg-white rounded-3xl p-5 shadow-[0_4px_20px_-4px_rgba(251,207,232,0.5)] border border-pink-100 mb-4 transition-all active-scale">
+            <!-- 頭部資訊 -->
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-pink-400"></i>
+                  ${skill.name}
+                </h3>
+                <span class="inline-block mt-1 px-3 py-1 bg-pink-50 text-pink-600 rounded-full text-xs font-medium border border-pink-100">
+                  ${skill.category}
+                </span>
+              </div>
+            </div>
+
+            <!-- 基本屬性 -->
+            <div class="space-y-2 mb-4 text-sm">
+              <div class="flex items-center gap-2 text-gray-600 bg-gray-50 p-2 rounded-xl">
+                <i data-lucide="droplet" class="w-4 h-4 text-blue-400"></i>
+                <span class="font-semibold w-12 shrink-0">材料</span>
+                <span class="text-gray-800 break-words">${skill.material}</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600 bg-gray-50 p-2 rounded-xl">
+                <i data-lucide="zap" class="w-4 h-4 text-yellow-500"></i>
+                <span class="font-semibold w-12 shrink-0">功用</span>
+                <span class="text-gray-800 break-words">${skill.func}</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-600 bg-gray-50 p-2 rounded-xl">
+                <i data-lucide="heart" class="w-4 h-4 text-red-400"></i>
+                <span class="font-semibold w-12 shrink-0">消耗</span>
+                <span class="text-gray-800 break-words">${skill.cost}</span>
+              </div>
+            </div>
+
+            <!-- 展開突破資訊 -->
+            <div class="mt-2">
+              ${actionHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 重新繪製 Lucide 圖示
+      lucide.createIcons();
+    }
+
+    // 執行初始化
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
