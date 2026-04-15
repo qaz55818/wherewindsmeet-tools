@@ -20,54 +20,9 @@
                         "on-surface": "#1b1c1b",
                         "secondary": "#685c53",
                         "on-secondary-fixed-variant": "#4f453c",
-                        "on-tertiary-container": "#fff4ee",
-                        "tertiary-fixed": "#f3dfd1",
-                        "background": "#fcf9f7",
-                        "surface-container": "#f0edeb",
                         "outline-variant": "#d9c2ba",
-                        "on-secondary-container": "#6c6057",
-                        "inverse-on-surface": "#f3f0ee",
-                        "surface-container-highest": "#e5e2e0",
-                        "tertiary-container": "#7d6e63",
-                        "on-error-container": "#93000a",
-                        "on-primary-fixed": "#390c00",
-                        "secondary-fixed-dim": "#d3c4b8",
-                        "on-background": "#1b1c1b",
-                        "surface-container-high": "#eae8e6",
-                        "on-secondary": "#ffffff",
-                        "surface": "#fcf9f7",
-                        "primary-container": "#a65d43",
-                        "error-container": "#ffdad6",
-                        "surface-tint": "#904b33",
-                        "on-surface-variant": "#54433e",
-                        "on-primary": "#ffffff",
-                        "on-primary-container": "#fff4f0",
-                        "surface-dim": "#dcd9d8",
-                        "secondary-container": "#edddd1",
-                        "surface-container-lowest": "#ffffff",
-                        "on-secondary-fixed": "#221a13",
-                        "outline": "#86736d",
-                        "on-tertiary": "#ffffff",
-                        "inverse-primary": "#ffb59c",
-                        "surface-bright": "#fcf9f7",
-                        "primary-fixed": "#ffdbcf",
-                        "tertiary-fixed-dim": "#d6c3b6",
-                        "inverse-surface": "#31302f",
-                        "on-tertiary-fixed": "#241a11",
-                        "error": "#ba1a1a",
-                        "tertiary": "#64564b",
-                        "primary-fixed-dim": "#ffb59c",
-                        "on-error": "#ffffff",
-                        "on-tertiary-fixed-variant": "#51443a",
-                        "secondary-fixed": "#f0e0d4"
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "2xl": "1rem",
-                        "3xl": "1.5rem",
-                        "full": "9999px"
+                        "background": "#fcf9f7",
+                        "surface-container-lowest": "#ffffff"
                     },
                     fontFamily: {
                         "noto-serif": ["Noto Serif TC", "serif"],
@@ -89,36 +44,38 @@
     </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col">
-    <header class="fixed top-0 w-full z-50 bg-[#fcf9f7] dark:bg-stone-950 flex items-center px-6 h-16">
-        <div class="flex items-center gap-4 w-full">
-            <span class="material-symbols-outlined text-[#6a3523] dark:text-[#a65d43] cursor-pointer hover:opacity-80 transition-opacity duration-400" data-icon="arrow_back">arrow_back</span>
-            <h1 class="font-noto-serif text-xl font-bold tracking-wider text-[#6a3523] dark:text-[#a65d43]">預約服務</h1>
+    <header class="fixed top-0 w-full z-50 bg-[#fcf9f7]/90 backdrop-blur-md flex items-center px-6 h-14 border-b border-surface-variant/30">
+        <div class="flex items-center gap-3 w-full max-w-2xl mx-auto">
+            <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity" data-icon="arrow_back">arrow_back</span>
+            <h1 class="font-noto-serif text-lg font-bold tracking-wider text-primary">預約服務</h1>
         </div>
     </header>
 
-    <main class="flex-1 mt-20 px-6 pb-40 max-w-2xl mx-auto w-full">
-        <div class="mb-10 flex flex-col gap-2">
-            <span class="text-xs font-manrope tracking-widest text-primary font-bold uppercase">Step 01 / 03</span>
-            <h2 class="font-noto-serif text-3xl font-bold tracking-wide text-on-surface">選擇專屬美容師</h2>
-            <p class="text-on-surface-variant font-manrope text-sm leading-relaxed mt-2">請先選擇您偏好的美容師，我們將根據她的專長為您規劃專屬服務。</p>
+    <main class="flex-1 mt-16 px-5 pb-32 max-w-2xl mx-auto w-full">
+        <div class="mb-6 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+                <span class="flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-[10px] font-bold">1</span>
+                <h2 class="font-noto-serif text-xl font-bold tracking-wide text-on-surface">選擇專屬美容師</h2>
+            </div>
+            <p class="text-on-surface-variant text-xs ml-7">請先選擇您偏好的美容師，我們將為您規劃專屬服務。</p>
         </div>
 
-        <div class="space-y-4 mb-16">
+        <div class="space-y-3 mb-10 ml-7">
             <label class="group relative block cursor-pointer">
                 <input class="peer hidden" name="beautician" type="radio" value="ariel"/>
-                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                <div class="p-3 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Ariel" class="w-full h-full object-cover"/>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-surface-variant">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Ariel" class="w-full h-full object-cover"/>
                             </div>
                             <div>
-                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Ariel (店長)</h3>
-                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">擅長客製化眼型調整與柔霧眉設計</p>
+                                <h3 class="font-noto-serif text-sm font-bold text-on-surface">Ariel <span class="text-[10px] font-normal text-primary bg-primary/10 px-1.5 py-0.5 rounded-md ml-1">店長</span></h3>
+                                <p class="text-on-surface-variant text-xs mt-0.5 line-clamp-1">擅長客製化眼型調整與柔霧眉設計</p>
                             </div>
                         </div>
-                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                         </div>
                     </div>
                 </div>
@@ -126,19 +83,19 @@
 
             <label class="group relative block cursor-pointer">
                 <input class="peer hidden" name="beautician" type="radio" value="bella"/>
-                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                <div class="p-3 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" alt="Bella" class="w-full h-full object-cover"/>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-surface-variant">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80" alt="Bella" class="w-full h-full object-cover"/>
                             </div>
                             <div>
-                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Bella (資深技師)</h3>
-                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">專精極致深層美膚與臉部撥筋</p>
+                                <h3 class="font-noto-serif text-sm font-bold text-on-surface">Bella <span class="text-[10px] font-normal text-secondary bg-secondary/10 px-1.5 py-0.5 rounded-md ml-1">資深技師</span></h3>
+                                <p class="text-on-surface-variant text-xs mt-0.5 line-clamp-1">專精極致深層美膚與臉部撥筋</p>
                             </div>
                         </div>
-                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                         </div>
                     </div>
                 </div>
@@ -146,48 +103,50 @@
 
             <label class="group relative block cursor-pointer">
                 <input class="peer hidden" name="beautician" type="radio" value="chloe"/>
-                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                <div class="p-3 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
-                                <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=200&q=80" alt="Chloe" class="w-full h-full object-cover"/>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-surface-variant">
+                                <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=150&q=80" alt="Chloe" class="w-full h-full object-cover"/>
                             </div>
                             <div>
-                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Chloe (專業美容師)</h3>
-                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">主打清新自然系嫁接與溫和淨膚</p>
+                                <h3 class="font-noto-serif text-sm font-bold text-on-surface">Chloe <span class="text-[10px] font-normal text-secondary bg-secondary/10 px-1.5 py-0.5 rounded-md ml-1">美容師</span></h3>
+                                <p class="text-on-surface-variant text-xs mt-0.5 line-clamp-1">主打清新自然系嫁接與溫和淨膚</p>
                             </div>
                         </div>
-                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                         </div>
                     </div>
                 </div>
             </label>
         </div>
 
-        <div id="service-section" class="hidden opacity-0 transition-opacity duration-700">
-            <div class="mb-10 flex flex-col gap-2">
-                <span class="text-xs font-manrope tracking-widest text-primary font-bold uppercase">Step 02 / 03</span>
-                <h2 class="font-noto-serif text-3xl font-bold tracking-wide text-on-surface">選擇服務類別</h2>
-                <p class="text-on-surface-variant font-manrope text-sm leading-relaxed mt-2">請選擇您今日想要體驗的療程產品。</p>
+        <div id="service-section" class="hidden opacity-0 transition-opacity duration-500">
+            <div class="mb-4 flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                    <span class="flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-[10px] font-bold">2</span>
+                    <h2 class="font-noto-serif text-xl font-bold tracking-wide text-on-surface">選擇服務類別</h2>
+                </div>
+                <p class="text-on-surface-variant text-xs ml-7">請選擇您今日想要體驗的療程產品。</p>
             </div>
             
-            <div class="space-y-6">
+            <div class="space-y-3 ml-7">
                 <label class="group relative block cursor-pointer">
                     <input class="peer hidden" name="service" type="radio"/>
-                    <div class="p-8 bg-surface-container-lowest rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-                        <div class="flex items-start justify-between">
-                            <div class="flex flex-col gap-4">
-                                <div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
-                                    <span class="material-symbols-outlined text-3xl" data-icon="visibility">visibility</span>
+                    <div class="p-4 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="w-10 h-10 shrink-0 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary peer-checked:bg-primary/10">
+                                    <span class="material-symbols-outlined text-[22px]" data-icon="visibility">visibility</span>
                                 </div>
-                                <div>
-                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">美睫 (Eyelash)</h3>
-                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">專業嫁接技術，打造自然如真或濃密亮眼的迷人雙眸。</p>
+                                <div class="flex-1">
+                                    <h3 class="font-noto-serif text-base font-bold text-on-surface">美睫 (Eyelash)</h3>
+                                    <p class="text-on-surface-variant text-xs mt-0.5 leading-snug">專業嫁接技術，打造自然如真或濃密亮眼的迷人雙眸。</p>
                                 </div>
                             </div>
-                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                             </div>
                         </div>
                     </div>
@@ -195,19 +154,19 @@
 
                 <label class="group relative block cursor-pointer">
                     <input class="peer hidden" name="service" type="radio"/>
-                    <div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-                        <div class="flex items-start justify-between">
-                            <div class="flex flex-col gap-4">
-                                <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
-                                    <span class="material-symbols-outlined text-3xl" data-icon="brush">brush</span>
+                    <div class="p-4 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="w-10 h-10 shrink-0 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary peer-checked:bg-primary/10">
+                                    <span class="material-symbols-outlined text-[22px]" data-icon="brush">brush</span>
                                 </div>
-                                <div>
-                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">霧眉 (Microblading)</h3>
-                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">半永久定妝技術，根據您的面部比例設計專屬自然眉型。</p>
+                                <div class="flex-1">
+                                    <h3 class="font-noto-serif text-base font-bold text-on-surface">霧眉 (Microblading)</h3>
+                                    <p class="text-on-surface-variant text-xs mt-0.5 leading-snug">半永久定妝技術，根據您的面部比例設計專屬自然眉型。</p>
                                 </div>
                             </div>
-                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                             </div>
                         </div>
                     </div>
@@ -215,38 +174,32 @@
 
                 <label class="group relative block cursor-pointer">
                     <input class="peer hidden" name="service" type="radio"/>
-                    <div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-                        <div class="flex items-start justify-between">
-                            <div class="flex flex-col gap-4">
-                                <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
-                                    <span class="material-symbols-outlined text-3xl" data-icon="spa">spa</span>
+                    <div class="p-4 bg-surface-container-low rounded-2xl transition-all duration-300 border border-transparent peer-checked:border-primary peer-checked:bg-white peer-checked:shadow-sm hover:bg-surface-variant/20">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="w-10 h-10 shrink-0 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary peer-checked:bg-primary/10">
+                                    <span class="material-symbols-outlined text-[22px]" data-icon="spa">spa</span>
                                 </div>
-                                <div>
-                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">美膚 (Skincare)</h3>
-                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">深層清潔與極致養護，讓肌膚重現如同瓷器般的透亮光澤。</p>
+                                <div class="flex-1">
+                                    <h3 class="font-noto-serif text-base font-bold text-on-surface">美膚 (Skincare)</h3>
+                                    <p class="text-on-surface-variant text-xs mt-0.5 leading-snug">深層清潔與極致養護，讓肌膚重現如同瓷器般的透亮光澤。</p>
                                 </div>
                             </div>
-                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            <div class="w-5 h-5 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
                             </div>
                         </div>
                     </div>
                 </label>
-            </div>
-
-            <div class="mt-16 mb-8 text-center">
-                <div class="inline-block px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-manrope tracking-wider opacity-70">
-                    探索更多客製化方案
-                </div>
             </div>
         </div>
     </main>
 
-    <div class="fixed bottom-0 left-0 w-full bg-[#fcf9f7]/80 backdrop-blur-xl z-40 pb-10 pt-6 px-6">
+    <div class="fixed bottom-0 left-0 w-full bg-background/90 backdrop-blur-md z-40 pb-8 pt-4 px-6 border-t border-surface-variant/30">
         <div class="max-w-2xl mx-auto flex flex-col gap-4">
-            <button id="next-btn" onclick="window.location.href='2.html'" disabled class="w-full h-16 bg-primary text-white rounded-2xl font-manrope font-bold text-lg flex items-center justify-center gap-2 shadow-[0_12px_32px_rgba(106,53,35,0.2)] hover:opacity-90 transition-all active:scale-95 duration-400 opacity-50 cursor-not-allowed">
-                下一步
-                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+            <button id="next-btn" onclick="window.location.href='2.html'" disabled class="w-full h-12 bg-primary text-white rounded-xl font-manrope font-bold text-base flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all active:scale-[0.98] duration-300 opacity-50 cursor-not-allowed">
+                確認選擇，下一步
+                <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
             </button>
         </div>
     </div>
@@ -258,7 +211,6 @@
             const serviceSection = document.getElementById('service-section');
             const nextBtn = document.getElementById('next-btn');
 
-            // 檢查是否皆已選取，以解鎖下一步按鈕
             function updateNextBtn() {
                 const bChecked = document.querySelector('input[name="beautician"]:checked');
                 const sChecked = document.querySelector('input[name="service"]:checked');
@@ -272,22 +224,19 @@
                 }
             }
 
-            // 點選美容師後，動態展開服務選擇區塊
             beauticianInputs.forEach(input => {
                 input.addEventListener('change', () => {
                     serviceSection.classList.remove('hidden');
                     
-                    // 使用微小的延遲讓 display: block 生效後，再套用透明度過渡動畫
                     setTimeout(() => {
                         serviceSection.classList.remove('opacity-0');
-                        serviceSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        serviceSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }, 50);
                     
                     updateNextBtn();
                 });
             });
 
-            // 點選服務後，解鎖下一步按鈕
             serviceInputs.forEach(input => {
                 input.addEventListener('change', updateNextBtn);
             });
