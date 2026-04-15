@@ -101,7 +101,7 @@
 
     <header class="fixed top-0 w-full z-50 bg-[#fcf9f7]/90 backdrop-blur-md border-b border-surface-variant/30 flex items-center px-6 h-14">
         <div class="flex items-center gap-3 w-full max-w-2xl mx-auto">
-            <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity" data-icon="arrow_back">arrow_back</span>
+            <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity" data-icon="arrow_back" onclick="history.back()">arrow_back</span>
             <h1 class="font-noto-serif text-lg font-bold tracking-wider text-primary">預約服務</h1>
         </div>
     </header>
@@ -199,7 +199,7 @@
                 <span id="selected-summary" class="text-sm font-bold text-on-surface">尚未選擇時段</span>
             </div>
             
-            <button id="next-btn" disabled class="bg-primary text-white px-8 py-3.5 rounded-xl font-manrope font-bold text-sm flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all active:scale-95 duration-300 opacity-50 cursor-not-allowed">
+            <button id="next-btn" onclick="window.location.href='3.html'" disabled class="bg-primary text-white px-8 py-3.5 rounded-xl font-manrope font-bold text-sm flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all active:scale-95 duration-300 opacity-50 cursor-not-allowed">
                 確認預約
                 <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
             </button>
