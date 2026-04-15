@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
-<html lang="zh-Hant"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>預約服務 - 選擇項目</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>預約服務 - 選擇項目</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -78,116 +77,221 @@
             }
         }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         body {
             font-family: 'Manrope', sans-serif;
             -webkit-font-smoothing: antialiased;
+            min-height: max(884px, 100dvh);
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-[#fcf9f7] dark:bg-stone-950 flex items-center px-6 h-16 w-full">
-<div class="flex items-center gap-4 w-full">
-<span class="material-symbols-outlined text-[#6a3523] dark:text-[#a65d43] cursor-pointer hover:opacity-80 transition-opacity duration-400" data-icon="arrow_back">arrow_back</span>
-<h1 class="font-noto-serif text-xl font-bold tracking-wider text-[#6a3523] dark:text-[#a65d43]">預約服務</h1>
-</div>
-</header>
-<main class="flex-1 mt-20 px-6 pb-32 max-w-2xl mx-auto w-full">
-<!-- Progress Indicator -->
-<div class="mb-10 flex flex-col gap-2">
-<span class="text-xs font-manrope tracking-widest text-primary font-bold uppercase">Step 01 / 03</span>
-<h2 class="font-noto-serif text-3xl font-bold tracking-wide text-on-surface">選擇服務類別</h2>
-<p class="text-on-surface-variant font-manrope text-sm leading-relaxed mt-2">請選擇您今日想要體驗的療程項目，我們將為您安排最合適的美容師。</p>
-</div>
-<!-- Service Bento-ish Grid -->
-<div class="space-y-6">
-<!-- Service Card 1: Eyelash -->
-<label class="group relative block cursor-pointer">
-<input checked="" class="peer hidden" name="service" type="radio"/>
-<div class="p-8 bg-surface-container-lowest rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-<div class="flex items-start justify-between">
-<div class="flex flex-col gap-4">
-<div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-3xl" data-icon="visibility">visibility</span>
-</div>
-<div>
-<h3 class="font-noto-serif text-2xl font-bold text-on-surface">美睫 (Eyelash)</h3>
-<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">專業嫁接技術，打造自然如真或濃密亮眼的迷人雙眸。</p>
-</div>
-</div>
-<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-<div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
-</div>
-</div>
-</div>
-</label>
-<!-- Service Card 2: Microblading -->
-<label class="group relative block cursor-pointer">
-<input class="peer hidden" name="service" type="radio"/>
-<div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-<div class="flex items-start justify-between">
-<div class="flex flex-col gap-4">
-<div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-3xl" data-icon="brush">brush</span>
-</div>
-<div>
-<h3 class="font-noto-serif text-2xl font-bold text-on-surface">霧眉 (Microblading)</h3>
-<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">半永久定妝技術，根據您的面部比例設計專屬自然眉型。</p>
-</div>
-</div>
-<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-<div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
-</div>
-</div>
-</div>
-</label>
-<!-- Service Card 3: Skincare -->
-<label class="group relative block cursor-pointer">
-<input class="peer hidden" name="service" type="radio"/>
-<div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
-<div class="flex items-start justify-between">
-<div class="flex flex-col gap-4">
-<div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-3xl" data-icon="spa">spa</span>
-</div>
-<div>
-<h3 class="font-noto-serif text-2xl font-bold text-on-surface">美膚 (Skincare)</h3>
-<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">深層清潔與極致養護，讓肌膚重現如同瓷器般的透亮光澤。</p>
-</div>
-</div>
-<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-<div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
-</div>
-</div>
-</div>
-</label>
-</div>
-<!-- Decorative Element -->
-<div class="mt-16 text-center">
-<div class="inline-block px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-manrope tracking-wider opacity-70">
-                探索更多客製化方案
+    <header class="fixed top-0 w-full z-50 bg-[#fcf9f7] dark:bg-stone-950 flex items-center px-6 h-16">
+        <div class="flex items-center gap-4 w-full">
+            <span class="material-symbols-outlined text-[#6a3523] dark:text-[#a65d43] cursor-pointer hover:opacity-80 transition-opacity duration-400" data-icon="arrow_back">arrow_back</span>
+            <h1 class="font-noto-serif text-xl font-bold tracking-wider text-[#6a3523] dark:text-[#a65d43]">預約服務</h1>
+        </div>
+    </header>
+
+    <main class="flex-1 mt-20 px-6 pb-40 max-w-2xl mx-auto w-full">
+        <div class="mb-10 flex flex-col gap-2">
+            <span class="text-xs font-manrope tracking-widest text-primary font-bold uppercase">Step 01 / 03</span>
+            <h2 class="font-noto-serif text-3xl font-bold tracking-wide text-on-surface">選擇專屬美容師</h2>
+            <p class="text-on-surface-variant font-manrope text-sm leading-relaxed mt-2">請先選擇您偏好的美容師，我們將根據她的專長為您規劃專屬服務。</p>
+        </div>
+
+        <div class="space-y-4 mb-16">
+            <label class="group relative block cursor-pointer">
+                <input class="peer hidden" name="beautician" type="radio" value="ariel"/>
+                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Ariel" class="w-full h-full object-cover"/>
+                            </div>
+                            <div>
+                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Ariel (店長)</h3>
+                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">擅長客製化眼型調整與柔霧眉設計</p>
+                            </div>
+                        </div>
+                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="group relative block cursor-pointer">
+                <input class="peer hidden" name="beautician" type="radio" value="bella"/>
+                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" alt="Bella" class="w-full h-full object-cover"/>
+                            </div>
+                            <div>
+                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Bella (資深技師)</h3>
+                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">專精極致深層美膚與臉部撥筋</p>
+                            </div>
+                        </div>
+                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <label class="group relative block cursor-pointer">
+                <input class="peer hidden" name="beautician" type="radio" value="chloe"/>
+                <div class="p-5 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=200&q=80" alt="Chloe" class="w-full h-full object-cover"/>
+                            </div>
+                            <div>
+                                <h3 class="font-noto-serif text-lg font-bold text-on-surface">Chloe (專業美容師)</h3>
+                                <p class="text-on-surface-variant text-sm mt-1 leading-relaxed">主打清新自然系嫁接與溫和淨膚</p>
+                            </div>
+                        </div>
+                        <div class="w-6 h-6 shrink-0 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                            <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <div id="service-section" class="hidden opacity-0 transition-opacity duration-700">
+            <div class="mb-10 flex flex-col gap-2">
+                <span class="text-xs font-manrope tracking-widest text-primary font-bold uppercase">Step 02 / 03</span>
+                <h2 class="font-noto-serif text-3xl font-bold tracking-wide text-on-surface">選擇服務類別</h2>
+                <p class="text-on-surface-variant font-manrope text-sm leading-relaxed mt-2">請選擇您今日想要體驗的療程產品。</p>
             </div>
-</div>
-</main>
-<!-- Bottom Navigation Area (Fixed Action Bar) -->
-<div class="fixed bottom-0 left-0 w-full bg-[#fcf9f7]/80 backdrop-blur-xl z-40 pb-10 pt-6 px-6">
-<div class="max-w-2xl mx-auto flex flex-col gap-4">
-<button onclick="window.location.href='2.html'" class="w-full h-16 bg-primary text-white rounded-2xl font-manrope font-bold text-lg flex items-center justify-center gap-2 shadow-[0_12px_32px_rgba(106,53,35,0.2)] hover:opacity-90 transition-all active:scale-95 duration-400">
-    下一步
-    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</button>
-</div>
-</div>
-<!-- BottomNavBar (Hidden on high-intent transactional pages as per rules) -->
-<!-- Suppressed for this step-based transactional flow to prioritize the content canvas -->
-</body></html>
+            
+            <div class="space-y-6">
+                <label class="group relative block cursor-pointer">
+                    <input class="peer hidden" name="service" type="radio"/>
+                    <div class="p-8 bg-surface-container-lowest rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                        <div class="flex items-start justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-3xl" data-icon="visibility">visibility</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">美睫 (Eyelash)</h3>
+                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">專業嫁接技術，打造自然如真或濃密亮眼的迷人雙眸。</p>
+                                </div>
+                            </div>
+                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="group relative block cursor-pointer">
+                    <input class="peer hidden" name="service" type="radio"/>
+                    <div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                        <div class="flex items-start justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-3xl" data-icon="brush">brush</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">霧眉 (Microblading)</h3>
+                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">半永久定妝技術，根據您的面部比例設計專屬自然眉型。</p>
+                                </div>
+                            </div>
+                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="group relative block cursor-pointer">
+                    <input class="peer hidden" name="service" type="radio"/>
+                    <div class="p-8 bg-surface-container-low rounded-3xl transition-all duration-400 cubic-bezier(0.4, 0, 0.2, 1) border-2 border-transparent peer-checked:border-primary peer-checked:bg-white shadow-[0_12px_32px_rgba(84,67,62,0.06)] group-hover:scale-[1.02]">
+                        <div class="flex items-start justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-3xl" data-icon="spa">spa</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-noto-serif text-2xl font-bold text-on-surface">美膚 (Skincare)</h3>
+                                    <p class="text-on-surface-variant text-sm mt-2 leading-relaxed">深層清潔與極致養護，讓肌膚重現如同瓷器般的透亮光澤。</p>
+                                </div>
+                            </div>
+                            <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="mt-16 mb-8 text-center">
+                <div class="inline-block px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-manrope tracking-wider opacity-70">
+                    探索更多客製化方案
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="fixed bottom-0 left-0 w-full bg-[#fcf9f7]/80 backdrop-blur-xl z-40 pb-10 pt-6 px-6">
+        <div class="max-w-2xl mx-auto flex flex-col gap-4">
+            <button id="next-btn" onclick="window.location.href='2.html'" disabled class="w-full h-16 bg-primary text-white rounded-2xl font-manrope font-bold text-lg flex items-center justify-center gap-2 shadow-[0_12px_32px_rgba(106,53,35,0.2)] hover:opacity-90 transition-all active:scale-95 duration-400 opacity-50 cursor-not-allowed">
+                下一步
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const beauticianInputs = document.querySelectorAll('input[name="beautician"]');
+            const serviceInputs = document.querySelectorAll('input[name="service"]');
+            const serviceSection = document.getElementById('service-section');
+            const nextBtn = document.getElementById('next-btn');
+
+            // 檢查是否皆已選取，以解鎖下一步按鈕
+            function updateNextBtn() {
+                const bChecked = document.querySelector('input[name="beautician"]:checked');
+                const sChecked = document.querySelector('input[name="service"]:checked');
+                
+                if (bChecked && sChecked) {
+                    nextBtn.disabled = false;
+                    nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    nextBtn.disabled = true;
+                    nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+
+            // 點選美容師後，動態展開服務選擇區塊
+            beauticianInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    serviceSection.classList.remove('hidden');
+                    
+                    // 使用微小的延遲讓 display: block 生效後，再套用透明度過渡動畫
+                    setTimeout(() => {
+                        serviceSection.classList.remove('opacity-0');
+                        serviceSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 50);
+                    
+                    updateNextBtn();
+                });
+            });
+
+            // 點選服務後，解鎖下一步按鈕
+            serviceInputs.forEach(input => {
+                input.addEventListener('change', updateNextBtn);
+            });
+        });
+    </script>
+</body>
+</html>
