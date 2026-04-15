@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Terra Muse - 支付預約訂金</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#eedfdb",
+                        "surface-bright": "#fff8f6",
+                        "primary-fixed-dim": "#ffb59b",
+                        "surface-variant": "#eedfdb",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#f3fffc",
+                        "on-secondary-fixed-variant": "#603f33",
+                        "on-background": "#211a18",
+                        "secondary-fixed-dim": "#ebbcac",
+                        "inverse-primary": "#ffb59b",
+                        "surface-container": "#faebe6",
+                        "secondary-fixed": "#ffdbcf",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#7ed6cb",
+                        "on-secondary-container": "#795548",
+                        "primary-fixed": "#ffdbcf",
+                        "tertiary-fixed": "#9af2e7",
+                        "secondary-container": "#fdccbc",
+                        "on-primary-fixed": "#380d00",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#208279",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface-variant": "#54433e",
+                        "on-primary-fixed-variant": "#72351d",
+                        "inverse-surface": "#372f2c",
+                        "primary": "#8d4930",
+                        "surface-dim": "#e5d7d3",
+                        "secondary": "#7a5649",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "on-surface": "#211a18",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#fff1ec",
+                        "on-secondary-fixed": "#2e150b",
+                        "surface": "#fff8f6",
+                        "on-primary-container": "#fffbff",
+                        "outline-variant": "#d9c2ba",
+                        "background": "#fff8f6",
+                        "inverse-on-surface": "#fdeee9",
+                        "surface-tint": "#904c32",
+                        "surface-container-high": "#f4e5e1",
+                        "tertiary": "#006860",
+                        "outline": "#86736d",
+                        "primary-container": "#ab6146"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#807571] dark:bg-stone-900 flex items-center px-4 h-16 w-full">
+<div class="flex items-center w-full max-w-4xl mx-auto">
+<span class="material-symbols-outlined text-stone-100 cursor-pointer hover:opacity-80 transition-opacity duration-500" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-noto-serif text-lg tracking-wide text-stone-100 ml-4 flex-grow">支付預約訂金</h1>
+<div class="text-xl font-bold text-stone-100">Terra Muse</div>
+</div>
+</header>
+<main class="w-full max-w-2xl mt-20 mb-24 px-6 space-y-8">
+<!-- Booking Summary Section (Editorial Asymmetry) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+<div class="md:col-span-7 bg-surface-container-low p-8 rounded-xl space-y-4">
+<p class="text-secondary font-semibold tracking-widest text-xs uppercase">預約詳情 · Reservation</p>
+<h2 class="text-3xl text-primary serif leading-tight">美睫服務</h2>
+<div class="space-y-3 pt-2">
+<div class="flex items-center space-x-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_month">calendar_month</span>
+<span class="text-sm font-medium">2024年12月12日 14:00</span>
+</div>
+<div class="flex items-center space-x-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="person">person</span>
+<span class="text-sm font-medium">Beautician: Emma Chen</span>
+</div>
+<div class="flex items-center space-x-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">台北市大安區信義路四段</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 relative group overflow-hidden rounded-xl h-full min-h-[200px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Close-up of elegant beauty salon interior with soft natural lighting, warm terracotta walls, and a professional minimalist aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLoxothAkQGw9egLyUH1J7t4jv2fFQ164RkKHHqJG0V0JMWSjjDJz_ADxnbDBzriIP1n314qQS2_OfcbnzvzaSz0RcGJjluzXFmomN5XcZ8gvK1GHSloiCrJVvlYGoQ6daDNcEHiwM74KWz-1p99zSRTcGUJCKuOOWjRX_ih-qt2sBsY3H4DPWPoNrRg4P853NrY6dxXVwZVy__eDDAO386Q1vT29Oun7muz6LHGJneDZ82D4YL9-xvOIjhh5KgQzJt1cBMQ2exgM')"></div>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+</section>
+<!-- Payment Details (Tonal Shift) -->
+<section class="bg-surface-container p-8 rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-secondary serif text-lg mb-1">付款摘要</h3>
+<p class="text-on-surface-variant text-sm">此金額將從服務總額中扣除</p>
+</div>
+<div class="text-right">
+<p class="text-sm text-secondary font-medium mb-1">預約訂金</p>
+<p class="text-2xl text-primary font-bold">NT$ 500</p>
+</div>
+</div>
+</section>
+<!-- Payment Actions -->
+<section class="space-y-6">
+<h3 class="text-center text-on-surface-variant serif text-base">選擇支付方式</h3>
+<!-- Main LINE Pay Button -->
+<button class="w-full bg-[#06C755] hover:bg-[#05b14c] text-white py-5 px-8 rounded-full flex items-center justify-center space-x-4 transition-all duration-300 transform active:scale-[0.98] shadow-sm">
+<img alt="LINE" class="h-6 w-6 brightness-0 invert" data-alt="LINE messenger official logo in white flat minimalist style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACNetF74g2qDnNrZ__Nh4ii2amzK7RF4TL61wmSAQLWphp5fZ7GvGfcFNNyeqQhBe9hediiFMD_IetaqYcHPMckWNB0KACVsUNq75pELKl0T42ZP1cRxEpYMrNOPR_qH_O5RgNWXwcfNGmKG1T1fXsQQDTjPncBDjZzlNsId_SPkfH8jMZ3hUkHA4mHQ5LvND5pG9ROFKt4_waeoR09CDe12rB-Al-IvgleVQ2yhetJbcILjzDb-zNe-9VGfmZKjPT6FXlXejOctU"/>
+<span class="text-lg font-bold tracking-wide">使用 LINE Pay 支付</span>
+</button>
+<!-- Other Methods / Security -->
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-high text-secondary py-4 px-6 rounded-xl flex flex-col items-center justify-center space-y-1 hover:bg-surface-variant transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+<span class="text-xs font-semibold">信用卡 / 簽帳卡</span>
+</button>
+<button class="bg-surface-container-high text-secondary py-4 px-6 rounded-xl flex flex-col items-center justify-center space-y-1 hover:bg-surface-variant transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="text-xs font-semibold">銀行轉帳</span>
+</button>
+</div>
+<!-- Security Trust Signifier -->
+<div class="flex items-center justify-center space-x-2 text-on-surface-variant opacity-60 pt-4">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span class="text-xs tracking-tight">加密支付，安全有保障 · SSL Secured Payment</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Suppressed as this is transactional) -->
+<!-- According to Shell Visibility & Relevance: Suppression for Transactional/Checkout pages -->
+<!-- Decorative Element -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-tertiary to-secondary opacity-20"></div>
+</body></html>

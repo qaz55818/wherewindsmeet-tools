@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>預約服務 - 美睫客製化</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#88452d",
+                        "surface-variant": "#e5e2e0",
+                        "on-primary-fixed-variant": "#73351e",
+                        "surface-container-low": "#f6f3f1",
+                        "on-surface": "#1b1c1b",
+                        "secondary": "#685c53",
+                        "on-secondary-fixed-variant": "#4f453c",
+                        "on-tertiary-container": "#fff4ee",
+                        "tertiary-fixed": "#f3dfd1",
+                        "background": "#fcf9f7",
+                        "surface-container": "#f0edeb",
+                        "outline-variant": "#d9c2ba",
+                        "on-secondary-container": "#6c6057",
+                        "inverse-on-surface": "#f3f0ee",
+                        "surface-container-highest": "#e5e2e0",
+                        "tertiary-container": "#7d6e63",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#390c00",
+                        "secondary-fixed-dim": "#d3c4b8",
+                        "on-background": "#1b1c1b",
+                        "surface-container-high": "#eae8e6",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf9f7",
+                        "primary-container": "#a65d43",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#904b33",
+                        "on-surface-variant": "#54433e",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#fff4f0",
+                        "surface-dim": "#dcd9d8",
+                        "secondary-container": "#edddd1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#221a13",
+                        "outline": "#86736d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#ffb59c",
+                        "surface-bright": "#fcf9f7",
+                        "primary-fixed": "#ffdbcf",
+                        "tertiary-fixed-dim": "#d6c3b6",
+                        "inverse-surface": "#31302f",
+                        "on-tertiary-fixed": "#241a11",
+                        "error": "#ba1a1a",
+                        "tertiary": "#64564b",
+                        "primary-fixed-dim": "#ffb59c",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#51443a",
+                        "secondary-fixed": "#f0e0d4"
+                    },
+                    fontFamily: {
+                        "noto-serif": ["Noto Serif TC", "serif"],
+                        "manrope": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fcf9f7; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow { box-shadow: 0 12px 32px rgba(84, 67, 62, 0.06); }
+        .clay-button-glow { box-shadow: inset 0 4px 6px rgba(0,0,0,0.05); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface antialiased pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center px-6 h-16 w-full bg-[#fcf9f7] dark:bg-stone-950">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#88452d] dark:text-[#a65d43] cursor-pointer hover:opacity-80 transition-opacity duration-400">arrow_back</span>
+<h1 class="font-noto-serif text-xl font-bold tracking-wider text-[#88452d] dark:text-[#a65d43]">預約服務</h1>
+</div>
+</header>
+<main class="mt-20 px-6 max-w-2xl mx-auto">
+<!-- Hero Section / Context -->
+<div class="mb-10 pt-4">
+<h2 class="font-noto-serif text-3xl font-bold text-primary mb-2 tracking-tight">客製化您的美睫</h2>
+<p class="text-on-surface-variant font-manrope text-sm leading-relaxed">選擇最適合您的眼型與妝感的款式，由專業技師為您細心打造。</p>
+</div>
+<!-- Section 1: Eyelash Style (Asymmetric Bento) -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-noto-serif text-lg font-bold text-on-surface">1. 選擇睫毛款式</h3>
+<span class="text-primary text-xs font-semibold tracking-widest uppercase">Style Selection</span>
+</div>
+<div class="grid grid-cols-12 gap-4">
+<!-- Natural Style -->
+<div class="col-span-12 md:col-span-7 group relative overflow-hidden rounded-3xl bg-surface-container-lowest editorial-shadow transition-all duration-400 hover:scale-[1.02]">
+<div class="h-48 w-full bg-cover bg-center" data-alt="Close-up of elegant natural looking eyelashes on a woman with soft warm lighting and minimalist background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJhUlD6zy_2RI2zKV_KoXI2krYNDJbmRKaZ9CpGI-61btHUOg2RI79VscuhWRTYEVluivdsQ-PnCa9rvp_zs_dYZkXd_2Rc0-6D8tZTtDXczJs-WZKdu8QeHYZ2mEDJ1LUy3NoLiKNbDsv0W6EA8dyAXCAPr3DAP44PEjuqKJd5OoI1UpWXlagru7c92bl5Tqs3XfOMOiO0h0by7MJU9C7s2O9fJTo0-HWm0weMhUmQAk9fve4DTm9D2XC-uzycl35iELj7y76AoU')"></div>
+<div class="p-5">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-xs text-primary font-bold uppercase tracking-tighter">Natural</span>
+<h4 class="font-noto-serif text-xl font-bold mt-1">清新自然款</h4>
+</div>
+<div class="h-6 w-6 rounded-full border-2 border-primary flex items-center justify-center bg-primary">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed">適合日常上班、素顏也自然的款式，強調眼神清亮。</p>
+</div>
+</div>
+<!-- Doll Style -->
+<div class="col-span-12 md:col-span-5 flex flex-col gap-4">
+<div class="flex-1 bg-surface-container-low rounded-3xl p-5 border-2 border-transparent hover:border-outline-variant/30 transition-all cursor-pointer">
+<span class="text-[10px] text-secondary font-bold uppercase">Doll</span>
+<h4 class="font-noto-serif text-lg font-bold mt-1">芭比大眼款</h4>
+<p class="text-xs text-on-surface-variant mt-1">加強黑眼球上方長度，視覺放大雙眼。</p>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-3xl p-5 border-2 border-transparent hover:border-outline-variant/30 transition-all cursor-pointer">
+<span class="text-[10px] text-secondary font-bold uppercase">Cat-eye</span>
+<h4 class="font-noto-serif text-lg font-bold mt-1">性感貓眼款</h4>
+<p class="text-xs text-on-surface-variant mt-1">眼尾加長設計，打造深邃神祕的眼神。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Lash Count (Clay Chips) -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-noto-serif text-lg font-bold text-on-surface">2. 睫毛根數</h3>
+<span class="text-primary text-xs font-semibold tracking-widest uppercase">Volume</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-3 rounded-xl font-manrope font-semibold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors">80 根</button>
+<button class="px-6 py-3 rounded-xl font-manrope font-semibold text-sm bg-primary text-white clay-button-glow transition-all">100 根</button>
+<button class="px-6 py-3 rounded-xl font-manrope font-semibold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors">120 根</button>
+<button class="px-6 py-3 rounded-xl font-manrope font-semibold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors">140 根</button>
+<button class="px-6 py-3 rounded-xl font-manrope font-semibold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors">山茶花多層次</button>
+</div>
+</section>
+<!-- Section 3: Notes (Ghost Form) -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-noto-serif text-lg font-bold text-on-surface">3. 其他需求備註</h3>
+<span class="text-primary text-xs font-semibold tracking-widest uppercase">Special Notes</span>
+</div>
+<div class="relative">
+<textarea class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant/40 focus:border-primary focus:ring-0 text-on-surface placeholder:text-stone-400 font-manrope text-sm py-4 h-32 resize-none transition-all duration-400" placeholder="例如：過敏史、眼型困擾或特殊喜好..."></textarea>
+<div class="absolute bottom-2 right-0 text-[10px] text-stone-400 uppercase tracking-widest">Optional</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full bg-background/80 backdrop-blur-xl z-40 pb-10 pt-4 px-6 border-t border-outline-variant/10">
+<div class="max-w-2xl mx-auto flex items-center justify-between gap-6">
+<div class="hidden md:block">
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Estimated Total</p>
+<p class="font-noto-serif text-2xl font-bold text-primary">NT$ 1,800</p>
+</div>
+<button class="flex-1 md:flex-none md:w-64 text-white py-4 px-8 rounded-full font-manrope font-bold text-center tracking-widest flex items-center justify-center gap-2 clay-button-glow transition-all duration-400 transform active:scale-95 bg-[#73351e] hover:bg-[#5a2a18]">
+                下一步
+                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar (Shared Component Logic - Suppression applied as this is a focused Task screen) -->
+<!-- Navigation is suppressed to prioritize focus on the booking journey -->
+</body></html>

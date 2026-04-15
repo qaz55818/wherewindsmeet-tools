@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#88452d",
+                    "surface-variant": "#e5e2e0",
+                    "on-primary-fixed-variant": "#73351e",
+                    "surface-container-low": "#f6f3f1",
+                    "on-surface": "#1b1c1b",
+                    "secondary": "#685c53",
+                    "on-secondary-fixed-variant": "#4f453c",
+                    "on-tertiary-container": "#fff4ee",
+                    "tertiary-fixed": "#f3dfd1",
+                    "background": "#fcf9f7",
+                    "surface-container": "#f0edeb",
+                    "outline-variant": "#d9c2ba",
+                    "on-secondary-container": "#6c6057",
+                    "inverse-on-surface": "#f3f0ee",
+                    "surface-container-highest": "#e5e2e0",
+                    "tertiary-container": "#7d6e63",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#390c00",
+                    "secondary-fixed-dim": "#d3c4b8",
+                    "on-background": "#1b1c1b",
+                    "surface-container-high": "#eae8e6",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fcf9f7",
+                    "primary-container": "#a65d43",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#904b33",
+                    "on-surface-variant": "#54433e",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#fff4f0",
+                    "surface-dim": "#dcd9d8",
+                    "secondary-container": "#edddd1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#221a13",
+                    "outline": "#86736d",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#ffb59c",
+                    "surface-bright": "#fcf9f7",
+                    "primary-fixed": "#ffdbcf",
+                    "tertiary-fixed-dim": "#d6c3b6",
+                    "inverse-surface": "#31302f",
+                    "on-tertiary-fixed": "#241a11",
+                    "error": "#ba1a1a",
+                    "tertiary": "#64564b",
+                    "primary-fixed-dim": "#ffb59c",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#51443a",
+                    "secondary-fixed": "#f0e0d4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif TC", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .font-noto-serif { font-family: 'Noto Serif TC', serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-gradient {
+            background: linear-gradient(135deg, #88452d 0%, #a65d43 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary/20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fcf9f7] dark:bg-stone-950 flex items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#88452d] dark:text-[#a65d43] cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-noto-serif text-xl font-bold tracking-wider text-[#88452d] dark:text-[#a65d43]">預約服務</h1>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Step Indicator -->
+<div class="mb-10 flex flex-col gap-2">
+<span class="text-primary font-semibold tracking-widest text-xs uppercase">Step 02 / 03</span>
+<h2 class="font-headline text-3xl font-bold text-on-surface">選擇日期與時間</h2>
+<p class="text-on-surface-variant text-sm mt-1">請挑選您理想的服務時段，我們將為您保留名額。</p>
+</div>
+<!-- Calendar Section (Bento Style Card) -->
+<section class="mb-8 p-8 rounded-[32px] bg-surface-container-low transition-all duration-400">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-xl font-bold text-on-surface">2024年 12月</h3>
+<div class="flex gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<div class="text-on-surface-variant text-xs font-bold pb-2">日</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">一</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">二</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">三</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">四</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">五</div>
+<div class="text-on-surface-variant text-xs font-bold pb-2">六</div>
+<!-- Calendar Days Mockup -->
+<div class="text-outline/40 py-3 text-sm">24</div>
+<div class="text-outline/40 py-3 text-sm">25</div>
+<div class="text-outline/40 py-3 text-sm">26</div>
+<div class="text-outline/40 py-3 text-sm">27</div>
+<div class="text-outline/40 py-3 text-sm">28</div>
+<div class="text-outline/40 py-3 text-sm">29</div>
+<div class="text-outline/40 py-3 text-sm">30</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">1</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">2</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">3</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">4</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">5</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">6</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">7</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">8</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">9</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">10</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">11</div>
+<!-- Selected Day -->
+<div class="py-3 text-sm cursor-pointer flex items-center justify-center">
+<span class="w-10 h-10 flex items-center justify-center text-white rounded-full font-bold shadow-lg shadow-primary/20" style="background-color: #5D2E1E;">12</span>
+</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">13</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">14</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">15</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">16</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">17</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">18</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">19</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">20</div>
+<div class="text-on-surface py-3 text-sm cursor-pointer hover:bg-surface-container rounded-xl transition-all">21</div>
+</div>
+</section>
+<!-- Time Slots Selection -->
+<div class="space-y-10">
+<!-- Morning -->
+<div>
+<div class="flex items-center gap-3 mb-5">
+<span class="material-symbols-outlined text-primary" data-icon="light_mode">light_mode</span>
+<h4 class="font-headline font-bold text-lg">上午時段</h4>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">09:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">10:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">11:00</button>
+</div>
+</div>
+<!-- Afternoon -->
+<div>
+<div class="flex items-center gap-3 mb-5">
+<span class="material-symbols-outlined text-primary" data-icon="wb_sunny">wb_sunny</span>
+<h4 class="font-headline font-bold text-lg">下午時段</h4>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">13:00</button>
+<!-- Selected Time Slot -->
+<button class="text-white py-3 rounded-xl font-bold shadow-md shadow-primary/20 transform scale-105 transition-all" style="background-color: #5D2E1E;">14:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">15:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">16:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">17:00</button>
+</div>
+</div>
+<!-- Evening -->
+<div class="pb-12">
+<div class="flex items-center gap-3 mb-5">
+<span class="material-symbols-outlined text-primary" data-icon="dark_mode">dark_mode</span>
+<h4 class="font-headline font-bold text-lg">晚間時段</h4>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">19:00</button>
+<button class="bg-surface-container-high text-on-surface-variant py-3 rounded-xl font-medium border-b-2 border-transparent hover:border-primary/20 transition-all">20:00</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Bar (Sticky Bottom) -->
+<div class="fixed bottom-0 left-0 w-full p-6 z-50">
+<div class="max-w-2xl mx-auto bg-surface/80 backdrop-blur-xl rounded-[24px] p-4 flex items-center justify-between shadow-[0_-12px_32px_rgba(84,67,62,0.06)]">
+<div class="flex flex-col pl-2">
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">預約確認</span>
+<span class="text-sm font-bold text-primary">12月12日 14:00</span>
+</div>
+<button class="text-white px-8 py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 active:scale-95 transition-all duration-400" style="background: linear-gradient(135deg, #5D2E1E 0%, #6A3523 100%);">
+                下一步
+            </button>
+</div>
+</div>
+<!-- BottomNavBar (Hidden for transactional screen based on "Relevance Check" logic) -->
+<nav class="fixed bottom-0 left-0 w-full hidden md:flex justify-around items-center px-8 pb-8 pt-4 bg-[#fcf9f7]/80 dark:bg-stone-950/80 backdrop-blur-xl z-50 rounded-t-[32px] shadow-[0_-12px_32px_rgba(84,67,62,0.06)]">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-6 py-2 transition-transform duration-400 hover:text-[#88452d]">
+<span class="material-symbols-outlined" data-icon="home_spark">spark</span>
+<span class="font-manrope text-[10px] uppercase tracking-[0.02em] font-medium">首頁</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#88452d] text-white rounded-[24px] px-6 py-2 transition-transform duration-400 scale-95">
+<span class="material-symbols-outlined" data-icon="calendar_month" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-manrope text-[10px] uppercase tracking-[0.02em] font-medium">我的預約</span>
+</div>
+</nav>
+</body></html>
