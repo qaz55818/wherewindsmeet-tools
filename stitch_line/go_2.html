@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>建立會員資料 - Terra Muse</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#ab6146",
+                    "on-background": "#211a18",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#211a18",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#00504a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#eedfdb",
+                    "secondary-fixed": "#ffdbcf",
+                    "on-secondary-fixed": "#2e150b",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#faebe6",
+                    "on-secondary-fixed-variant": "#603f33",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#54433e",
+                    "secondary": "#7a5649",
+                    "on-primary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fff8f6",
+                    "surface-variant": "#eedfdb",
+                    "tertiary-container": "#208279",
+                    "surface-container-low": "#fff1ec",
+                    "surface-tint": "#904c32",
+                    "surface-bright": "#fff8f6",
+                    "primary": "#8d4930",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-secondary-container": "#795548",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#ffb59b",
+                    "outline-variant": "#d9c2ba",
+                    "secondary-fixed-dim": "#ebbcac",
+                    "tertiary-fixed-dim": "#7ed6cb",
+                    "secondary-container": "#fdccbc",
+                    "tertiary-fixed": "#9af2e7",
+                    "tertiary": "#006860",
+                    "primary-fixed": "#ffdbcf",
+                    "outline": "#86736d",
+                    "inverse-on-surface": "#fdeee9",
+                    "on-primary-fixed-variant": "#72351d",
+                    "on-primary-fixed": "#380d00",
+                    "surface-dim": "#e5d7d3",
+                    "on-tertiary-container": "#f3fffc",
+                    "inverse-surface": "#372f2c",
+                    "primary-fixed-dim": "#ffb59b",
+                    "background": "#fff8f6",
+                    "surface-container-high": "#f4e5e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        input:focus, select:focus {
+            outline: none;
+            --tw-ring-color: #ae6348;
+        }
+        .tonal-layering {
+            background: linear-gradient(180deg, #fff8f6 0%, #faebe6 100%);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 h-16 bg-[#807571] dark:bg-stone-900 flex items-center justify-between px-6 no-border tonal-shift bg-stone-200/10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ae6348] dark:text-[#bd7054] cursor-pointer hover:opacity-80 transition-opacity active:scale-95 duration-300 ease-in-out" data-icon="arrow_back">arrow_back</span>
+<h1 class="text-lg font-serif font-bold tracking-tight text-[#ae6348] dark:text-[#bd7054]">建立會員資料</h1>
+</div>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Hero Branding Section -->
+<div class="mb-12 text-center">
+<div class="inline-block relative mb-6">
+<div class="w-24 h-24 rounded-full overflow-hidden mx-auto border-2 border-primary-container/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Soft focus portrait of a person with glowing skin and warm lighting in a minimalist organic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzSqXYgru53R6e3SB-ch0SVT6miHI9DwpCIzR10ZTjMBbOI4b63W1Xah4pc3FwzNnqVWhZt93tEVyTQe62JWzcwXO8KpdEP78l85YrDmuwtRYLpzh6geFstjjfAJRDAQ6oIHCqKbI5jzTynDmfqjs2DT_I03JDDzY6GLSXQa8KEACAn0p1XOrEn9fsv5TNpdWbR7Xyj-v-tFbJjKS1MJIpvq8x70RcBPBKnKPF63qihvGj69OJOZ5ery0AZK6d8RaQ4vMpOjUA600"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary-container text-white p-1 rounded-full border-2 border-background">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h2 class="text-3xl font-headline font-bold text-primary mb-2">歡迎來到 Terra Muse</h2>
+<p class="text-on-surface-variant font-body text-sm tracking-wide">請填寫以下資料以完成您的會員個人檔案。</p>
+</div>
+<!-- Form Section -->
+<form class="space-y-8 pb-12">
+<!-- Consolidated Customer Name -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">顧客姓名</label>
+<div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary">
+<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="請輸入姓名" type="text"/>
+</div>
+</div>
+<!-- Phone Number -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">手機號碼</label>
+<div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary">
+<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="09XX-XXX-XXX" type="tel"/>
+</div>
+</div>
+<!-- Birthday -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">生日</label>
+<div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary flex items-center pr-4">
+<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body appearance-none" type="date"/>
+<span class="material-symbols-outlined text-outline-variant">calendar_month</span>
+</div>
+</div>
+<!-- Address Section -->
+<div class="space-y-4">
+<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">通訊地址</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low rounded-lg relative">
+<select class="w-full bg-transparent border-none py-4 px-4 text-on-surface font-body appearance-none cursor-pointer">
+<option value="">選擇縣市</option>
+<option value="Taipei">台北市</option>
+<option value="NewTaipei">新北市</option>
+<option value="Taichung">台中市</option>
+<option value="Kaohsiung">高雄市</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+</div>
+<div class="bg-surface-container-low rounded-lg relative">
+<select class="w-full bg-transparent border-none py-4 px-4 text-on-surface font-body appearance-none cursor-pointer">
+<option value="">選擇區域</option>
+<option value="Xinyi">信義區</option>
+<option value="Daan">大安區</option>
+<option value="Zhongshan">中山區</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Optional Field - Previous Customer Mobile -->
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="block text-xs font-label uppercase tracking-widest text-outline">輸入舊客戶手機 (推薦)</label>
+<span class="text-[10px] text-outline-variant italic">選填</span>
+</div>
+<div class="bg-surface-container-low rounded-lg border border-dashed border-outline-variant transition-all focus-within:border-solid focus-within:ring-1 focus-within:ring-primary">
+<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="用於同步歷史紀錄" type="tel"/>
+</div>
+</div>
+<!-- Aesthetic Divider -->
+<div class="py-4">
+<div class="h-16 w-full bg-surface-container-high rounded-xl flex items-center justify-center gap-3 px-6">
+<span class="material-symbols-outlined text-tertiary-container text-sm">auto_awesome</span>
+<p class="text-xs font-body text-on-surface-variant leading-tight">
+                        您的資料已加密，僅用於提供個人化的療程建議。
+                    </p>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="pt-4">
+<button class="w-full bg-primary py-5 rounded-lg text-on-primary font-body font-bold tracking-[0.2em] uppercase text-sm shadow-xl shadow-primary-container/10 hover:opacity-90 active:scale-[0.98] transition-all duration-300" type="submit">
+                    完成建立
+                </button>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-[#807571] dark:bg-stone-900 rounded-t-lg tonal-layering without borders flat no shadows">
+<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">首頁</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">預約</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#ae6348] dark:text-[#bd7054] font-bold soft easing transition duration-500">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">個人檔案</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">支援</span>
+</button>
+</nav>
+</body></html>
