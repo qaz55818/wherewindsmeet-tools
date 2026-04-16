@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>遊戲下載 - 劍嘯笑傲</title>
+    
+    <!-- Tailwind & Config -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col pt-24 relative overflow-x-hidden">
+    
+    <!-- Navbar (Modular) -->
+    <nav id="main-nav"></nav>
+
+    <!-- Ambient Background Elements -->
+    <div class="fixed top-0 left-0 w-full h-[819px] pointer-events-none opacity-20 z-0 bg-no-repeat bg-left-top bg-contain mix-blend-multiply" style="background-image: radial-gradient(circle at 30% 30%, var(--tw-colors-surface-container-highest) 0%, transparent 60%);"></div>
+
+    <main class="flex-grow w-full max-w-screen-xl mx-auto px-6 py-12 lg:py-24 relative z-10 flex flex-col gap-24 font-body">
+        <!-- Hero Section -->
+        <section class="relative w-full min-h-[409px] flex flex-col md:flex-row items-center justify-between gap-12 bg-surface-container-low rounded-xl p-8 lg:p-16 overflow-hidden border border-outline-variant/30 shadow-sm">
+            <div class="absolute top-0 right-0 w-full h-full opacity-30 z-0 pointer-events-none">
+                <img alt="abstract ink wash mountain landscape" class="w-full h-full object-cover mix-blend-multiply filter grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPb0ZnO_9m2KE5wr5EX4dz1ZVLBYNT9wCeUXGeF29bFFwCmWUMiPBTa7BtrenCNBYKd0H_K5Ulrm6YFcVXfn6-2_IRN-XBJgx7WDhq40SuBTn8wzx851Re0lvWMv8PCwvCymexHHOyGaBEkhZp_a4PQe7o2zcNdGJOsye3erf9j9M5GYvj8N5mbQR0nX-Z2g9y5QvMHVKHwU8tG2AhVuL7pfq1RW2TqkVfD10u-nikWxThUG-2HJREz0qgatf6eEXEQ03wmgt8EVw"/>
+            </div>
+            <div class="flex-1 relative z-10">
+                <h1 class="font-headline text-5xl lg:text-7xl font-black text-on-background mb-4 tracking-wider leading-tight">
+                    遊戲下載
+                </h1>
+                <div class="w-24 h-2 bg-primary rounded-full mb-6 opacity-80"></div>
+                <p class="text-xl lg:text-2xl text-on-surface-variant font-medium max-w-lg leading-relaxed">
+                    踏破鐵鞋無覓處，得來全不費工夫。立即啟程，一嘯江湖。
+                </p>
+            </div>
+            <div class="flex-1 relative z-10 flex justify-center lg:justify-end w-full">
+                <div class="bg-surface-container-highest p-8 lg:p-12 rounded-2xl w-full max-w-md shadow-2xl backdrop-blur-md bg-opacity-80 flex flex-col items-center gap-6 border border-outline-variant/30">
+                    <button class="w-full bg-primary text-on-primary font-headline text-2xl font-bold py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 relative overflow-hidden group">
+                        <span class="relative z-10 flex items-center justify-center gap-3">
+                            <span class="material-symbols-outlined text-3xl">download</span>
+                            立即下載
+                        </span>
+                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    </button>
+                    <div class="w-full flex flex-col gap-2 text-center font-body text-sm text-on-surface-variant">
+                        <div class="flex justify-between items-center px-4 py-2 bg-surface-container-low rounded-md">
+                            <span>檔案大小</span>
+                            <span class="font-mono font-medium text-on-background">26 GB</span>
+                        </div>
+                        <div class="flex justify-between items-center px-4 py-2 bg-surface-container-low rounded-md">
+                            <span>MD5 驗證碼</span>
+                            <span class="font-mono text-xs text-on-background opacity-70">a1b2c3d4e5f6g7h8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid: Alternative Downloads & System Requirements -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Alternative Channels -->
+            <div class="lg:col-span-1 flex flex-col gap-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="material-symbols-outlined text-primary text-3xl">cloud_download</span>
+                    <h2 class="font-headline text-2xl font-bold text-on-background">備用下載點</h2>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <a class="flex items-center justify-between p-5 bg-surface-container-high rounded-xl hover:bg-surface-container-highest transition-colors group border border-outline-variant/10" href="#">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">public</span>
+                            </div>
+                            <span class="font-body text-lg font-medium text-on-background group-hover:text-primary transition-colors">官方主下載點</span>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+                    </a>
+                    <a class="flex items-center justify-between p-5 bg-surface-container-high rounded-xl hover:bg-surface-container-highest transition-colors group border border-outline-variant/10" href="#">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">cloud</span>
+                            </div>
+                            <span class="font-body text-lg font-medium text-on-background group-hover:text-primary transition-colors">雲端下載點</span>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- System Requirements -->
+            <div class="lg:col-span-2 bg-surface-container-low rounded-2xl p-8 lg:p-10 relative overflow-hidden border border-outline-variant/30 shadow-sm flex flex-col">
+                <div class="flex items-center gap-3 mb-8 relative z-10">
+                    <span class="material-symbols-outlined text-primary text-3xl">memory</span>
+                    <h2 class="font-headline text-2xl font-bold text-on-background">系統需求</h2>
+                </div>
+                <div class="overflow-x-auto relative z-10">
+                    <table class="w-full text-left font-body">
+                        <thead>
+                            <tr class="border-b border-outline-variant/30 text-on-surface-variant text-sm tracking-wider">
+                                <th class="pb-4 font-medium">配置</th>
+                                <th class="pb-4 font-medium pl-4">最低需求</th>
+                                <th class="pb-4 font-medium pl-4 text-primary">推薦配置</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-on-background">
+                            <tr class="border-b border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-4 font-medium text-on-surface-variant font-headline">處理器 (CPU)</td>
+                                <td class="py-4 pl-4 text-sm">Intel i5-8400 / Ryzen 5 1600</td>
+                                <td class="py-4 pl-4 text-sm font-medium">Intel i7-10700 / Ryzen 7 3700X</td>
+                            </tr>
+                            <tr class="border-b border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-4 font-medium text-on-surface-variant font-headline">記憶體 (RAM)</td>
+                                <td class="py-4 pl-4 text-sm">16 GB RAM</td>
+                                <td class="py-4 pl-4 text-sm font-medium">32 GB RAM</td>
+                            </tr>
+                            <tr class="border-b border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-4 font-medium text-on-surface-variant font-headline">顯示卡 (GPU)</td>
+                                <td class="py-4 pl-4 text-sm">GTX 1060 6GB</td>
+                                <td class="py-4 pl-4 text-sm font-medium">RTX 3060 / RX 6700 XT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Modular) -->
+    <footer id="main-footer"></footer>
+
+    <!-- Scripts (Modularized fallback for file:// support) -->
+    <script src="js/components/navbar.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

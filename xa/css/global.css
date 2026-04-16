@@ -1,0 +1,82 @@
+/**
+ * 《劍嘯笑傲》全域 CSS 樣式
+ */
+
+/* 宣紙紋理疊加層 */
+.paper-texture {
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+    pointer-events: none;
+}
+
+/* 毛筆筆觸按鈕裁剪路徑 */
+.btn-brushstroke {
+    clip-path: polygon(3% 0, 98% 5%, 100% 95%, 2% 100%, 0 50%);
+}
+
+/* 墨跡擴散與遮罩組件 */
+.ink-splatter {
+    clip-path: path('M45.5,1.5c15.2-3.8,32.4,5.4,41.9,18.7c9.5,13.3,11.2,30.8,4.5,45.1c-6.7,14.3-21.8,25.4-38,28.6c-16.2,3.2-33.5-1.5-46-13.6C-4.6,68.2-6.5,48.7,2.2,33.5C10.9,18.3,30.3,5.3,45.5,1.5z');
+}
+
+/* 墨跡遮罩（用於導航欄按鈕等） */
+.brush-mask {
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg"><path d="M5,20 Q50,0 100,20 T195,20 Q150,40 100,20 T5,20 Z" fill="black"/></svg>');
+    mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg"><path d="M5,20 Q50,0 100,20 T195,20 Q150,40 100,20 T5,20 Z" fill="black"/></svg>');
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* 迷霧模糊特效 */
+.mist-bg {
+    backdrop-filter: blur(12px);
+}
+
+/* 基礎背景樣式（適用於活動與內容頁面） */
+.bg-ink-pattern {
+    background-image: radial-gradient(#efe7d7 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* 響應式優化與全域平滑縮放 */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #fff8ef;
+}
+
+/* --- 會員系統專用樣式 --- */
+
+/* 毛筆風格輸入框 */
+.input-ink {
+    @apply bg-surface-container-low border-b-2 border-outline-variant focus:border-primary transition-all duration-300 outline-none px-4 py-3 font-label text-on-surface;
+    background-image: linear-gradient(to right, rgba(57, 0, 3, 0.05) 1px, transparent 1px);
+    background-size: 20px 100%;
+}
+
+/* 密碼強度裝飾條 */
+.strength-meter {
+    height: 4px;
+    width: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* 驗證碼容器 */
+.captcha-box {
+    filter: contrast(150%) brightness(90%);
+    letter-spacing: 4px;
+}
+
+/* 記住帳號 Checkbox 樣式 */
+.checkbox-ink {
+    @apply appearance-none w-5 h-5 border-2 border-outline-variant rounded-sm checked:bg-primary checked:border-primary transition-all cursor-pointer relative;
+}
+
+.checkbox-ink:checked::after {
+    content: '✓';
+    @apply absolute inset-0 flex items-center justify-center text-on-primary text-xs font-bold font-serif;
+}

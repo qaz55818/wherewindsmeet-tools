@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>登入遊戲 - 劍嘯笑傲</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body class="bg-surface text-on-surface font-body min-h-screen relative overflow-x-hidden flex flex-col bg-ink-pattern py-24">
+    <!-- Navbar Placeholder -->
+    <nav id="main-nav"></nav>
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-10">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPb0ZnO_9m2KE5wr5EX4dz1ZVLBYNT9wCeUXGeF29bFFwCmWUMiPBTa7BtrenCNBYKd0H_K5Ulrm6YFcVXfn6-2_IRN-XBJgx7WDhq40SuBTn8wzx851Re0lvWMv8PCwvCymexHHOyGaBEkhZp_a4PQe7o2zcNdGJOsye3erf9j9M5GYvj8N5mbQR0nX-Z2g9y5QvMHVKHwU8tG2AhVuL7pfq1RW2TqkVfD10u-nikWxThUG-2HJREz0qgatf6eEXEQ03wmgt8EVw" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Login Content Wrapper -->
+    <div class="flex-1 flex items-center justify-center relative z-10 w-full">
+        <!-- Login Card -->
+        <main class="w-full max-w-md px-6 py-12">
+        <div class="bg-surface-container-high/80 backdrop-blur-xl p-10 rounded-2xl shadow-2xl border border-outline-variant/30 relative">
+            <!-- Decorative Ink Splat -->
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full filter blur-2xl pointer-events-none"></div>
+            
+            <header class="text-center mb-10">
+                <h1 class="font-headline text-4xl font-black text-primary mb-2 tracking-widest">登入江湖</h1>
+                <p class="text-on-surface-variant font-label italic">一劍霜寒，笑傲紅塵</p>
+            </header>
+
+            <form id="login-form" class="space-y-6">
+                <!-- Account -->
+                <div class="space-y-2">
+                    <label for="account" class="block font-headline font-bold text-sm text-on-surface">遊戲帳號</label>
+                    <input type="text" id="account" required class="w-full input-ink" placeholder="請輸入帳號">
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-2">
+                    <label for="password" class="block font-headline font-bold text-sm text-on-surface">遊戲密碼</label>
+                    <input type="password" id="password" required class="w-full input-ink" placeholder="請輸入密碼">
+                </div>
+
+                <!-- Captcha -->
+                <div class="space-y-2">
+                    <label class="block font-headline font-bold text-sm text-on-surface">驗證碼</label>
+                    <div class="flex gap-4">
+                        <input type="text" required class="flex-1 input-ink" placeholder="驗證碼">
+                        <div id="login-captcha" class="w-32 bg-surface-container-highest flex items-center justify-center captcha-box cursor-pointer select-none border border-outline-variant/30" onclick="AuthSystem.generateCaptcha('login-captcha')">
+                            <!-- JS Inject -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remember & Forgot -->
+                <div class="flex items-center justify-between font-label text-sm text-on-surface-variant">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" id="remember-me" class="checkbox-ink">
+                        <span>記住帳號</span>
+                    </label>
+                    <a href="#" class="hover:text-primary transition-colors">忘記密碼？</a>
+                </div>
+
+                <!-- Action Button -->
+                <button type="submit" class="w-full py-4 bg-primary text-on-primary font-headline font-bold text-xl btn-brushstroke shadow-lg hover:opacity-90 transition-opacity mt-4 tracking-widest">
+                    進入遊戲
+                </button>
+            </form>
+
+            <footer class="mt-10 text-center font-label text-sm text-on-surface-variant">
+                尚未擁有帳號？ <a href="register.html" class="text-primary font-bold hover:underline">立即註冊</a>
+            </footer>
+        </div>
+    </main>
+</div>
+
+    <!-- Footer Placeholder -->
+    <footer id="main-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="js/components/navbar.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 初始化登入邏輯
+        AuthSystem.initLogin();
+    </script>
+</body>
+</html>

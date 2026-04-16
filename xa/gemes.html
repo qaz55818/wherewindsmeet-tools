@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>遊戲公告 - 劍嘯笑傲</title>
+    
+    <!-- Tailwind & Config -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body class="font-body min-h-screen relative flex flex-col pt-[88px] bg-ink-pattern">
+    
+    <!-- Navbar (Modular) -->
+    <nav id="main-nav"></nav>
+
+    <!-- Ambient Bamboo Silhouette Background -->
+    <div class="fixed top-0 right-0 w-1/3 h-screen pointer-events-none opacity-20 z-0 bg-no-repeat bg-right-top bg-contain"
+        style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23dce0e5\'%3E%3Cpath d=\'M80,0 Q75,50 85,100 L95,100 Q85,50 90,0 Z M60,20 Q55,60 65,100 L70,100 Q60,60 65,20 Z M40,50 Q35,80 45,100 L50,100 Q40,80 45,50 Z\'/%3E%3C/svg%3E');">
+    </div>
+
+    <!-- Main Content Canvas -->
+    <main class="flex-1 flex flex-col md:flex-row max-w-screen-xl mx-auto w-full p-6 md:p-12 gap-12 relative z-10">
+        <!-- Left Sidebar: Categories & Filters -->
+        <aside class="w-full md:w-64 flex-shrink-0 order-2 md:order-1">
+            <div class="sticky top-32 space-y-10">
+                <!-- Search -->
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-0 top-2 text-on-surface-variant">search</span>
+                    <input class="w-full pl-8 py-2 border-none border-b border-outline-variant bg-transparent focus:ring-0 focus:border-primary transition-all font-label text-on-surface placeholder:text-on-surface-variant/50"
+                        placeholder="搜尋公告..." type="text" />
+                </div>
+                <!-- Categories -->
+                <div>
+                    <h3 class="font-headline font-bold text-xl text-on-surface mb-6 flex items-center gap-2"><span
+                            class="material-symbols-outlined text-primary"
+                            style="font-variation-settings: 'FILL' 1;">auto_awesome</span> 歷程存檔</h3>
+                    <ul class="space-y-4 font-label text-on-surface-variant">
+                        <li>
+                            <a class="flex items-center justify-between hover:text-primary transition-colors group" href="#">
+                                <span class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all">brush</span>
+                                    <span class="text-primary font-medium">全部公告</span>
+                                </span>
+                                <span class="text-xs bg-surface-container-high px-2 py-1 rounded">128</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center justify-between hover:text-primary transition-colors group" href="#">
+                                <span class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all">brush</span>
+                                    <span>系統更新</span>
+                                </span>
+                                <span class="text-xs bg-surface-container px-2 py-1 rounded">45</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center justify-between hover:text-primary transition-colors group" href="#">
+                                <span class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-sm opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all">brush</span>
+                                    <span>維護日誌</span>
+                                </span>
+                                <span class="text-xs bg-surface-container px-2 py-1 rounded">32</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Right Content: The News List -->
+        <section class="flex-1 order-1 md:order-2">
+            <!-- Page Header -->
+            <div class="mb-16 relative">
+                <h1 class="font-headline font-black text-5xl md:text-7xl text-on-surface tracking-tight opacity-90 relative z-10 leading-tight">
+                    最新公告
+                </h1>
+                <div class="absolute -top-4 -left-4 text-8xl font-serif text-primary opacity-5 select-none pointer-events-none">
+                    公告
+                </div>
+                <p class="font-label text-on-surface-variant mt-4 max-w-lg text-lg">來自武林各地的最新法規、編年史及各類奇聞異事。</p>
+                <div class="h-px bg-gradient-to-r from-primary/30 to-transparent w-full mt-8"></div>
+            </div>
+            
+            <!-- News Items -->
+            <div class="space-y-8">
+                <!-- Featured Item -->
+                <article class="group bg-surface-container-high rounded-sm p-8 hover:bg-surface-container-highest transition-colors duration-300 relative overflow-hidden flex flex-col md:flex-row gap-8 items-start">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-primary opacity-10 rounded-bl-full"></div>
+                    <div class="absolute top-4 right-4 text-primary">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+                    </div>
+                    <div class="flex-shrink-0 text-center md:text-left w-24">
+                        <div class="font-label text-on-surface-variant text-sm uppercase tracking-widest mb-1">十月</div>
+                        <div class="font-headline font-bold text-4xl text-primary">15</div>
+                        <div class="mt-2 inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-label font-bold tracking-wider rounded-sm border border-primary/20">系統</div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-headline font-bold text-2xl text-on-surface group-hover:text-primary transition-colors leading-snug mb-3">盛大擴張：龍峰之巔的崛起</h2>
+                        <p class="font-label text-on-surface-variant line-clamp-2 leading-relaxed mb-6">雲霧繚繞中展現出全新的領土。準備好您的神兵利器，磨練武藝，龍峰正為那些勇於攀登的俠客提供前所未有的挑戰與縹緲的獎勵。</p>
+                        <a class="inline-flex items-center gap-2 font-label font-medium text-primary hover:text-primary-container transition-colors group/link" href="#">查閱卷軸 <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Modular) -->
+    <footer id="main-footer"></footer>
+
+    <!-- Scripts (Modularized fallback for file:// support) -->
+    <script src="js/components/navbar.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

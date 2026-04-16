@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>加入江湖 - 劍嘯笑傲</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body class="bg-surface text-on-surface font-body min-h-screen relative overflow-x-hidden flex flex-col bg-ink-pattern py-24">
+    <!-- Navbar Placeholder -->
+    <nav id="main-nav"></nav>
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-x-0 top-0 z-0 pointer-events-none opacity-5">
+         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCayGp9NIf-ZClFzdB3ot54NzcAYwvP5RAntQzuCQRFZjYDMlivVdPjW1zM42N2yFh-FbH62UTy_niUpXFjq5JWUeFInCrKgWnnsgTF7sqfI6PntIVoslJTWZXHUm2kZbPdBNimdhCTxmgAVgKsfSzvhYpluedVYTLGkPJInT77Vck4GlFF1_aoTSSgiS6Xsvq3oXcv8M5BAax8PPXIdTxZK3gy7pv4C3WdK5OBkRWoefrZBVW4vWv8quMcobC2RfFDKkppEi50Wq8" class="w-full h-auto">
+    </div>
+
+    <!-- Register Content Wrapper -->
+    <div class="flex-1 flex items-center justify-center relative z-10 w-full">
+        <!-- Register Card -->
+        <main class="w-full max-w-xl px-6">
+        <div class="bg-surface-container-high/90 backdrop-blur-2xl p-8 md:p-12 rounded-3xl shadow-2xl border border-outline-variant/30">
+            <header class="text-center mb-12">
+                <h1 class="font-headline text-4xl font-black text-primary mb-2 tracking-widest">註冊遊戲</h1>
+                <p class="text-on-surface-variant font-label">名滿天下，從此開始</p>
+            </header>
+
+            <form id="register-form" class="space-y-6">
+                <!-- Account -->
+                <div class="space-y-2">
+                    <label for="reg-account" class="block font-headline font-bold text-sm text-on-surface">遊戲帳號 <span class="text-primary text-xs font-normal">(僅限小寫、數字)</span></label>
+                    <div class="flex gap-4">
+                        <input type="text" id="reg-account" required class="flex-1 input-ink" placeholder="請設定帳號" autocomplete="off">
+                        <button type="button" id="check-availability" class="px-6 py-2 bg-surface-container-highest text-primary font-label font-bold text-sm border border-outline-variant/30 hover:bg-primary hover:text-on-primary transition-all">檢測可用性</button>
+                    </div>
+                </div>
+
+                <!-- Password Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="reg-password" class="block font-headline font-bold text-sm text-on-surface">遊戲密碼</label>
+                        <input type="password" id="reg-password" required class="w-full input-ink" placeholder="請設定密碼">
+                        <!-- Strength Meter -->
+                        <div class="w-full h-1 bg-surface-container-highest mt-1">
+                            <div id="strength-bar" class="strength-meter"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="reg-confirm" class="block font-headline font-bold text-sm text-on-surface">確認密碼</label>
+                        <input type="password" id="reg-confirm" required class="w-full input-ink" placeholder="再次輸入密碼">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="space-y-2">
+                    <label for="reg-email" class="block font-headline font-bold text-sm text-on-surface">電子信箱</label>
+                    <input type="email" id="reg-email" required class="w-full input-ink" placeholder="用於找回密碼與接收資訊">
+                </div>
+
+                <!-- Captcha -->
+                <div class="space-y-2">
+                    <label class="block font-headline font-bold text-sm text-on-surface">驗證碼</label>
+                    <div class="flex gap-4">
+                        <input type="text" required class="flex-1 input-ink" placeholder="輸入圖中驗證碼">
+                        <div id="reg-captcha" class="w-32 bg-surface-container-highest flex items-center justify-center captcha-box cursor-pointer select-none border border-outline-variant/30" onclick="AuthSystem.generateCaptcha('reg-captcha')">
+                            <!-- JS Inject -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agree Policy -->
+                <div class="flex items-start gap-3 font-label text-xs text-on-surface-variant leading-relaxed">
+                    <input type="checkbox" required class="checkbox-ink mt-1">
+                    <span>我已閱讀並同意 <a href="#" class="text-primary underline">服務條款</a> 與 <a href="#" class="text-primary underline">隱私權政策</a>，並承諾遵守江湖秩序。</span>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="w-full py-5 bg-primary text-on-primary font-headline font-bold text-2xl btn-brushstroke shadow-xl mt-4 tracking-[0.5em]">
+                    立即註冊
+                </button>
+            </form>
+
+            <footer class="mt-8 text-center font-label text-sm text-on-surface-variant">
+                已經是江湖中人？ <a href="login.html" class="text-primary font-bold hover:underline">返回登入</a>
+            </footer>
+        </div>
+    </main>
+</div>
+
+    <!-- Footer Placeholder -->
+    <footer id="main-footer"></footer>
+
+    <!-- Scripts -->
+    <script src="js/components/navbar.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 初始化註冊邏輯
+        AuthSystem.initRegister();
+    </script>
+</body>
+</html>
