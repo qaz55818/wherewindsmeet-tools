@@ -91,11 +91,11 @@
             background: linear-gradient(180deg, #fff8f6 0%, #faebe6 100%);
         }
         body {
-            min-height: max(884px, 100dvh);
+            min-height: 100dvh;
         }
     </style>
 </head>
-<body class="bg-background text-on-background min-h-screen pb-24">
+<body class="bg-background text-on-background min-h-screen">
 <!-- TopAppBar -->
 <header class="fixed top-0 left-0 w-full z-50 h-16 bg-[#807571] dark:bg-stone-900 flex items-center justify-between px-6 no-border tonal-shift bg-stone-200/10">
 <div class="flex items-center gap-4">
@@ -104,41 +104,33 @@
 </div>
 <div class="w-6"></div> <!-- Spacer for centering -->
 </header>
-<main class="pt-24 px-6 max-w-2xl mx-auto">
+<main class="px-6 max-w-2xl mx-auto pt-24 pb-12">
 <!-- Hero Branding Section -->
-<div class="mb-12 text-center">
-<div class="inline-block relative mb-6">
-<div class="w-24 h-24 rounded-full overflow-hidden mx-auto border-2 border-primary-container/20">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="Soft focus portrait of a person with glowing skin and warm lighting in a minimalist organic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzSqXYgru53R6e3SB-ch0SVT6miHI9DwpCIzR10ZTjMBbOI4b63W1Xah4pc3FwzNnqVWhZt93tEVyTQe62JWzcwXO8KpdEP78l85YrDmuwtRYLpzh6geFstjjfAJRDAQ6oIHCqKbI5jzTynDmfqjs2DT_I03JDDzY6GLSXQa8KEACAn0p1XOrEn9fsv5TNpdWbR7Xyj-v-tFbJjKS1MJIpvq8x70RcBPBKnKPF63qihvGj69OJOZ5ery0AZK6d8RaQ4vMpOjUA600"/>
-</div>
-<div class="absolute bottom-0 right-0 bg-primary-container text-white p-1 rounded-full border-2 border-background">
-<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
-</div>
-</div>
+<div class="text-center mb-10">
 <h2 class="text-3xl font-headline font-bold text-primary mb-2">歡迎來到 Terra Muse</h2>
 <p class="text-on-surface-variant font-body text-sm tracking-wide">請填寫以下資料以完成您的會員個人檔案。</p>
 </div>
 <!-- Form Section -->
-<form class="space-y-8 pb-12">
-<!-- Consolidated Customer Name -->
+<form class="space-y-6">
+<!-- Name -->
 <div class="space-y-2">
-<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">顧客姓名</label>
+<label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">姓名</label>
 <div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary">
-<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="請輸入姓名" type="text"/>
+<input class="w-full bg-transparent border-none px-4 text-on-surface placeholder:text-outline-variant font-body py-3" placeholder="請輸入姓名" type="text"/>
 </div>
 </div>
 <!-- Phone Number -->
 <div class="space-y-2">
 <label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">手機號碼</label>
 <div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary">
-<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="09XX-XXX-XXX" type="tel"/>
+<input class="w-full bg-transparent border-none px-4 text-on-surface placeholder:text-outline-variant font-body py-3" placeholder="09XX-XXX-XXX" type="tel"/>
 </div>
 </div>
 <!-- Birthday -->
 <div class="space-y-2">
 <label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">生日</label>
 <div class="bg-surface-container-low rounded-lg transition-all focus-within:ring-1 focus-within:ring-primary flex items-center pr-4">
-<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body appearance-none" type="date"/>
+<input class="w-full bg-transparent border-none px-4 text-on-surface placeholder:text-outline-variant font-body appearance-none py-3" type="date"/>
 <span class="material-symbols-outlined text-outline-variant">calendar_month</span>
 </div>
 </div>
@@ -147,7 +139,7 @@
 <label class="block text-xs font-label uppercase tracking-widest text-outline ml-1">通訊地址</label>
 <div class="grid grid-cols-2 gap-4">
 <div class="bg-surface-container-low rounded-lg relative">
-<select class="w-full bg-transparent border-none py-4 px-4 text-on-surface font-body appearance-none cursor-pointer">
+<select class="w-full bg-transparent border-none px-4 text-on-surface font-body appearance-none cursor-pointer py-3">
 <option value="">選擇縣市</option>
 <option value="Taipei">台北市</option>
 <option value="NewTaipei">新北市</option>
@@ -157,7 +149,7 @@
 <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
 </div>
 <div class="bg-surface-container-low rounded-lg relative">
-<select class="w-full bg-transparent border-none py-4 px-4 text-on-surface font-body appearance-none cursor-pointer">
+<select class="w-full bg-transparent border-none px-4 text-on-surface font-body appearance-none cursor-pointer py-3">
 <option value="">選擇區域</option>
 <option value="Xinyi">信義區</option>
 <option value="Daan">大安區</option>
@@ -170,15 +162,14 @@
 <!-- Optional Field - Previous Customer Mobile -->
 <div class="space-y-2">
 <div class="flex justify-between items-center ml-1">
-<label class="block text-xs font-label uppercase tracking-widest text-outline">輸入舊客戶手機 (推薦)</label>
-<span class="text-[10px] text-outline-variant italic">選填</span>
+<label class="block text-xs font-label uppercase tracking-widest text-outline">推薦人手機號碼 (選填)</label>
 </div>
 <div class="bg-surface-container-low rounded-lg border border-dashed border-outline-variant transition-all focus-within:border-solid focus-within:ring-1 focus-within:ring-primary">
-<input class="w-full bg-transparent border-none py-4 px-4 text-on-surface placeholder:text-outline-variant font-body" placeholder="用於同步歷史紀錄" type="tel"/>
+<input class="w-full bg-transparent border-none px-4 text-on-surface placeholder:text-outline-variant font-body py-3" placeholder="輸入推薦人的手機號碼" type="tel"/>
 </div>
 </div>
 <!-- Aesthetic Divider -->
-<div class="py-4">
+<div class="">
 <div class="h-16 w-full bg-surface-container-high rounded-xl flex items-center justify-center gap-3 px-6">
 <span class="material-symbols-outlined text-tertiary-container text-sm">auto_awesome</span>
 <p class="text-xs font-body text-on-surface-variant leading-tight">
@@ -194,23 +185,4 @@
 </div>
 </form>
 </main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-[#807571] dark:bg-stone-900 rounded-t-lg tonal-layering without borders flat no shadows">
-<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
-<span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">首頁</span>
-</button>
-<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
-<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
-<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">預約</span>
-</button>
-<button class="flex flex-col items-center justify-center text-[#ae6348] dark:text-[#bd7054] font-bold soft easing transition duration-500">
-<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">個人檔案</span>
-</button>
-<button class="flex flex-col items-center justify-center text-stone-400/80 hover:text-[#ae6348] soft easing transition duration-500">
-<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
-<span class="font-manrope text-[10px] uppercase tracking-widest mt-1">支援</span>
-</button>
-</nav>
 </body></html>
