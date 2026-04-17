@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>下載 - 踏雪笑傲</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&amp;family=Noto+Serif+TC:wght@400;600;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4b5f7e",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#041c37",
+                        "outline": "#74777e",
+                        "on-primary-fixed-variant": "#334865",
+                        "surface-container": "#eceef1",
+                        "tertiary-container": "#640014",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9fc",
+                        "on-tertiary-container": "#f9646e",
+                        "on-background": "#191c1e",
+                        "primary-fixed-dim": "#b3c8eb",
+                        "on-secondary-container": "#626566",
+                        "on-secondary-fixed": "#191c1d",
+                        "primary-fixed": "#d4e3ff",
+                        "secondary-container": "#e1e3e4",
+                        "tertiary-fixed": "#ffdad9",
+                        "primary": "#021a35",
+                        "on-surface-variant": "#44474d",
+                        "on-primary-container": "#8397b8",
+                        "background": "#f7f9fc",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary": "#3d0009",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "inverse-primary": "#b3c8eb",
+                        "inverse-surface": "#2d3133",
+                        "surface-variant": "#e0e3e6",
+                        "secondary": "#5c5f60",
+                        "on-secondary-fixed-variant": "#454748",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1a2f4b",
+                        "tertiary-fixed-dim": "#ffb3b3",
+                        "surface-dim": "#d8dadd",
+                        "surface-container-low": "#f2f4f7",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8eb",
+                        "on-tertiary-fixed": "#40000a",
+                        "outline-variant": "#c4c6ce",
+                        "on-tertiary-fixed-variant": "#8d1226"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Noto Serif TC", "serif"],
+                        "body": ["Noto Serif TC", "serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-surface/70 backdrop-blur-xl border border-outline-variant/15;
+            }
+            .text-vertical {
+                writing-mode: vertical-rl;
+                text-orientation: upright;
+            }
+            .ghost-border {
+                @apply border border-outline-variant/15;
+            }
+            
+            /* High-end Wuxia Elements */
+            .ink-border {
+                position: relative;
+                border: 2px solid transparent;
+                background-clip: padding-box;
+            }
+            .ink-border::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                z-index: -1;
+                background: linear-gradient(to bottom right, rgba(2, 26, 53, 0.8), rgba(2, 26, 53, 0.1), rgba(2, 26, 53, 0.6));
+                filter: url(#rough-edge);
+            }
+
+            .wind-bg {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                z-index: 0;
+                pointer-events: none;
+            }
+            .wind-line {
+                position: absolute;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+                height: 1px;
+                width: 200px;
+                opacity: 0;
+                animation: wind-blow linear infinite;
+            }
+            @keyframes wind-blow {
+                0% { transform: translateX(-100vw) translateY(10vh) rotate(-15deg); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translateX(100vw) translateY(-10vh) rotate(-15deg); opacity: 0; }
+            }
+
+            .ink-spread-container {
+                position: relative;
+            }
+            .ink-spread-bg {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, rgba(2, 26, 53, 0.05) 0%, transparent 70%);
+                opacity: 0;
+                transform: scale(0.5);
+                transition: opacity 1.5s ease-out, transform 2s cubic-bezier(0.1, 0.9, 0.2, 1);
+                pointer-events: none;
+                z-index: 0;
+            }
+            .ink-spread-container.is-visible .ink-spread-bg {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+
+            .seal-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                border: 2px solid #8d1226;
+                color: #8d1226;
+                font-family: 'Noto Serif TC', serif;
+                font-weight: 900;
+                font-size: 14px;
+                border-radius: 2px;
+                transform: rotate(-5deg);
+                opacity: 0.8;
+                margin-right: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+    <!-- SVG Filter for Ink Border -->
+    <svg style="width:0;height:0;position:absolute;">
+        <defs>
+            <filter id="rough-edge">
+                <feturbulence basefrequency="0.05" numoctaves="3" result="noise" type="fractalNoise"></feturbulence>
+                <fedisplacementmap in="SourceGraphic" in2="noise" scale="4" xchannelselector="R" ychannelselector="G">
+                </fedisplacementmap>
+            </filter>
+        </defs>
+    </svg>
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 rounded-none bg-[#f7f9fc]/80 dark:bg-[#021a35]/80 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(25,28,30,0.06)] no-border shadow-none border-b border-primary/10">
+        <div class="flex justify-between items-center h-24 px-12 max-w-screen-2xl mx-auto">
+            <a class="text-3xl font-bold text-[#021a35] dark:text-[#f7f9fc] tracking-widest font-headline"
+                href="#">踏雪笑傲</a>
+            <div class="hidden md:flex gap-8 items-center font-serif tracking-widest text-lg">
+                <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] transition-colors scale-100 active:scale-95 transition-transform duration-300"
+                    href="#">首頁</a>
+                <a class="text-[#021a35] dark:text-white border-b-2 border-[#021a35] dark:border-[#f7f9fc] pb-1 scale-100 active:scale-95 transition-transform"
+                    href="#">下載</a>
+                <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] transition-colors scale-100 active:scale-95 transition-transform duration-300"
+                    href="#">活動</a>
+                <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] transition-colors scale-100 active:scale-95 transition-transform duration-300"
+                    href="#">儲值</a>
+                <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] transition-colors scale-100 active:scale-95 transition-transform duration-300"
+                    href="#">公告</a>
+            </div>
+            <button
+                class="bg-tertiary text-on-tertiary px-8 py-3 font-headline tracking-widest hover:bg-tertiary-container transition-colors scale-100 active:scale-95 transition-transform border border-tertiary-container/50">
+                立即遊玩
+            </button>
+        </div>
+    </nav>
+    <main class="flex-grow pt-24 relative overflow-hidden">
+        <!-- Wind Animation Background -->
+        <div class="wind-bg">
+            <div class="wind-line" style="top: 20%; animation-duration: 8s; animation-delay: 0s;"></div>
+            <div class="wind-line" style="top: 40%; width: 300px; animation-duration: 12s; animation-delay: 2s;"></div>
+            <div class="wind-line" style="top: 60%; width: 150px; animation-duration: 6s; animation-delay: 4s;"></div>
+            <div class="wind-line" style="top: 80%; width: 250px; animation-duration: 10s; animation-delay: 1s;"></div>
+            <div class="wind-line" style="top: 30%; width: 200px; animation-duration: 9s; animation-delay: 5s;"></div>
+        </div>
+        <!-- Hero Background Image (Fixed) -->
+        <div class="fixed inset-0 z-[-1]">
+            <img alt=""
+                class="w-full h-full object-cover opacity-70 mix-blend-multiply filter grayscale-[40%] contrast-125"
+                data-alt="Vast, mist-covered snowy mountain peaks fading into a deep ink-blue sky, minimal and cold, high-end editorial landscape photography"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYuKV7m_WnWt3B1V3ELzIIp5NG9Zrk0C4sXtbccHRhxp3JCYcIQN1mQCarCtWVuITUGS6X9stzyM4yj9Q_wP3g0KmF6pW6z3C2Ee8rXzv0r4eDOWB3cunTCTqFXb3W4ZWq_EccvtnCqKwFCM-rcyNxXu3F2N-_lby-qMe3xpYF7_YroFy0DrDTYqSBlOT7T8OyGVAQqA5O5g6Aq7nv61CrtWH8PxHY_M91Gla4-nhv_XeC0bL9sI9Q04npKxBne2rIWp7ZInM_9ic" />
+            <div class="absolute inset-0 bg-gradient-to-b from-surface/30 via-surface/70 to-surface"></div>
+        </div>
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 pt-20 pb-40">
+            <!-- Hero Title Area -->
+            <div class="flex flex-col md:flex-row justify-between items-end mb-32 relative z-10">
+                <div class="max-w-2xl">
+                    <p class="font-headline text-primary tracking-[0.3em] mb-4 text-sm font-bold uppercase">客戶端下載</p>
+                    <h1
+                        class="font-headline text-6xl md:text-8xl font-black text-primary tracking-widest leading-tight">
+                        踏入<br />
+                        <span class="text-on-surface-variant font-light italic">寂靜之巔。</span>
+                    </h1>
+                </div>
+                <div class="mt-8 md:mt-0 text-right">
+                    <p
+                        class="font-body text-on-surface-variant text-lg max-w-sm ml-auto leading-relaxed tracking-wider">
+                        為旅程準備好您的軀體。<br />在下載武俠世界之前，請確保您的系統符合要求。
+                    </p>
+                </div>
+            </div>
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 relative z-10">
+                <!-- Left Column: Download Actions (Bento Style) -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Primary Download Card -->
+                    <div
+                        class="bg-surface-container-lowest/90 backdrop-blur-sm p-10 relative overflow-hidden group shadow-[0_40px_60px_-15px_rgba(25,28,30,0.1)] ink-border transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(2,26,53,0.15)]">
+                        <div
+                            class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 transform group-hover:scale-110">
+                            <span class="material-symbols-outlined text-9xl text-primary"
+                                style="font-variation-settings: 'FILL' 0;">download</span>
+                        </div>
+                        <h2 class="font-headline text-3xl font-bold text-primary mb-2 tracking-widest">PC 官方客戶端</h2>
+                        <p class="font-headline text-on-surface-variant text-sm mb-8 tracking-[0.2em] uppercase">版本
+                            2.4.1 — 瑞雪更新</p>
+                        <div class="flex items-end gap-4 mb-10">
+                            <span class="font-headline text-6xl font-black text-primary">26</span>
+                            <span
+                                class="font-headline text-xl font-bold text-on-surface-variant mb-1 tracking-wider">GB</span>
+                        </div>
+                        <div class="space-y-4 relative z-10">
+                            <button
+                                class="w-full bg-primary text-on-primary py-5 px-8 font-headline text-xl tracking-[0.3em] flex items-center justify-between hover:bg-primary-container transition-colors group border border-primary-container relative overflow-hidden">
+                                <span class="relative z-10">下載主要鏡像</span>
+                                <span
+                                    class="material-symbols-outlined group-hover:translate-y-1 transition-transform relative z-10"
+                                    style="font-variation-settings: 'FILL' 0;">arrow_downward</span>
+                                <div
+                                    class="absolute inset-0 bg-white/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0">
+                                </div>
+                            </button>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button
+                                    class="bg-transparent border border-outline-variant/50 text-on-surface py-4 px-6 font-headline text-sm tracking-widest hover:bg-surface-container-low hover:border-primary/50 transition-colors flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-base"
+                                        style="font-variation-settings: 'FILL' 0;">cloud</span>
+                                    雲端鏡像
+                                </button>
+                                <button
+                                    class="bg-transparent border border-outline-variant/50 text-on-surface py-4 px-6 font-headline text-sm tracking-widest hover:bg-surface-container-low hover:border-primary/50 transition-colors flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-base"
+                                        style="font-variation-settings: 'FILL' 0;">folder_zip</span>
+                                    MEGA 連結
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-8 pt-6 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between text-xs font-label text-on-surface-variant items-center">
+                            <span class="font-mono tracking-wider">MD5: a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6</span>
+                            <a class="hover:text-tertiary-container mt-4 md:mt-0 flex items-center transition-colors font-headline tracking-widest"
+                                href="#">
+                                <span class="seal-icon">驗</span>
+                                驗證檔案完整性
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Secondary Tools -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div
+                            class="bg-surface-container-lowest/90 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px] hover:bg-surface-container-low transition-colors cursor-pointer group ink-border">
+                            <div>
+                                <span class="material-symbols-outlined text-primary mb-4 text-3xl opacity-80"
+                                    style="font-variation-settings: 'FILL' 0;">build</span>
+                                <h3 class="font-headline font-bold text-xl text-primary mb-2 tracking-widest">修復工具</h3>
+                                <p class="font-body text-sm text-on-surface-variant tracking-wider leading-relaxed">
+                                    自動修復損壞的客戶端檔案。</p>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-2 transition-all self-end"
+                                style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+                        </div>
+                        <div
+                            class="bg-surface-container-lowest/90 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px] hover:bg-surface-container-low transition-colors cursor-pointer group ink-border">
+                            <div>
+                                <span class="material-symbols-outlined text-primary mb-4 text-3xl opacity-80"
+                                    style="font-variation-settings: 'FILL' 0;">smartphone</span>
+                                <h3 class="font-headline font-bold text-xl text-primary mb-2 tracking-widest">行動助手</h3>
+                                <p class="font-body text-sm text-on-surface-variant tracking-wider leading-relaxed">
+                                    隨時隨地管理您的背包。</p>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-2 transition-all self-end"
+                                style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: System Requirements (Editorial Table) -->
+                <div class="lg:col-span-5 ink-spread-container" id="sys-req-section">
+                    <div class="ink-spread-bg"></div>
+                    <div
+                        class="bg-surface-container-highest/60 backdrop-blur-md p-10 h-full relative border border-primary/10">
+                        <!-- Decorative Vertical Text -->
+                        <div
+                            class="absolute right-6 top-10 text-vertical font-headline text-primary/10 text-6xl tracking-[0.5em] select-none font-black pointer-events-none">
+                            系統要求
+                        </div>
+                        <h2
+                            class="font-headline text-2xl font-bold text-primary mb-10 relative z-10 tracking-widest border-l-4 border-tertiary-container pl-4">
+                            系統要求</h2>
+                        <div class="space-y-12 relative z-10">
+                            <!-- Minimum -->
+                            <div>
+                                <h3
+                                    class="font-headline text-sm tracking-[0.3em] text-on-surface-variant uppercase mb-6 border-b border-outline-variant/40 pb-3">
+                                    最低配備要求</h3>
+                                <ul class="space-y-5 font-body text-sm tracking-wider">
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">作業系統</span>
+                                        <span class="text-on-surface col-span-2">Windows 10 64位元</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">處理器</span>
+                                        <span class="text-on-surface col-span-2">Intel Core i5-6600K / AMD Ryzen 5
+                                            1600</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">記憶體</span>
+                                        <span class="text-on-surface col-span-2">8 GB 記憶體</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">顯示卡</span>
+                                        <span class="text-on-surface col-span-2">NVIDIA GeForce GTX 1060 6GB / AMD
+                                            Radeon RX 580</span>
+                                    </li>
+                                    <li class="grid grid-cols-3 gap-4 items-start">
+                                        <span class="font-bold text-primary col-span-1">儲存空間</span>
+                                        <span class="text-on-surface col-span-2">40 GB 可用空間 (建議使用 SSD)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Recommended -->
+                            <div>
+                                <h3
+                                    class="font-headline text-sm tracking-[0.3em] text-primary uppercase mb-6 border-b border-primary/40 pb-3 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm text-tertiary-container"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    建議配備要求
+                                </h3>
+                                <ul class="space-y-5 font-body text-sm tracking-wider">
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">作業系統</span>
+                                        <span class="text-on-surface col-span-2">Windows 10/11 64位元</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">處理器</span>
+                                        <span class="text-on-surface col-span-2">Intel Core i7-9700K / AMD Ryzen 7
+                                            3700X</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">記憶體</span>
+                                        <span class="text-on-surface col-span-2">16 GB 記憶體</span>
+                                    </li>
+                                    <li
+                                        class="grid grid-cols-3 gap-4 items-start border-b border-outline-variant/10 pb-2">
+                                        <span class="font-bold text-primary col-span-1">顯示卡</span>
+                                        <span class="text-on-surface col-span-2">NVIDIA GeForce RTX 3060 / AMD Radeon RX
+                                            6700 XT</span>
+                                    </li>
+                                    <li class="grid grid-cols-3 gap-4 items-start">
+                                        <span class="font-bold text-primary col-span-1">儲存空間</span>
+                                        <span class="text-on-surface col-span-2">40 GB NVMe SSD</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="rounded-none w-full tonal-shift-no-border flat-no-shadows flex flex-col items-center py-20 px-12 gap-8 w-full bg-[#e6e8eb]/90 dark:bg-[#1a2f4b]/90 backdrop-blur-md border-t border-outline-variant/20 relative z-10">
+        <div class="text-2xl font-bold text-[#021a35] dark:text-[#f7f9fc] font-headline tracking-widest">踏雪笑傲</div>
+        <div class="flex flex-wrap justify-center gap-8 font-serif text-sm uppercase tracking-widest">
+            <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] underline underline-offset-8 opacity-100 hover:opacity-80 transition-all"
+                href="#">服務條款</a>
+            <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] underline underline-offset-8 opacity-100 hover:opacity-80 transition-all"
+                href="#">隱私權政策</a>
+            <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] underline underline-offset-8 opacity-100 hover:opacity-80 transition-all"
+                href="#">聯絡我們</a>
+            <a class="text-[#44474d] dark:text-[#c4c6ce] hover:text-[#3d0009] dark:hover:text-[#3d0009] underline underline-offset-8 opacity-100 hover:opacity-80 transition-all"
+                href="#">社群規範</a>
+        </div>
+        <div class="text-[#021a35] dark:text-[#f7f9fc] font-body text-sm opacity-70 tracking-widest">
+            © 2024 踏雪笑傲. 版權所有。踏雪笑傲編輯部。
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            const target = document.getElementById('sys-req-section');
+            if (target) {
+                observer.observe(target);
+            }
+        });
+    </script>
+</body>
+
+</html>
