@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>江湖盛事 - 踏雪笑傲</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fc",
+                        "primary-fixed": "#d4e3ff",
+                        "on-primary-fixed": "#041c37",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-bright": "#f7f9fc",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#191c1d",
+                        "tertiary": "#3d0009",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#4b5f7e",
+                        "surface-container-low": "#f2f4f7",
+                        "tertiary-fixed": "#ffdad9",
+                        "secondary-container": "#e1e3e4",
+                        "outline": "#74777e",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "on-tertiary-fixed": "#40000a",
+                        "surface-container": "#eceef1",
+                        "primary-container": "#1a2f4b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#f9646e",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c4c6ce",
+                        "primary-fixed-dim": "#b3c8eb",
+                        "inverse-on-surface": "#eff1f4",
+                        "secondary": "#5c5f60",
+                        "on-primary-fixed-variant": "#334865",
+                        "tertiary-container": "#640014",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed-dim": "#ffb3b3",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#454748",
+                        "inverse-primary": "#b3c8eb",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fc",
+                        "on-tertiary-fixed-variant": "#8d1226",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-primary-container": "#8397b8",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#626566",
+                        "primary": "#021a35",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8eb",
+                        "surface-dim": "#d8dadd",
+                        "on-surface-variant": "#44474d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Noto Serif TC", "serif"],
+                        "body": ["Noto Serif TC", "serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .font-label {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Ink bleed mask placeholder */
+        .ink-mask {
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col relative antialiased">
+    <!-- Ambient background gradient -->
+    <div
+        class="fixed inset-0 z-[-1] bg-gradient-to-br from-surface via-surface to-surface-variant opacity-80 pointer-events-none">
+    </div>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm">
+        <div class="flex justify-between items-center px-12 py-4 max-w-full">
+            <div class="text-2xl font-serif font-bold text-slate-900 tracking-tight">踏雪笑傲</div>
+            <div class="hidden md:flex items-center gap-8 font-serif font-medium tracking-tight">
+                <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">首頁</a>
+                <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">立即下載</a>
+                <a class="text-slate-900 border-b-2 border-slate-900 pb-1" href="#">江湖盛事</a>
+                <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">武林公告</a>
+                <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">儲值中心</a>
+            </div>
+            <div class="hidden md:flex">
+                <button
+                    class="bg-primary text-on-primary px-6 py-2 font-serif font-medium tracking-wide hover:bg-primary-container transition-colors">
+                    登入遊戲
+                </button>
+            </div>
+            <div class="md:hidden">
+                <span class="material-symbols-outlined text-primary text-3xl">menu</span>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="flex-grow pt-32 pb-24 px-6 md:px-12 lg:px-24">
+        <!-- Header Section (Reduced Banner) -->
+        <header class="mb-20 max-w-7xl mx-auto relative">
+            <div class="absolute -top-12 -left-12 text-surface-container-highest opacity-50 z-[-1] pointer-events-none">
+                <span class="material-symbols-outlined text-[12rem]" data-weight="fill">landscape</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold font-headline text-primary tracking-tighter mb-4">江湖盛事</h1>
+            <p class="text-xl text-on-surface-variant font-body max-w-2xl leading-relaxed">
+                風雪之中，暗流湧動。天下豪傑齊聚，共襄武林盛宴。在此探尋屬於你的機遇與榮耀。</p>
+            <!-- Filter/Tabs -->
+            <div class="mt-12 flex gap-8 border-b border-outline-variant/30 pb-4">
+                <button class="text-primary font-bold text-lg tracking-widest relative">
+                    全部活動
+                    <div class="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-primary"></div>
+                </button>
+                <button
+                    class="text-on-surface-variant hover:text-primary transition-colors font-medium text-lg tracking-widest">
+                    進行中
+                </button>
+                <button
+                    class="text-on-surface-variant hover:text-primary transition-colors font-medium text-lg tracking-widest">
+                    即將開啟
+                </button>
+                <button
+                    class="text-on-surface-variant hover:text-primary transition-colors font-medium text-lg tracking-widest">
+                    常駐
+                </button>
+            </div>
+        </header>
+        <!-- Events Grid (Bento/Asymmetric inspired) -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+            <!-- Featured Event Card (Span 8 cols) -->
+            <article
+                class="md:col-span-8 bg-surface-container-lowest group relative overflow-hidden flex flex-col min-h-[400px]">
+                <div class="h-64 overflow-hidden relative">
+                    <img alt="Featured Event"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ink-mask"
+                        data-alt="Epic martial arts battle scene in snowy mountains at dusk, high contrast ink style, cinematic lighting, wide shot"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPMJRYYmlPdZwDuROk-ebM6-wb5fmHYS_kTWHy6PKjNmt5rsi7e_OIMhBT1liYiibRAVz3_LUQXzUKf8EQa0Ss-nmeT-2oNTi6EhcxkxFKRS6RDDVeXhmIljKu8_zq3NTjqzwruk3EvlkGpoOO9KwNXWPM9vQcLEjgirW9wNhM3_xLXOQ3sAgViajcQ1Z1wNIDYxYwvUZ6VELIhBl7COMMxNj3o31_E5ir8UL3qeqwZIZpTVyJuZW_MhO5bWDn9W3E4NliRUeJvvQ" />
+                    <div
+                        class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-surface-container-lowest">
+                    </div>
+                    <!-- Status Badge -->
+                    <div
+                        class="absolute top-6 left-6 bg-primary text-on-primary px-3 py-1 text-sm font-label tracking-widest flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+                        <span class="w-1.5 h-1.5 bg-tertiary rounded-full animate-pulse"></span>
+                        進行中
+                    </div>
+                </div>
+                <div
+                    class="p-8 flex-grow flex flex-col justify-between relative z-10 -mt-16 bg-surface-container-lowest/90 backdrop-blur-sm mr-8 ml-8">
+                    <div>
+                        <div
+                            class="flex items-center gap-4 mb-3 text-on-surface-variant font-label text-sm tracking-wider">
+                            <span class="material-symbols-outlined text-base">calendar_month</span>
+                            <span>2024.11.15 - 2024.12.30</span>
+                        </div>
+                        <h2
+                            class="text-3xl font-bold font-headline text-primary mb-4 tracking-tight group-hover:text-tertiary transition-colors">
+                            寒梅傲雪：絕世神兵降世</h2>
+                        <p class="text-on-surface-variant leading-relaxed mb-6">
+                            極寒之巔，傳說中的神兵『雪魄劍』即將現世。各路英豪皆欲將其收入囊中，一場腥風血雨在所難免。參與試煉，奪取無上榮耀與稀世珍寶。</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-auto">
+                        <a class="inline-flex items-center gap-2 bg-tertiary text-on-tertiary px-6 py-3 font-serif font-medium tracking-widest hover:bg-tertiary-container transition-colors"
+                            href="#">
+                            立即查看
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                        <span class="text-outline text-sm font-label tracking-widest">EVENT TYPE / 挑戰</span>
+                    </div>
+                </div>
+            </article>
+            <!-- Secondary Event Card (Span 4 cols) -->
+            <article class="md:col-span-4 bg-surface-container-lowest group relative flex flex-col">
+                <div class="h-48 overflow-hidden relative">
+                    <img alt="Secondary Event"
+                        class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                        data-alt="Abstract gradient ink wash painting in dark blue and grey tones, suggestive of misty mountains, ethereal mood"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBobWTSnzlhA4TxyEjQGWvVG8T3IdKRadsSVsTi6wFnocL0MOSIlqQfRvy91dHDjr1sSB2Ge9MVRykkRxS_lR0uE4BQFUIQx9B573bSubD6xsF1nC1NxlKGoY6NPaRIkpXlrHMCvdyIn7J_1IcJal3M-kKqYFCuZkRwSoljYhJSwPU9Hzuas91u85wKwwi0t-oxJ5u63bEiaEuWOgdeio86M-tb-rx33ZTRCUNEml4vYBYVFFl4XfinuAC-ziIgdtfHnR7tiQD1VQc" />
+                    <div
+                        class="absolute top-4 left-4 bg-surface-container-highest text-primary border border-outline-variant/30 px-2 py-1 text-xs font-label tracking-widest">
+                        即將開啟
+                    </div>
+                </div>
+                <div
+                    class="p-6 flex-grow flex flex-col bg-surface-container-lowest shadow-[0_20px_40px_-15px_rgba(25,28,30,0.06)] z-10 -ml-4 mt-8 mb-4 mr-4">
+                    <div class="text-on-surface-variant font-label text-xs tracking-wider mb-2">
+                        2024.12.01 啟動
+                    </div>
+                    <h3 class="text-xl font-bold font-headline text-primary mb-3 leading-snug">冬至夜宴：幫會集結</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed mb-6 flex-grow">
+                        冬至將至，江湖各大幫會將於臨安城舉辦盛大夜宴。結交新知，共謀大業。</p>
+                    <button
+                        class="w-full border border-outline-variant/30 text-primary py-2 font-serif font-medium tracking-widest hover:bg-surface-container-low transition-colors">
+                        預約通知
+                    </button>
+                </div>
+            </article>
+            <!-- Tertiary Event Card (Span 4 cols) -->
+            <article class="md:col-span-4 bg-transparent border-t border-outline-variant/20 pt-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div
+                        class="bg-surface text-on-surface-variant px-2 py-1 text-xs font-label tracking-widest border border-outline-variant/20">
+                        常駐
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">bookmark_border</span>
+                </div>
+                <h3 class="text-lg font-bold font-headline text-primary mb-2">聽雪閣試煉</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-4">挑戰聽雪閣歷代長老留下的機關陣法，突破自我極限，獲取專屬稱號。</p>
+                <a class="text-primary font-serif text-sm tracking-widest inline-flex items-center gap-1 hover:text-tertiary transition-colors"
+                    href="#">
+                    探索詳情 <span class="material-symbols-outlined text-xs">chevron_right</span>
+                </a>
+            </article>
+            <!-- Tertiary Event Card (Span 4 cols) -->
+            <article class="md:col-span-4 bg-transparent border-t border-outline-variant/20 pt-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div
+                        class="bg-surface text-on-surface-variant px-2 py-1 text-xs font-label tracking-widest border border-outline-variant/20">
+                        常駐
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">bookmark_border</span>
+                </div>
+                <h3 class="text-lg font-bold font-headline text-primary mb-2">江湖百曉生：奇遇懸賞</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed mb-4">完成百曉生發布的隱秘任務，揭開武林中鮮為人知的秘密與往事。</p>
+                <a class="text-primary font-serif text-sm tracking-widest inline-flex items-center gap-1 hover:text-tertiary transition-colors"
+                    href="#">
+                    探索詳情 <span class="material-symbols-outlined text-xs">chevron_right</span>
+                </a>
+            </article>
+            <!-- Empty space for asymmetry (Span 4 cols) -->
+            <div
+                class="md:col-span-4 hidden md:flex items-center justify-center border-t border-outline-variant/10 pt-6">
+                <span class="material-symbols-outlined text-4xl text-outline-variant/20">filter_vintage</span>
+            </div>
+        </div>
+        <!-- Decorative element -->
+        <div class="mt-32 flex justify-center opacity-30">
+            <div class="w-px h-24 bg-gradient-to-b from-primary to-transparent"></div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-20 bg-slate-50">
+        <div class="flex flex-col items-center justify-center gap-8 px-8 text-center max-w-7xl mx-auto">
+            <div class="text-lg font-serif font-semibold text-slate-800 tracking-widest">
+                踏雪笑傲
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 font-serif text-sm tracking-widest">
+                <a class="text-slate-400 hover:text-red-900 transition-colors ease-in-out duration-500"
+                    href="#">隱私政策</a>
+                <a class="text-slate-400 hover:text-red-900 transition-colors ease-in-out duration-500"
+                    href="#">服務條款</a>
+                <a class="text-slate-400 hover:text-red-900 transition-colors ease-in-out duration-500"
+                    href="#">聯繫我們</a>
+                <a class="text-slate-400 hover:text-red-900 transition-colors ease-in-out duration-500"
+                    href="#">官方論壇</a>
+            </div>
+            <div class="text-slate-400 text-xs font-label tracking-wider">
+                © 2024 踏雪笑傲. 版權所有. 聽雪閣工作室出品.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

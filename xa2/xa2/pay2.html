@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>踏雪笑傲 - 訂單詳情確認</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&amp;family=Manrope:wght@400;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#626566",
+                        "secondary-fixed": "#e1e3e4",
+                        "secondary": "#5c5f60",
+                        "primary-container": "#1a2f4b",
+                        "outline-variant": "#c4c6ce",
+                        "tertiary-fixed-dim": "#ffb3b3",
+                        "tertiary": "#3d0009",
+                        "on-primary-fixed-variant": "#334865",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-primary-container": "#8397b8",
+                        "tertiary-fixed": "#ffdad9",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#40000a",
+                        "surface-bright": "#f7f9fc",
+                        "surface-container-low": "#f2f4f7",
+                        "on-tertiary-fixed-variant": "#8d1226",
+                        "on-secondary-fixed": "#191c1d",
+                        "inverse-primary": "#b3c8eb",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#640014",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b3c8eb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#d4e3ff",
+                        "primary": "#021a35",
+                        "surface-tint": "#4b5f7e",
+                        "on-surface-variant": "#44474d",
+                        "surface-dim": "#d8dadd",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eceef1",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary-fixed-variant": "#454748",
+                        "background": "#f7f9fc",
+                        "surface-container-highest": "#e0e3e6",
+                        "secondary-container": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#f9646e",
+                        "inverse-surface": "#2d3133",
+                        "surface": "#f7f9fc",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e6",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#041c37",
+                        "outline": "#74777e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Noto Serif TC", "Noto Serif", "serif"],
+                        "body": ["Noto Serif TC", "Noto Serif", "serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .label-text {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Custom scrollbar for multi-line input */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: #f7f9fc;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: #c4c6ce;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #74777e;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface text-on-surface min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+    <!-- Top Navigation (Generated from JSON) -->
+    <nav
+        class="fixed top-0 w-full z-50 rounded-none bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-12 h-24 w-full border-none shadow-none tonal shifts with vast negative space">
+        <div class="flex items-center space-x-12">
+            <h1 class="text-2xl font-bold italic text-slate-950 dark:text-white tracking-widest font-headline">
+                踏雪笑傲
+            </h1>
+            <ul class="hidden md:flex space-x-8 font-serif text-lg tracking-tight">
+                <li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300"
+                        href="#">World</a></li>
+                <li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300"
+                        href="#">Characters</a></li>
+                <li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300"
+                        href="#">Combat</a></li>
+                <li><a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300"
+                        href="#">News</a></li>
+                <!-- Suppressed Navigation Highlight due to Transactional nature of the page -->
+            </ul>
+        </div>
+        <div class="flex items-center space-x-6">
+            <button
+                class="text-slate-900 dark:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-300 p-2 rounded-none">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+            </button>
+            <button
+                class="bg-primary text-on-primary px-6 py-2 rounded-none font-label uppercase tracking-wider hover:bg-primary-container transition-colors duration-300">
+                Play Now
+            </button>
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto flex flex-col gap-16">
+        <!-- Header -->
+        <header class="text-center space-y-4">
+            <h2 class="font-headline text-4xl md:text-5xl text-primary tracking-tight">訂單詳情確認</h2>
+            <p class="font-body text-on-surface-variant text-lg">請確認您的儲值明細與角色資訊</p>
+        </header>
+        <!-- Order Details Card -->
+        <section class="bg-surface-container-lowest p-8 md:p-12 relative overflow-hidden group">
+            <!-- Decorative atmospheric element -->
+            <div
+                class="absolute -top-12 -right-12 w-64 h-64 bg-primary-fixed-dim/10 rounded-full blur-3xl group-hover:bg-primary-fixed-dim/20 transition-all duration-700">
+            </div>
+            <h3
+                class="font-headline text-2xl text-primary mb-8 border-b border-surface-container-highest pb-4 flex items-center justify-between">
+                <span>儲值明細</span>
+                <span class="material-symbols-outlined text-outline-variant"
+                    style="font-variation-settings: 'FILL' 0;">receipt_long</span>
+            </h3>
+            <div class="space-y-8">
+                <!-- Item: Amount -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <span class="font-label text-on-surface-variant text-sm uppercase tracking-wider">儲值內容</span>
+                    <span class="font-headline text-xl text-primary font-semibold">1,000 元寶</span>
+                </div>
+                <!-- Item: Quantity -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <span class="font-label text-on-surface-variant text-sm uppercase tracking-wider">儲值數量</span>
+                    <div class="flex items-center border border-outline-variant/30 bg-surface-container-low">
+                        <button aria-label="Decrease quantity"
+                            class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors">
+                            <span class="material-symbols-outlined text-xl"
+                                style="font-variation-settings: 'FILL' 0;">remove</span>
+                        </button>
+                        <input aria-label="Quantity"
+                            class="w-16 text-center bg-transparent border-none font-label text-lg text-primary focus:ring-0"
+                            type="number" value="1" />
+                        <button aria-label="Increase quantity"
+                            class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-variant transition-colors">
+                            <span class="material-symbols-outlined text-xl"
+                                style="font-variation-settings: 'FILL' 0;">add</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Item: Payment Method -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <span class="font-label text-on-surface-variant text-sm uppercase tracking-wider">支付方式</span>
+                    <div class="flex items-center gap-4">
+                        <span class="font-headline text-lg text-on-surface">信用卡</span>
+                        <button
+                            class="font-label text-xs text-primary hover:text-primary-container underline underline-offset-4 tracking-widest transition-colors">
+                            更改
+                        </button>
+                    </div>
+                </div>
+                <!-- Total -->
+                <div
+                    class="pt-6 border-t border-surface-container-highest flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <span class="font-label text-on-surface-variant text-sm uppercase tracking-wider">訂單金額</span>
+                    <div class="text-right">
+                        <span class="font-label text-sm text-on-surface-variant mr-2">NT$</span>
+                        <span class="font-headline text-4xl text-tertiary">500</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Form Section -->
+        <section class="bg-surface-container-low p-8 md:p-12">
+            <h3
+                class="font-headline text-2xl text-primary mb-8 border-b border-surface-container-highest pb-4 flex items-center justify-between">
+                <span>角色資訊</span>
+                <span class="material-symbols-outlined text-outline-variant"
+                    style="font-variation-settings: 'FILL' 0;">person</span>
+            </h3>
+            <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Character Name (Readonly) -->
+                    <div class="space-y-2">
+                        <label class="font-label text-sm text-on-surface-variant uppercase tracking-wider">角色名稱</label>
+                        <input
+                            class="w-full bg-surface-container border-b border-outline-variant/30 border-t-0 border-x-0 py-3 px-4 font-body text-on-surface focus:border-primary focus:ring-0 transition-colors"
+                            readonly="" type="text" value="唯雪" />
+                    </div>
+                    <!-- Server -->
+                    <div class="space-y-2">
+                        <label class="font-label text-sm text-on-surface-variant uppercase tracking-wider">伺服器</label>
+                        <input
+                            class="w-full bg-surface-container border-b border-outline-variant/30 border-t-0 border-x-0 py-3 px-4 font-body text-on-surface focus:border-primary focus:ring-0 transition-colors"
+                            readonly="" type="text" value="踏雪尋梅" />
+                    </div>
+                </div>
+                <!-- Notes -->
+                <div class="space-y-2">
+                    <label class="font-label text-sm text-on-surface-variant uppercase tracking-wider">備註</label>
+                    <textarea
+                        class="w-full bg-surface-container border border-outline-variant/30 py-3 px-4 font-body text-on-surface placeholder:text-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-y rounded-none"
+                        placeholder="如有特殊需求請在此留言..." rows="4"></textarea>
+                </div>
+            </form>
+        </section>
+        <!-- Legal Terms -->
+        <section
+            class="text-sm text-on-surface-variant font-body leading-relaxed bg-surface-container p-6 border-l-4 border-outline-variant/50">
+            <p class="mb-2 font-semibold">虛擬貨幣購買須知：</p>
+            <p class="mb-2">1. 本平台販售之虛擬貨幣（元寶）一經儲值成功，即視為完成服務提供，除法律另有規定外，恕不接受退款要求。</p>
+            <p class="mb-2">2. 請務必確認您的角色名稱與伺服器是否正確，若因填寫錯誤導致儲值失敗或發放至錯誤帳號，本公司概不負責。</p>
+            <p>3. 未滿十八歲之玩家，請由法定代理人陪同閱讀並同意本服務條款後，方得進行購買。</p>
+        </section>
+        <!-- Action Button -->
+        <div class="flex justify-end pt-8">
+            <button
+                class="bg-tertiary text-on-tertiary font-headline text-xl py-4 px-12 rounded-none hover:bg-tertiary-container transition-all duration-300 shadow-[0_10px_40px_-10px_rgba(61,0,9,0.3)] hover:shadow-[0_15px_50px_-10px_rgba(61,0,9,0.5)] tracking-widest flex items-center gap-3">
+                <span>確認支付</span>
+                <span class="material-symbols-outlined text-lg"
+                    style="font-variation-settings: 'FILL' 0;">arrow_forward_ios</span>
+            </button>
+        </div>
+    </main>
+    <!-- Footer (Generated from JSON) -->
+    <footer
+        class="w-full py-20 border-none bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center space-y-8 px-8 w-full tonal shift from surface to surface-container-low flat no shadows">
+        <div class="flex space-x-6 font-serif text-sm uppercase tracking-widest">
+            <a class="text-slate-400 dark:text-slate-600 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-500"
+                href="#">Privacy Policy</a>
+            <a class="text-slate-400 dark:text-slate-600 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-500"
+                href="#">Terms of Service</a>
+            <a class="text-slate-400 dark:text-slate-600 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-500"
+                href="#">Community Guidelines</a>
+            <a class="text-slate-400 dark:text-slate-600 hover:text-red-900 dark:hover:text-red-400 transition-colors duration-500"
+                href="#">Contact Us</a>
+        </div>
+        <p class="font-serif text-sm uppercase tracking-widest text-slate-900 dark:text-slate-100 text-center">
+            © 2024 Tread Snow &amp; Proud Smile. All rights reserved. The Silent Peak Studios.
+        </p>
+    </footer>
+</body>
+
+</html>
