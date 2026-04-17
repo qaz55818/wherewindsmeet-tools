@@ -7,13 +7,17 @@
     <title>儲值中心 - 劍嘯笑傲</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="js/tailwind-config.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="css/global.css">
     <style>
         .amount-card.active {
             @apply ring-4 ring-primary border-transparent bg-surface-container-highest;
         }
+
         .amount-card.active .check-icon {
             @apply opacity-100;
         }
@@ -24,7 +28,9 @@
     <nav id="main-nav"></nav>
 
     <!-- Background -->
-    <div class="fixed inset-0 z-[-1] opacity-10 bg-no-repeat bg-center bg-cover" style="background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9SczpzIL-Vb6iCqzrmi6m3EUI8YpPkH4xidP434vK4GkM_vsBmudhAwpxHwTc-IH9N1mWa_pQRfWpCZOO-DnCbNv-VTdF-Uh6_Tr-STKs8VZvXjjxVuJKstP5l_ZMbMJ5iUvlXqbsolcma6HU3XGIXD5lGV8CDFJTVWrcdvmOsBcQoqFG2c5xJv7DoMOMgjlAr6nwF8VIqVnqOwOy1_SrcW8nujSMyNmi8w2jjjYb1EyRy9L-EzHEnu8c7hQZH4ZnEiaWS_UBofA);"></div>
+    <div class="fixed inset-0 z-[-1] opacity-10 bg-no-repeat bg-center bg-cover"
+        style="background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9SczpzIL-Vb6iCqzrmi6m3EUI8YpPkH4xidP434vK4GkM_vsBmudhAwpxHwTc-IH9N1mWa_pQRfWpCZOO-DnCbNv-VTdF-Uh6_Tr-STKs8VZvXjjxVuJKstP5l_ZMbMJ5iUvlXqbsolcma6HU3XGIXD5lGV8CDFJTVWrcdvmOsBcQoqFG2c5xJv7DoMOMgjlAr6nwF8VIqVnqOwOy1_SrcW8nujSMyNmi8w2jjjYb1EyRy9L-EzHEnu8c7hQZH4ZnEiaWS_UBofA);">
+    </div>
     <div class="fixed inset-0 z-[-1] bg-gradient-to-b from-surface/80 via-surface to-surface/90"></div>
 
     <main class="flex-grow pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
@@ -37,15 +43,21 @@
             <!-- Left Side: Account & Payment -->
             <div class="xl:col-span-4 flex flex-col gap-8">
                 <!-- Step 1: Account -->
-                <section class="bg-surface-container-high p-8 rounded-2xl border border-outline-variant/30 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-12 -mt-12 blur-3xl"></div>
+                <section
+                    class="bg-surface-container-high p-8 rounded-2xl border border-outline-variant/30 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-12 -mt-12 blur-3xl">
+                    </div>
                     <h2 class="font-headline text-2xl font-bold text-on-surface mb-6 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm">1</span>
+                        <span
+                            class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm">1</span>
                         選擇帳號
                     </h2>
-                    <div id="account-status-area" class="p-6 rounded-xl border-2 border-dashed border-outline-variant/50 flex flex-col items-center justify-center text-center gap-4 hover:border-primary/50 transition-colors group cursor-pointer" onclick="checkAccountAction()">
+                    <div id="account-status-area"
+                        class="p-6 rounded-xl border-2 border-dashed border-outline-variant/50 flex flex-col items-center justify-center text-center gap-4 hover:border-primary/50 transition-colors group cursor-pointer"
+                        onclick="checkAccountAction()">
                         <!-- Dynamic Content Inject -->
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:scale-110 transition-transform">account_circle</span>
+                        <span
+                            class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:scale-110 transition-transform">account_circle</span>
                         <div id="account-info">
                             <p class="font-headline text-lg font-bold">檢查登入狀態...</p>
                         </div>
@@ -55,44 +67,61 @@
                 <!-- Step 3: Payment Method -->
                 <section class="bg-surface-container-high p-8 rounded-2xl border border-outline-variant/30 shadow-sm">
                     <h2 class="font-headline text-2xl font-bold text-on-surface mb-6 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm">3</span>
+                        <span
+                            class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm">3</span>
                         支付方式
                     </h2>
                     <div class="grid grid-cols-2 gap-4">
-                        <label class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
-                            <input type="radio" name="payment" value="credit" class="sr-only" checked onchange="toggleCryptoMenu(false)">
-                            <span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">credit_card</span>
+                        <label
+                            class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
+                            <input type="radio" name="payment" value="credit" class="sr-only" checked
+                                onchange="toggleCryptoMenu(false)">
+                            <span
+                                class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">credit_card</span>
                             <span class="font-label text-sm font-medium">信用卡</span>
                         </label>
-                        <label class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
-                            <input type="radio" name="payment" value="transfer" class="sr-only" onchange="toggleCryptoMenu(false)">
-                            <span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">account_balance</span>
+                        <label
+                            class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
+                            <input type="radio" name="payment" value="transfer" class="sr-only"
+                                onchange="toggleCryptoMenu(false)">
+                            <span
+                                class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">account_balance</span>
                             <span class="font-label text-sm font-medium">線上轉帳</span>
                         </label>
-                        <label class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
-                            <input type="radio" name="payment" value="store" class="sr-only" onchange="toggleCryptoMenu(false)">
-                            <span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">store</span>
+                        <label
+                            class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
+                            <input type="radio" name="payment" value="store" class="sr-only"
+                                onchange="toggleCryptoMenu(false)">
+                            <span
+                                class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">store</span>
                             <span class="font-label text-sm font-medium">超商繳費</span>
                         </label>
-                        <label class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
-                            <input type="radio" name="payment" value="crypto" class="sr-only" onchange="toggleCryptoMenu(true)">
-                            <span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">currency_bitcoin</span>
+                        <label
+                            class="payment-opt p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low flex flex-col items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-all group has-[:checked]:ring-2 has-[:checked]:ring-primary has-[:checked]:bg-surface-container-highest">
+                            <input type="radio" name="payment" value="crypto" class="sr-only"
+                                onchange="toggleCryptoMenu(true)">
+                            <span
+                                class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">currency_bitcoin</span>
                             <span class="font-label text-sm font-medium">虛擬貨幣</span>
                         </label>
                     </div>
 
                     <!-- Crypto Sub-menu -->
                     <div id="crypto-submenu" class="mt-4 hidden animate-in fade-in slide-in-from-top-2 duration-300">
-                        <div class="grid grid-cols-3 gap-2 p-2 bg-surface-container-highest rounded-xl border border-outline-variant/30">
-                            <label class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
+                        <div
+                            class="grid grid-cols-3 gap-2 p-2 bg-surface-container-highest rounded-xl border border-outline-variant/30">
+                            <label
+                                class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
                                 <input type="radio" name="crypto-type" value="usdt" class="sr-only" checked>
                                 <span class="font-bold text-xs">USDT</span>
                             </label>
-                            <label class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
+                            <label
+                                class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
                                 <input type="radio" name="crypto-type" value="btc" class="sr-only">
                                 <span class="font-bold text-xs">BTC</span>
                             </label>
-                            <label class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
+                            <label
+                                class="flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-primary/10 has-[:checked]:bg-primary has-[:checked]:text-on-primary transition-colors">
                                 <input type="radio" name="crypto-type" value="eth" class="sr-only">
                                 <span class="font-bold text-xs">ETH</span>
                             </label>
@@ -100,103 +129,152 @@
                     </div>
                 </section>
 
-                <button class="w-full py-5 bg-primary text-on-primary font-headline font-bold text-2xl btn-brushstroke shadow-2xl shadow-primary/30 hover:opacity-90 transition-opacity mt-4 tracking-widest">
+                <button
+                    class="w-full py-5 bg-primary text-on-primary font-headline font-bold text-2xl btn-brushstroke shadow-2xl shadow-primary/30 hover:opacity-90 transition-opacity mt-4 tracking-widest">
                     確認儲值
                 </button>
             </div>
 
             <!-- Right Side: Amount Selection -->
             <div class="xl:col-span-8">
-                <section class="bg-surface-container-low p-8 lg:p-12 rounded-3xl border border-outline-variant/30 shadow-xl min-h-full">
-                    <h2 class="font-headline text-3xl font-black text-on-surface mb-8 flex items-center gap-4">
-                        <span class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center text-lg">2</span>
-                        選擇儲值數量
+                <section
+                    class="bg-surface-container-low p-8 lg:p-12 rounded-3xl border border-outline-variant/30 shadow-xl min-h-full">
+                    <h2 class="font-headline text-3xl font-black text-on-surface mb-8 flex flex-wrap items-center gap-x-6 gap-y-2">
+                        <div class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center text-lg shadow-lg shadow-primary/20">2</span>
+                            選擇購買項目
+                        </div>
+                        <div class="flex items-center gap-3 py-1 px-3 bg-surface-container-highest rounded-full border border-outline-variant/30">
+                            <span class="w-1 h-3 bg-primary rounded-full"></span>
+                            <span class="text-[11px] font-label text-on-surface-variant font-bold tracking-[0.15em] uppercase">客製化商品款式</span>
+                        </div>
                     </h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="amount-grid">
                         <!-- Card 1 -->
-                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 100, 1000)">
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 100, 1000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">各式化名牌1</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">1000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    各式化名牌1</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>1000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 100</p>
                             </div>
                         </div>
                         <!-- Card 2 -->
-                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 500, 5000)">
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 500, 5000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">客製化名牌2</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">5000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    客製化名牌2</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>5000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 500</p>
                             </div>
                         </div>
-                         <!-- Card 3 -->
-                         <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 1000, 10000)">
+                        <!-- Card 3 -->
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 1000, 10000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">客製化3</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">10,000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    客製化3</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>10,000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 1,000</p>
                             </div>
                         </div>
                         <!-- Card 4 -->
-                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 3000, 30000)">
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 3000, 30000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">客製化飾品1</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">30,000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    客製化飾品1</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>30,000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 3,000</p>
                             </div>
                         </div>
-                         <!-- Card 5 -->
-                         <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 5000, 50000)">
+                        <!-- Card 5 -->
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 5000, 50000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">客製化飾品2</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">50,000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    客製化飾品2</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>50,000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 5,000</p>
                             </div>
                         </div>
                         <!-- Card 6 -->
-                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative" onclick="selectAmount(this, 8000, 80000)">
+                        <div class="amount-card group p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest cursor-pointer hover:shadow-xl transition-all relative"
+                            onclick="selectAmount(this, 8000, 80000)">
                             <div class="absolute top-4 right-4 check-icon opacity-0 transition-opacity">
                                 <span class="material-symbols-outlined text-primary font-bold">check_circle</span>
                             </div>
                             <div class="flex flex-col items-center text-center">
                                 <span class="material-symbols-outlined text-4xl text-primary mb-2">token</span>
-                                <h4 class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">客製化飾品3</h4>
-                                <h3 class="font-headline font-bold text-3xl mb-1">80,000 <span class="text-sm font-normal text-on-surface-variant">元寶</span></h3>
+                                <h4
+                                    class="text-xs font-label text-amber-950 bg-amber-400 px-3 py-1 rounded-full mb-2 font-bold shadow-sm">
+                                    客製化飾品3</h4>
+                                <h3 class="font-headline font-bold text-3xl mb-1 flex items-center justify-center gap-1">
+                                    <span class="bg-red-600 text-white text-[10px] px-1 py-0.5 rounded-[3px] leading-none">贈</span>80,000 
+                                    <span class="text-sm font-normal text-on-surface-variant">元寶</span>
+                                </h3>
                                 <p class="font-label text-primary font-bold">NT$ 8,000</p>
                             </div>
                         </div>
 
                         <!-- Custom Input -->
-                        <div id="custom-amount-card" class="amount-card p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest hover:shadow-xl transition-all flex flex-col justify-center gap-4">
-                            <h3 class="font-headline font-bold text-on-surface">其他金額 (NT$)</h3>
+                        <div id="custom-amount-card"
+                            class="amount-card p-6 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest hover:shadow-xl transition-all flex flex-col justify-center gap-4">
+                            <h3 class="font-headline font-bold text-on-surface">客訂下單 請先私聊再填寫金額</h3>
                             <div class="relative">
-                                <input type="number" id="custom-twd" min="100" max="40000" placeholder="100 - 40,000" class="w-full bg-surface-container-highest border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 px-2 py-3 font-bold text-xl transition-all" oninput="handleCustomInput(this)">
+                                <input type="number" id="custom-twd" min="100" max="40000" placeholder="100 - 40,000"
+                                    class="w-full bg-surface-container-highest border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 px-2 py-3 font-bold text-xl transition-all"
+                                    oninput="handleCustomInput(this)">
                                 <span class="absolute right-2 top-3 text-sm text-on-surface-variant">台幣</span>
                             </div>
                             <div id="conversion-display" class="text-center bg-primary/5 p-2 rounded-lg hidden">
                                 <p class="text-xs text-on-surface-variant italic">預計獲得</p>
-                                <p class="font-headline font-black text-primary text-2xl" id="custom-yuanbao-result">0 <span class="text-xs font-normal">元寶</span></p>
+                                <p class="font-headline font-black text-primary text-2xl" id="custom-yuanbao-result">0
+                                    <span class="text-xs font-normal">元寶</span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -218,7 +296,7 @@
         function updateAccountDisplay() {
             const statusArea = document.getElementById('account-info');
             const currentUser = sessionStorage.getItem('current_user');
-            
+
             if (currentUser) {
                 statusArea.innerHTML = `
                     <p class="font-headline text-lg font-bold text-primary">${currentUser}</p>
@@ -271,7 +349,7 @@
             const val = parseInt(input.value);
             const resultBox = document.getElementById('conversion-display');
             const resultValue = document.getElementById('custom-yuanbao-result');
-            
+
             // 清除卡片選中狀態
             document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('active'));
             document.getElementById('custom-amount-card').classList.add('active');
