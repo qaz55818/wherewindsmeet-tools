@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>嘉義在地社群命名企劃提案</title>
+    <!-- 引入 Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 自定義進場動畫 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 點讚動畫 */
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .liked .heart-icon {
+            animation: heartPop 0.3s ease-in-out;
+            fill: #ef4444; /* red-500 */
+        }
+        
+        /* 隱藏捲軸但保持可滾動 */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-24">
+
+    <!-- 頂部導航列 (Sticky) -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-lg mx-auto px-4 py-4 flex items-center justify-center">
+            <h1 class="text-xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
+                嘉義在地社群命名企劃
+            </h1>
+        </div>
+        <!-- 進度條裝飾 -->
+        <div class="h-1 w-full bg-slate-100">
+            <div class="h-1 bg-gradient-to-r from-emerald-400 to-teal-500 w-1/3 rounded-r-full"></div>
+        </div>
+    </header>
+
+    <!-- 頁面介紹 -->
+    <section class="max-w-lg mx-auto px-5 pt-6 pb-2">
+        <p class="text-sm text-slate-500 leading-relaxed">
+            請瀏覽以下針對不同受眾與定位所發想的社群名稱提案。點擊愛心可標記您偏好的選項。
+        </p>
+    </section>
+
+    <!-- 提案列表容器 -->
+    <main id="proposal-container" class="max-w-lg mx-auto px-4 py-4 space-y-5">
+        <!-- 卡片將由 JavaScript 動態生成 -->
+    </main>
+
+    <!-- 底部浮動按鈕 -->
+    <div class="fixed bottom-6 left-0 right-0 z-40 flex justify-center pointer-events-none">
+        <button class="pointer-events-auto bg-slate-800 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-slate-800/30 active:scale-95 transition-transform flex items-center gap-2">
+            <span>提交評估意見</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+    </div>
+
+    <script>
+        // 提案資料
+        const proposals = [
+            {
+                title: "綠豆放送頭",
+                desc: "利用嘉義人專屬諧音梗（綠豆加薏仁），「放送頭」在台語是廣播喇叭的意思。適合喜歡看在地大小事、鄰里八卦，帶有濃濃人情味與三姑六婆特質的傳統在地鄉親與婆媽群體。",
+                icon: "📢",
+                theme: "from-emerald-50 to-emerald-100 border-emerald-200",
+                tag: "在地八卦",
+                tagColor: "text-emerald-700 bg-emerald-100/50"
+            },
+            {
+                title: "火雞肉飯宇宙的日常",
+                desc: "以嘉義最具代表性的美食作為切入點。適合熱愛討論嘉義哪家火雞肉飯最好吃、喜歡踩點在地美食與隱藏版生活資訊的年輕吃貨、大學生與外地觀光客。",
+                icon: "🦃",
+                theme: "from-orange-50 to-orange-100 border-orange-200",
+                tag: "美食生活",
+                tagColor: "text-orange-700 bg-orange-100/50"
+            },
+            {
+                title: "嘉義踹共！鄉民評理區",
+                desc: "「踹共」帶有直接、嗆辣的風格。適合用來討論交通亂象、市政議題或店家消費糾紛，能吸引喜歡在網路上發表意見、具備強烈正義感或愛看熱鬧的青壯年網路鄉民。",
+                icon: "🔥",
+                theme: "from-red-50 to-red-100 border-red-200",
+                tag: "公共討論",
+                tagColor: "text-red-700 bg-red-100/50"
+            },
+            {
+                title: "諸羅城探險隊",
+                desc: "帶有文青與探索未知的色彩。適合分享嘉義的老屋翻新、秘境景點、深度藝文時事，鎖定文青族群、地方創生工作者及喜歡深度旅遊的受眾。",
+                icon: "🧭",
+                theme: "from-teal-50 to-cyan-100 border-teal-200",
+                tag: "深度探索",
+                tagColor: "text-teal-700 bg-teal-100/50"
+            },
+            {
+                title: "噴水圓環地下電台",
+                desc: "噴水圓環是嘉義最具代表性的地標，「地下電台」則暗示這裡專門放送未經證實、不見天日的重口味八卦。適合愛看在地政治黑幕、道上兄弟恩怨或地方角頭秘辛的「吃瓜群眾」與在地老江湖。",
+                icon: "📻",
+                theme: "from-stone-100 to-stone-200 border-stone-300",
+                tag: "重度八卦",
+                tagColor: "text-stone-700 bg-stone-200/50"
+            },
+            {
+                title: "綠豆加特辣：諸羅重口味爆料",
+                desc: "將溫和的「綠豆」加上「特辣」，形成強烈反差。適合喜歡看腥羶色、無碼車禍現場、捉姦或暴力衝突等未修飾畫面的重度嗜血型網友。",
+                icon: "🌶️",
+                theme: "from-rose-50 to-rose-100 border-rose-200",
+                tag: "腥羶爆料",
+                tagColor: "text-rose-700 bg-rose-100/50"
+            },
+            {
+                title: "嘉義夜行動物觀察站",
+                desc: "「夜行動物」隱喻在八大行業出沒的男男女女。名稱帶有一點黑色幽默與偷窺感，適合想看特種行業生態、酒客鬧事或夜生活奇聞軼事，但又不想表現得太低俗的一般上班族與好奇網友。",
+                icon: "🦉",
+                theme: "from-indigo-50 to-violet-100 border-indigo-200",
+                tag: "夜生活",
+                tagColor: "text-indigo-700 bg-indigo-100/50"
+            },
+            {
+                title: "嘉義暈船勒戒所／老司機佈告欄",
+                desc: "「暈船」是年輕人形容在感情（或聲色場所）中迷失的流行語。這個名稱非常明確地鎖定有在八大行業消費、想要分享「戰報」、交流踩雷經驗或抱怨公關手腕的特定男性消費者（老司機）。",
+                icon: "💔",
+                theme: "from-pink-50 to-fuchsia-100 border-pink-200",
+                tag: "老司機",
+                tagColor: "text-pink-700 bg-pink-100/50"
+            },
+            {
+                title: "桃城午夜場：不能說的秘密",
+                desc: "利用嘉義古名「桃城」增加在地感，「午夜場」直接點出內容的成人性質。適合用來做匿名爆料，吸引那些喜歡窺探別人隱私、感情糾紛或桃色風波的八卦愛好者。",
+                icon: "🤫",
+                theme: "from-slate-100 to-slate-200 border-slate-300",
+                tag: "成人私密",
+                tagColor: "text-slate-700 bg-slate-200/50"
+            },
+            {
+                title: "白醋涼麵護衛隊",
+                desc: "嘉義人稱美乃滋為「白醋」，加在涼麵上是外地人難以理解、在地人卻無法割捨的信仰。適合喜歡戰南北口味、推廣嘉義隱藏版小吃、熱愛捍衛在地飲食文化的死忠嘉義人與返鄉青年。",
+                icon: "🍜",
+                theme: "from-yellow-50 to-amber-100 border-yellow-200",
+                tag: "飲食信仰",
+                tagColor: "text-yellow-700 bg-yellow-100/50"
+            },
+            {
+                title: "鳳梨田裡的迷航日誌",
+                desc: "民雄擁有大片鳳梨田且大學林立。此名稱帶有濃厚的學生迷因感，適合大學生交流租屋避雷、期末考崩潰日常、學餐評價、打工黑名單以及周邊校園生活資訊的年輕學子與校友。",
+                icon: "🍍",
+                theme: "from-lime-50 to-green-100 border-lime-200",
+                tag: "學生迷因",
+                tagColor: "text-lime-700 bg-lime-100/50"
+            },
+            {
+                title: "蘭潭撈水鬼都市傳說",
+                desc: "蘭潭水庫在嘉義擁有許多靈異傳聞與都市怪談。適合喜歡討論靈異事件、探險廢墟、分享在地怪奇故事、宮廟陣頭與民間信仰的靈異愛好者、夜遊愛好者及大膽的年輕族群。",
+                icon: "👻",
+                theme: "from-purple-50 to-purple-200 border-purple-300",
+                tag: "都市怪談",
+                tagColor: "text-purple-700 bg-purple-100/50"
+            },
+            {
+                title: "垂楊路待轉區生存指南",
+                desc: "垂楊路是嘉義市區的重要幹道，車流量大且交通狀況多。適合用來回報即時路況、檢舉違停、抱怨測速照相機、車禍行車紀錄器分享，是機車族、通勤上班族與外送員必看的實用兼取暖天地。",
+                icon: "🛵",
+                theme: "from-slate-100 to-gray-200 border-slate-300",
+                tag: "交通路況",
+                tagColor: "text-slate-700 bg-slate-200/50"
+            },
+            {
+                title: "文化路走九遍：在地避雷針",
+                desc: "文化路夜市是嘉義的觀光一級戰區。這個社群主打「在地人真實評比」，專門踢爆過譽網美名店、分享真正免排隊的在地人私藏名單，適合不想被當觀光客痛宰、討厭排隊的務實鄉親與精明消費者。",
+                icon: "⚡",
+                theme: "from-amber-50 to-yellow-100 border-amber-200",
+                tag: "真實評比",
+                tagColor: "text-amber-700 bg-amber-100/50"
+            },
+            {
+                title: "木都老屋甦醒計畫",
+                desc: "嘉義被稱為「木都」，巷弄內隱藏大量日式木造建築。這個社群適合討論老屋修繕、老屋咖啡廳地圖、地方文史記憶與手作工藝，吸引文創工作者、建築迷、歷史愛好者以及喜歡懷舊復古風的文青。",
+                icon: "🪵",
+                theme: "from-orange-50 to-amber-100 border-orange-200",
+                tag: "文創老屋",
+                tagColor: "text-orange-800 bg-orange-100/50"
+            },
+            {
+                title: "嘉義公園甩手晨運俱樂部",
+                desc: "嘉義市是高齡友善城市，嘉義公園更是長輩的活動中心。適合分享養生保健資訊、長照資源、各地進香團遊覽車行程、菜市場物價波動，主力鎖定銀髮族、關心長輩健康的青壯年以及地方婆媽群體。",
+                icon: "🌳",
+                theme: "from-green-50 to-emerald-100 border-green-200",
+                tag: "樂齡養生",
+                tagColor: "text-green-700 bg-green-100/50"
+            },
+            {
+                title: "北回歸線以南的任性",
+                desc: "以嘉義水上鄉的北回歸線為界，象徵一種氣候與生活步調的切換。適合分享嘉義特有的「慢活」哲學、天氣穿搭求救、農務日常，或是厭世上班族抒發不想努力的心情，吸引嚮往躺平或熱愛悠閒生活的在地人。",
+                icon: "☀️",
+                theme: "from-sky-50 to-blue-100 border-sky-200",
+                tag: "慢活躺平",
+                tagColor: "text-sky-700 bg-sky-100/50"
+            },
+            {
+                title: "砂鍋裡的浮世繪",
+                desc: "以嘉義另一大知名美食「砂鍋魚頭」為靈感，象徵大鍋炒、大雜燴的社會百態。適合分享各行各業的甘苦談、打工仔的抱怨、服務業遇到的奧客奇葩事蹟，吸引喜歡看世間冷暖、人情世故的社會新鮮人與基層勞工。",
+                icon: "🍲",
+                theme: "from-orange-100 to-red-100 border-orange-300",
+                tag: "社會百態",
+                tagColor: "text-orange-800 bg-orange-200/50"
+            },
+            {
+                title: "嘉農紅土熱血陣線",
+                desc: "嘉義是台灣棒球的原鄉（KANO）。這個社群帶有強烈的在地榮譽感，適合討論中華職棒賽事、在地三級棒球發展、相約看球或揪團運動健身資訊，吸引熱愛體育賽事、擁有棒球魂的熱血球迷與運動愛好者。",
+                icon: "⚾",
+                theme: "from-red-50 to-orange-100 border-red-200",
+                tag: "熱血體育",
+                tagColor: "text-red-800 bg-red-100/50"
+            }
+        ];
+
+        const container = document.getElementById('proposal-container');
+
+        // 生成卡片 HTML
+        proposals.forEach((p, index) => {
+            // 隨機生成一個初始按讚數
+            const initialLikes = Math.floor(Math.random() * 80) + 12;
+            
+            const cardHTML = `
+                <article class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden opacity-0 animate-fade-in-up" style="animation-delay: ${index * 80}ms;">
+                    <div class="bg-gradient-to-br ${p.theme} p-5 relative">
+                        <!-- 背景浮水印大圖示 -->
+                        <div class="absolute right-0 top-0 text-7xl opacity-10 transform translate-x-4 -translate-y-2 select-none pointer-events-none">
+                            ${p.icon}
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-3xl filter drop-shadow-sm">${p.icon}</span>
+                                <h2 class="text-xl font-bold text-slate-800 leading-tight">${p.title}</h2>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 text-xs font-bold rounded-full border border-white/40 shadow-sm backdrop-blur-md ${p.tagColor}">
+                                    # ${p.tag}
+                                </span>
+                            </div>
+                            
+                            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)]">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">特色與受眾</h3>
+                                <p class="text-sm text-slate-700 leading-relaxed font-medium">
+                                    ${p.desc}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 互動區塊 -->
+                    <div class="px-5 py-3 bg-white flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-medium">提案 #${(index + 1).toString().padStart(2, '0')}</span>
+                        <button class="like-btn flex items-center gap-1.5 text-slate-400 transition-colors" onclick="toggleLike(this)">
+                            <svg class="w-6 h-6 heart-icon fill-current stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span class="text-sm font-bold like-count">${initialLikes}</span>
+                        </button>
+                    </div>
+                </article>
+            `;
+            container.innerHTML += cardHTML;
+        });
+
+        // 處理點讚互動邏輯
+        function toggleLike(btn) {
+            const countSpan = btn.querySelector('.like-count');
+            let count = parseInt(countSpan.innerText);
+
+            if (btn.classList.contains('liked')) {
+                // 取消讚
+                btn.classList.remove('liked');
+                btn.classList.remove('text-red-500');
+                btn.classList.add('text-slate-400');
+                count--;
+            } else {
+                // 點讚
+                btn.classList.add('liked');
+                btn.classList.remove('text-slate-400');
+                btn.classList.add('text-red-500');
+                count++;
+            }
+            countSpan.innerText = count;
+            
+            // 觸發設備微震動反饋 (如果設備支援)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+    </script>
+</body>
+</html>
