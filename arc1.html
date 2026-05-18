@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>醋飯槍枝資訊站｜ARC Raiders 武器資料庫</title>
+  <style>
+    :root {
+      --bg: #070a10;
+      --bg-2: #0d1320;
+      --card: rgba(18, 25, 39, 0.82);
+      --card-2: rgba(24, 35, 54, 0.74);
+      --text: #edf3ff;
+      --muted: #91a0b8;
+      --line: rgba(255, 255, 255, 0.11);
+      --gold: #f6c768;
+      --orange: #ff8a3d;
+      --cyan: #5ee7ff;
+      --green: #75f0a5;
+      --red: #ff5f6d;
+      --purple: #b58cff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 16% 12%, rgba(255, 138, 61, 0.22), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(94, 231, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 56% 80%, rgba(181, 140, 255, 0.14), transparent 32%),
+        linear-gradient(135deg, #06080d 0%, #101625 48%, #070a10 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 80%);
+      z-index: -1;
+    }
+
+    .shell {
+      width: min(1240px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 36px 0 64px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        rgba(10, 15, 24, 0.68);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "CU FAN ARMORY";
+      position: absolute;
+      right: -24px;
+      bottom: -18px;
+      font-size: clamp(54px, 10vw, 134px);
+      font-weight: 1000;
+      letter-spacing: -0.08em;
+      color: rgba(255,255,255,0.035);
+      z-index: -1;
+      white-space: nowrap;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 14px;
+      border: 1px solid rgba(246, 199, 104, 0.4);
+      border-radius: 999px;
+      background: rgba(246, 199, 104, 0.12);
+      color: #ffe4aa;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(117, 240, 165, 0.8);
+      animation: pulse 1.7s infinite;
+    }
+
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 12px rgba(117, 240, 165, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(117, 240, 165, 0); }
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(38px, 7vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
+      font-weight: 1000;
+    }
+
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(90deg, #fff 0%, #ffe0a3 32%, #65e9ff 78%, #fff 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 50px rgba(94, 231, 255, 0.18);
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .stat-pill {
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+    }
+
+    .stat-pill strong {
+      display: block;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .stat-pill small {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .panel {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .toolbar, .ranking {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(9, 14, 23, 0.72);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(18px);
+    }
+
+    .toolbar {
+      padding: 18px;
+    }
+
+    .search-wrap {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 12px;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 14px 15px;
+      background: rgba(255,255,255,0.065);
+      color: var(--text);
+      outline: none;
+      font-size: 15px;
+      transition: 0.25s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(94, 231, 255, 0.65);
+      box-shadow: 0 0 0 4px rgba(94, 231, 255, 0.08);
+    }
+
+    select option {
+      background: #101625;
+      color: var(--text);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.045);
+      font-weight: 800;
+      font-size: 13px;
+      transition: 0.22s ease;
+    }
+
+    .chip:hover, .chip.active {
+      color: #101010;
+      background: linear-gradient(135deg, var(--gold), #ff9b54);
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .ranking {
+      padding: 18px;
+    }
+
+    .ranking h3 {
+      margin-bottom: 12px;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+    }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .rank-row:last-child { border-bottom: none; }
+
+    .rank-num {
+      width: 25px;
+      height: 25px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: rgba(246, 199, 104, 0.13);
+      color: var(--gold);
+      font-weight: 1000;
+      font-size: 12px;
+    }
+
+    .rank-name {
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .rank-sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .rank-value {
+      font-weight: 1000;
+      color: var(--cyan);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin: 34px 0 16px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: -0.055em;
+    }
+
+    .count {
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        var(--card);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 90% 0%, var(--accent, rgba(246,199,104,0.18)), transparent 40%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-inner { position: relative; z-index: 1; }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .weapon-name {
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 1000;
+    }
+
+    .weapon-en {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .type-tag {
+      padding: 8px 10px;
+      border-radius: 12px;
+      color: #101010;
+      background: linear-gradient(135deg, var(--gold), #ff9b54);
+      font-weight: 1000;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 17px 0;
+    }
+
+    .meta-item {
+      padding: 11px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .meta-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .meta-item b {
+      font-size: 14px;
+    }
+
+    .bars {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .track {
+      height: 9px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      box-shadow: 0 0 18px rgba(94, 231, 255, 0.28);
+      transition: width 0.55s ease;
+    }
+
+    .slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .slot {
+      font-size: 12px;
+      color: #cbd6e8;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-weight: 800;
+    }
+
+    .unknown {
+      color: var(--red);
+      font-weight: 1000;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 40px;
+      text-align: center;
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.045);
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .panel { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-top { flex-direction: column; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 24px, 1240px); padding-top: 20px; }
+      .hero { padding: 24px; border-radius: 26px; }
+      .search-wrap { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="badge"><span class="pulse"></span> ARC RAIDERS WEAPON DATABASE</div>
+          <h1>醋飯槍枝<br /><span>資訊站</span></h1>
+          <p class="subtitle">
+            整合突擊步槍、戰鬥步槍、衝鋒槍、霰彈槍、手槍、手炮、輕機槍、狙擊步槍與特殊武器資料。可搜尋、分類篩選、依傷害／射速／射程排序，快速找到最適合你的作戰配置。
+          </p>
+        </div>
+        <div class="hero-actions" id="heroStats"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="搜尋武器名稱、英文、彈藥、射擊模式、模組插槽…" />
+          <select id="sortSelect">
+            <option value="default">預設排序</option>
+            <option value="damage">傷害最高</option>
+            <option value="fireRate">射速最高</option>
+            <option value="range">射程最遠</option>
+            <option value="slots">模組最多</option>
+          </select>
+        </div>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <aside class="ranking">
+        <h3>🔥 火力排行榜｜依傷害</h3>
+        <div id="rankingList"></div>
+      </aside>
+    </section>
+
+    <div class="section-head">
+      <h2>武器資料庫</h2>
+      <div class="count" id="resultCount"></div>
+    </div>
+
+    <section class="grid" id="weaponGrid"></section>
+
+    <div class="footer-note">
+      <strong>資料註記：</strong>錛斧 Dolabra 的傷害、射速、射程目前以「?」呈現；遠日點 Aphelion 標註為無法升級，數值依你提供資料保留。此頁面可直接作為單檔 HTML 使用，也能後續接 API 或改成粉絲專頁工具站。
+    </div>
+  </main>
+
+  <script>
+    const weapons = [
+      { type: "突擊步槍", name: "水壺", en: "Kettle", ammo: "輕型彈藥", mode: "半自動", damage: 8.5, fireRate: 30, range: 42.8, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
+      { type: "突擊步槍", name: "響尾蛇", en: "Rattler", ammo: "中型彈藥", mode: "全自動", damage: 9, fireRate: 33.3, range: 56.2, slots: ["槍口", "下掛", "槍托"] },
+      { type: "突擊步槍", name: "琶音", en: "Arpeggio", ammo: "中型彈藥", mode: "三連發", damage: 9.5, fireRate: 18.3, range: 55.9, slots: ["槍口", "下掛", "中型彈匣", "槍托"] },
+      { type: "突擊步槍", name: "風暴", en: "Tempest", ammo: "中型彈藥", mode: "全自動", damage: 10, fireRate: 36.7, range: 55.9, slots: ["槍口", "下掛", "中型彈匣"] },
+      { type: "突擊步槍", name: "貝蒂娜", en: "Bettina", ammo: "重型彈藥", mode: "全自動", damage: 16, fireRate: 28.7, range: 52.3, slots: ["槍口", "下掛", "槍托"] },
+
+      { type: "戰鬥步槍", name: "費羅/鐵", en: "Ferro", ammo: "重型彈藥", mode: "折管式", damage: 40, fireRate: 6.6, range: 53.1, slots: ["槍口", "下掛", "槍托"] },
+      { type: "戰鬥步槍", name: "叛逆者", en: "Renegade", ammo: "中型彈藥", mode: "槓桿式", damage: 35, fireRate: 21, range: 68.8, slots: ["槍口", "中型彈匣", "槍托"] },
+      { type: "戰鬥步槍", name: "遠日點", en: "Aphelion", ammo: "能量彈匣", mode: "雙連發", damage: 25, fireRate: 9, range: 76, slots: ["下掛", "槍托"], note: "無法升級／估算值" },
+
+      { type: "衝鋒槍", name: "縫合者", en: "Stitcher", ammo: "輕型彈藥", mode: "全自動", damage: 6.5, fireRate: 45.3, range: 42.1, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
+      { type: "衝鋒槍", name: "詩篇", en: "Canto", ammo: "中型彈藥", mode: "全自動", damage: 6.5, fireRate: 56.7, range: 51, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
+      { type: "衝鋒槍", name: "短尾貓", en: "Bobcat", ammo: "輕型彈藥", mode: "全自動", damage: 6, fireRate: 66.7, range: 44, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
+
+      { type: "霰彈槍", name: "公牛", en: "Il Toro", ammo: "霰彈", mode: "泵動式", damage: 67.5, fireRate: 14, range: 20, slots: ["霰彈槍口", "下掛", "霰彈彈匣", "槍托"] },
+      { type: "霰彈槍", name: "火山", en: "Vulcano", ammo: "霰彈", mode: "半自動", damage: 49.5, fireRate: 26.3, range: 26, slots: ["霰彈槍口", "下掛", "霰彈彈匣", "槍托"] },
+      { type: "霰彈槍", name: "錛斧", en: "Dolabra", ammo: "能量彈匣", mode: "半自動", damage: null, fireRate: null, range: null, slots: ["無"] },
+
+      { type: "手槍", name: "髮夾", en: "Hairpin", ammo: "輕型彈藥", mode: "滑套式", damage: 20, fireRate: 9, range: 38.6, slots: ["輕型彈匣"] },
+      { type: "手槍", name: "諧歌劇", en: "Burletta", ammo: "輕型彈藥", mode: "半自動", damage: 10, fireRate: 28, range: 41.7, slots: ["槍口", "輕型彈匣"] },
+      { type: "手槍", name: "獵人", en: "Venator", ammo: "中型彈藥", mode: "半自動", damage: 16, fireRate: 36.7, range: 48.4, slots: ["下掛", "中型彈匣"] },
+
+      { type: "手炮", name: "鐵砧", en: "Anvil", ammo: "重型彈藥", mode: "單動式", damage: 40, fireRate: 16.3, range: 50.2, slots: ["槍口", "科技模組"] },
+
+      { type: "輕機槍", name: "洪流", en: "Torrente", ammo: "中型彈藥", mode: "全自動", damage: 8, fireRate: 58.3, range: 49.9, slots: ["槍口", "中型彈匣", "槍托"] },
+
+      { type: "狙擊步槍", name: "魚鷹", en: "Osprey", ammo: "中型彈藥", mode: "栓動式", damage: 45, fireRate: 17.7, range: 80.3, slots: ["槍口", "下掛", "中型彈匣", "槍托"] },
+      { type: "狙擊步槍", name: "木星", en: "Jupiter", ammo: "能量彈匣", mode: "栓動式", damage: 60, fireRate: 7.7, range: 71.7, slots: ["無"] },
+
+      { type: "特殊武器", name: "破殼者", en: "Hullcracker", ammo: "發射器彈藥", mode: "泵動式", damage: 100, fireRate: 20.3, range: 38.9, slots: ["下掛", "槍托"] },
+      { type: "特殊武器", name: "均衡器", en: "Equalizer", ammo: "能量彈匣", mode: "全自動", damage: 8, fireRate: 33.3, range: 68.6, slots: ["無"] }
+    ];
+
+    const colors = {
+      "突擊步槍": "rgba(255, 138, 61, 0.28)",
+      "戰鬥步槍": "rgba(246, 199, 104, 0.28)",
+      "衝鋒槍": "rgba(94, 231, 255, 0.26)",
+      "霰彈槍": "rgba(255, 95, 109, 0.26)",
+      "手槍": "rgba(117, 240, 165, 0.24)",
+      "手炮": "rgba(181, 140, 255, 0.28)",
+      "輕機槍": "rgba(255, 204, 92, 0.24)",
+      "狙擊步槍": "rgba(100, 149, 255, 0.28)",
+      "特殊武器": "rgba(255, 255, 255, 0.23)"
+    };
+
+    const max = {
+      damage: Math.max(...weapons.map(w => w.damage || 0)),
+      fireRate: Math.max(...weapons.map(w => w.fireRate || 0)),
+      range: Math.max(...weapons.map(w => w.range || 0))
+    };
+
+    const grid = document.getElementById("weaponGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const chips = document.getElementById("chips");
+    const resultCount = document.getElementById("resultCount");
+    const rankingList = document.getElementById("rankingList");
+    const heroStats = document.getElementById("heroStats");
+
+    let activeType = "全部";
+
+    function value(v) {
+      return v === null || v === undefined ? "?" : v;
+    }
+
+    function makeBar(label, raw, key) {
+      const percent = raw ? Math.max(4, (raw / max[key]) * 100) : 0;
+      return `
+        <div class="bar-row">
+          <div class="bar-label"><span>${label}</span><span class="${raw ? "" : "unknown"}">${value(raw)}</span></div>
+          <div class="track"><div class="fill" style="width:${percent}%"></div></div>
+        </div>
+      `;
+    }
+
+    function card(w) {
+      const slotText = w.slots.map(s => `<span class="slot">${s}</span>`).join("");
+      const note = w.note ? `<span class="slot">${w.note}</span>` : "";
+      return `
+        <article class="card" style="--accent:${colors[w.type] || "rgba(246,199,104,0.2)"}">
+          <div class="card-inner">
+            <div class="card-top">
+              <div>
+                <div class="weapon-name">${w.name}</div>
+                <div class="weapon-en">${w.en}</div>
+              </div>
+              <div class="type-tag">${w.type}</div>
+            </div>
+
+            <div class="meta">
+              <div class="meta-item"><small>Ammo</small><b>${w.ammo}</b></div>
+              <div class="meta-item"><small>Mode</small><b>${w.mode}</b></div>
+            </div>
+
+            <div class="bars">
+              ${makeBar("傷害 Damage", w.damage, "damage")}
+              ${makeBar("射速 Fire Rate", w.fireRate, "fireRate")}
+              ${makeBar("射程 Range", w.range, "range")}
+            </div>
+
+            <div class="slots">${slotText}${note}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderChips() {
+      const types = ["全部", ...new Set(weapons.map(w => w.type))];
+      chips.innerHTML = types.map(t => `<button class="chip ${t === activeType ? "active" : ""}" data-type="${t}">${t}</button>`).join("");
+      chips.querySelectorAll(".chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeType = btn.dataset.type;
+          render();
+        });
+      });
+    }
+
+    function renderHeroStats() {
+      const weaponCount = weapons.length;
+      const typeCount = new Set(weapons.map(w => w.type)).size;
+      const highestDamage = weapons.reduce((a, b) => (a.damage || 0) > (b.damage || 0) ? a : b);
+      heroStats.innerHTML = `
+        <div class="stat-pill"><strong>${weaponCount}</strong><small>把武器</small></div>
+        <div class="stat-pill"><strong>${typeCount}</strong><small>大分類</small></div>
+        <div class="stat-pill"><strong>${highestDamage.name}</strong><small>最高傷害 ${highestDamage.damage}</small></div>
+      `;
+    }
+
+    function renderRanking() {
+      const top = [...weapons]
+        .filter(w => typeof w.damage === "number")
+        .sort((a, b) => b.damage - a.damage)
+        .slice(0, 5);
+
+      rankingList.innerHTML = top.map((w, i) => `
+        <div class="rank-row">
+          <div class="rank-num">${i + 1}</div>
+          <div>
+            <div class="rank-name">${w.name} <span style="color:var(--muted);font-weight:800;">${w.en}</span></div>
+            <div class="rank-sub">${w.type}／${w.ammo}</div>
+          </div>
+          <div class="rank-value">${w.damage}</div>
+        </div>
+      `).join("");
+    }
+
+    function getFiltered() {
+      const q = searchInput.value.trim().toLowerCase();
+      let list = weapons.filter(w => {
+        const text = [w.type, w.name, w.en, w.ammo, w.mode, ...w.slots, w.note || ""].join(" ").toLowerCase();
+        const matchType = activeType === "全部" || w.type === activeType;
+        const matchSearch = !q || text.includes(q);
+        return matchType && matchSearch;
+      });
+
+      const sort = sortSelect.value;
+      if (sort === "damage") list.sort((a, b) => (b.damage || -1) - (a.damage || -1));
+      if (sort === "fireRate") list.sort((a, b) => (b.fireRate || -1) - (a.fireRate || -1));
+      if (sort === "range") list.sort((a, b) => (b.range || -1) - (a.range || -1));
+      if (sort === "slots") list.sort((a, b) => b.slots.length - a.slots.length);
+      return list;
+    }
+
+    function render() {
+      renderChips();
+      const list = getFiltered();
+      resultCount.textContent = `目前顯示 ${list.length} / ${weapons.length} 把武器`;
+      grid.innerHTML = list.length ? list.map(card).join("") : `<div class="empty">找不到符合條件的武器，換個關鍵字或分類試試。</div>`;
+    }
+
+    searchInput.addEventListener("input", render);
+    sortSelect.addEventListener("change", render);
+
+    renderHeroStats();
+    renderRanking();
+    render();
+  </script>
+</body>
+</html>
