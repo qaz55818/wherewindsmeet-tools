@@ -6,38 +6,37 @@
   <title>醋飯槍枝資訊站｜ARC Raiders 武器資料庫</title>
   <style>
     :root {
-      --bg: #070a10;
-      --bg-2: #0d1320;
-      --card: rgba(18, 25, 39, 0.82);
-      --card-2: rgba(24, 35, 54, 0.74);
-      --text: #edf3ff;
-      --muted: #91a0b8;
-      --line: rgba(255, 255, 255, 0.11);
-      --gold: #f6c768;
+      --bg: #06080d;
+      --panel: rgba(12, 18, 30, 0.78);
+      --panel-2: rgba(18, 27, 43, 0.82);
+      --card: rgba(18, 27, 43, 0.86);
+      --text: #eef5ff;
+      --muted: #92a4bd;
+      --line: rgba(255,255,255,.12);
+      --gold: #f9c96b;
       --orange: #ff8a3d;
-      --cyan: #5ee7ff;
-      --green: #75f0a5;
-      --red: #ff5f6d;
-      --purple: #b58cff;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      --cyan: #61e9ff;
+      --green: #7af3aa;
+      --red: #ff6473;
+      --purple: #b88cff;
+      --blue: #7ba7ff;
       --radius: 24px;
+      --shadow: 0 26px 90px rgba(0,0,0,.42);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
       color: var(--text);
       font-family: Inter, "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background:
-        radial-gradient(circle at 16% 12%, rgba(255, 138, 61, 0.22), transparent 28%),
-        radial-gradient(circle at 82% 8%, rgba(94, 231, 255, 0.18), transparent 28%),
-        radial-gradient(circle at 56% 80%, rgba(181, 140, 255, 0.14), transparent 32%),
-        linear-gradient(135deg, #06080d 0%, #101625 48%, #070a10 100%);
+        radial-gradient(circle at 12% 10%, rgba(255,138,61,.25), transparent 26%),
+        radial-gradient(circle at 86% 4%, rgba(97,233,255,.18), transparent 30%),
+        radial-gradient(circle at 50% 92%, rgba(184,140,255,.16), transparent 34%),
+        linear-gradient(135deg, #05070c 0%, #0d1423 48%, #070a11 100%);
       overflow-x: hidden;
     }
 
@@ -47,153 +46,175 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 80%);
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 86%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.045), transparent);
+      transform: translateX(-100%);
+      animation: scan 9s linear infinite;
       z-index: -1;
     }
 
+    @keyframes scan {
+      0% { transform: translateX(-120%); opacity: 0; }
+      12% { opacity: 1; }
+      38% { transform: translateX(120%); opacity: 0; }
+      100% { transform: translateX(120%); opacity: 0; }
+    }
+
     .shell {
-      width: min(1240px, calc(100% - 36px));
+      width: min(1320px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 36px 0 64px;
+      padding: 34px 0 70px;
     }
 
     .hero {
       position: relative;
-      padding: 34px;
       border: 1px solid var(--line);
-      border-radius: 34px;
+      border-radius: 36px;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
-        rgba(10, 15, 24, 0.68);
+        linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.028)),
+        rgba(8, 13, 22, .72);
       box-shadow: var(--shadow);
       overflow: hidden;
       isolation: isolate;
+      padding: clamp(24px, 5vw, 44px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 560px;
+      height: 560px;
+      right: -190px;
+      top: -220px;
+      background: radial-gradient(circle, rgba(249,201,107,.2), transparent 62%);
+      z-index: -1;
     }
 
     .hero::after {
-      content: "CU FAN ARMORY";
+      content: "CUFAN ARMORY";
       position: absolute;
-      right: -24px;
-      bottom: -18px;
-      font-size: clamp(54px, 10vw, 134px);
+      right: -28px;
+      bottom: -20px;
+      color: rgba(255,255,255,.04);
+      font-size: clamp(56px, 12vw, 155px);
       font-weight: 1000;
-      letter-spacing: -0.08em;
-      color: rgba(255,255,255,0.035);
-      z-index: -1;
+      letter-spacing: -.09em;
       white-space: nowrap;
+      z-index: -1;
     }
 
-    .hero-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 22px;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items: end;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       padding: 9px 14px;
-      border: 1px solid rgba(246, 199, 104, 0.4);
+      border: 1px solid rgba(249,201,107,.42);
       border-radius: 999px;
-      background: rgba(246, 199, 104, 0.12);
-      color: #ffe4aa;
+      background: rgba(249,201,107,.12);
+      color: #ffe6ad;
       font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: .09em;
     }
 
     .pulse {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
+      width: 9px; height: 9px; border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 0 0 rgba(117, 240, 165, 0.8);
+      box-shadow: 0 0 0 0 rgba(122,243,170,.85);
       animation: pulse 1.7s infinite;
     }
 
     @keyframes pulse {
-      70% { box-shadow: 0 0 0 12px rgba(117, 240, 165, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(117, 240, 165, 0); }
+      70% { box-shadow: 0 0 0 13px rgba(122,243,170,0); }
+      100% { box-shadow: 0 0 0 0 rgba(122,243,170,0); }
     }
 
     h1 {
       margin-top: 18px;
-      font-size: clamp(38px, 7vw, 82px);
-      line-height: 0.92;
-      letter-spacing: -0.075em;
+      font-size: clamp(42px, 8vw, 92px);
+      line-height: .9;
+      letter-spacing: -.08em;
       font-weight: 1000;
     }
 
-    .hero h1 span {
+    h1 span {
       display: block;
-      background: linear-gradient(90deg, #fff 0%, #ffe0a3 32%, #65e9ff 78%, #fff 100%);
+      background: linear-gradient(90deg, #fff 0%, #ffe4ad 30%, #61e9ff 76%, #fff 100%);
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 0 0 50px rgba(94, 231, 255, 0.18);
+      filter: drop-shadow(0 0 35px rgba(97,233,255,.16));
     }
 
     .subtitle {
+      max-width: 820px;
       margin-top: 18px;
-      max-width: 760px;
       color: var(--muted);
+      line-height: 1.85;
       font-size: 16px;
-      line-height: 1.8;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-top: 26px;
     }
 
-    .stat-pill {
-      padding: 12px 16px;
-      border-radius: 16px;
+    .stat {
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      padding: 16px;
+      backdrop-filter: blur(16px);
     }
 
-    .stat-pill strong {
+    .stat strong {
       display: block;
-      font-size: 20px;
-      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -.04em;
     }
 
-    .stat-pill small {
+    .stat small {
+      display: block;
+      margin-top: 8px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .panel {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-    }
-
-    .toolbar, .ranking {
+    .dock {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      margin-top: 20px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(9, 14, 23, 0.72);
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      background: rgba(7, 11, 18, .78);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 18px 54px rgba(0,0,0,.32);
+      padding: 16px;
     }
 
-    .toolbar {
-      padding: 18px;
-    }
-
-    .search-wrap {
+    .controls {
       display: grid;
-      grid-template-columns: 1fr 180px;
+      grid-template-columns: minmax(220px, 1fr) 170px 170px 170px;
       gap: 12px;
     }
 
@@ -201,23 +222,20 @@
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 17px;
-      padding: 14px 15px;
-      background: rgba(255,255,255,0.065);
       color: var(--text);
+      background: rgba(255,255,255,.065);
+      padding: 13px 14px;
+      font-size: 14px;
       outline: none;
-      font-size: 15px;
-      transition: 0.25s ease;
+      transition: .22s ease;
     }
 
     input:focus, select:focus {
-      border-color: rgba(94, 231, 255, 0.65);
-      box-shadow: 0 0 0 4px rgba(94, 231, 255, 0.08);
+      border-color: rgba(97,233,255,.68);
+      box-shadow: 0 0 0 4px rgba(97,233,255,.09);
     }
 
-    select option {
-      background: #101625;
-      color: var(--text);
-    }
+    select option { background: #101625; color: var(--text); }
 
     .chips {
       display: flex;
@@ -227,92 +245,87 @@
     }
 
     .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,.045);
       cursor: pointer;
       user-select: none;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      padding: 10px 13px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.045);
-      font-weight: 800;
       font-size: 13px;
-      transition: 0.22s ease;
+      font-weight: 900;
+      transition: .2s ease;
     }
 
     .chip:hover, .chip.active {
       color: #101010;
-      background: linear-gradient(135deg, var(--gold), #ff9b54);
       border-color: transparent;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
       transform: translateY(-1px);
     }
 
-    .ranking {
-      padding: 18px;
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0 12px;
     }
 
-    .ranking h3 {
-      margin-bottom: 12px;
+    .board {
+      min-height: 210px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 18px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.24);
+      overflow: hidden;
+    }
+
+    .board h3 {
       font-size: 16px;
-      letter-spacing: 0.04em;
+      letter-spacing: .04em;
+      margin-bottom: 12px;
     }
 
     .rank-row {
       display: grid;
       grid-template-columns: 28px 1fr auto;
-      gap: 10px;
       align-items: center;
+      gap: 10px;
       padding: 9px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,.075);
     }
 
     .rank-row:last-child { border-bottom: none; }
 
-    .rank-num {
-      width: 25px;
-      height: 25px;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      background: rgba(246, 199, 104, 0.13);
+    .num {
+      width: 26px; height: 26px;
+      display: grid; place-items: center;
+      border-radius: 10px;
       color: var(--gold);
+      background: rgba(249,201,107,.13);
       font-weight: 1000;
       font-size: 12px;
     }
 
-    .rank-name {
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .rank-sub {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
-    .rank-value {
-      font-weight: 1000;
-      color: var(--cyan);
-    }
+    .rank-name { font-size: 14px; font-weight: 1000; }
+    .rank-sub { margin-top: 3px; color: var(--muted); font-size: 12px; }
+    .rank-value { color: var(--cyan); font-weight: 1000; }
 
     .section-head {
       display: flex;
-      justify-content: space-between;
       align-items: end;
-      gap: 18px;
-      margin: 34px 0 16px;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 32px 0 16px;
     }
 
     .section-head h2 {
-      font-size: clamp(26px, 4vw, 44px);
-      letter-spacing: -0.055em;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: -.06em;
     }
 
-    .count {
-      color: var(--muted);
-      font-weight: 800;
-      white-space: nowrap;
-    }
+    .count { color: var(--muted); font-weight: 900; white-space: nowrap; }
 
     .grid {
       display: grid;
@@ -324,219 +337,291 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 18px;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
         var(--card);
-      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 14px 42px rgba(0,0,0,.24);
+      padding: 18px;
       overflow: hidden;
-      transition: 0.25s ease;
+      transition: .25s ease;
+      min-height: 430px;
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 90% 0%, var(--accent, rgba(246,199,104,0.18)), transparent 40%);
-      opacity: 0.85;
+      background: radial-gradient(circle at 92% 0%, var(--accent), transparent 42%);
+      opacity: .95;
       pointer-events: none;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: rgba(255,255,255,0.22);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      border-color: rgba(255,255,255,.23);
+      box-shadow: 0 26px 72px rgba(0,0,0,.38);
     }
 
     .card-inner { position: relative; z-index: 1; }
 
     .card-top {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
-      gap: 14px;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .weapon-name {
-      font-size: 24px;
-      line-height: 1.1;
-      letter-spacing: -0.04em;
+      font-size: 25px;
+      line-height: 1.08;
+      letter-spacing: -.045em;
       font-weight: 1000;
     }
 
     .weapon-en {
+      margin-top: 4px;
       color: var(--muted);
       font-size: 13px;
       font-weight: 800;
-      margin-top: 4px;
     }
 
     .type-tag {
       padding: 8px 10px;
-      border-radius: 12px;
-      color: #101010;
-      background: linear-gradient(135deg, var(--gold), #ff9b54);
-      font-weight: 1000;
+      border-radius: 13px;
+      color: #111;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
       font-size: 12px;
+      font-weight: 1000;
       white-space: nowrap;
+    }
+
+    .level-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 17px 0 13px;
+    }
+
+    .level-tabs button {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 8px 6px;
+      color: var(--muted);
+      background: rgba(255,255,255,.045);
+      cursor: pointer;
+      font-weight: 1000;
+      transition: .2s ease;
+    }
+
+    .level-tabs button.active, .level-tabs button:hover {
+      color: #081018;
+      background: var(--cyan);
+      border-color: transparent;
     }
 
     .meta {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 17px 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin: 12px 0;
     }
 
     .meta-item {
-      padding: 11px;
+      border: 1px solid rgba(255,255,255,.075);
       border-radius: 15px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,.055);
+      padding: 10px;
     }
 
     .meta-item small {
       display: block;
       color: var(--muted);
       font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
+      font-weight: 1000;
+      letter-spacing: .08em;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
 
-    .meta-item b {
-      font-size: 14px;
-    }
+    .meta-item b { font-size: 14px; }
+    .danger { color: var(--red); }
+    .good { color: var(--green); }
+    .gold { color: var(--gold); }
 
-    .bars {
-      display: grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .bar-row {
-      display: grid;
-      gap: 6px;
-    }
+    .bars { display: grid; gap: 10px; margin-top: 12px; }
 
     .bar-label {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
+      gap: 10px;
       color: var(--muted);
-      font-weight: 900;
+      font-size: 12px;
+      font-weight: 1000;
+      margin-bottom: 6px;
     }
 
     .track {
       height: 9px;
       border-radius: 99px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.08);
       overflow: hidden;
     }
 
     .fill {
       height: 100%;
-      width: 0%;
       border-radius: inherit;
       background: linear-gradient(90deg, var(--cyan), var(--gold));
-      box-shadow: 0 0 18px rgba(94, 231, 255, 0.28);
-      transition: width 0.55s ease;
+      box-shadow: 0 0 18px rgba(97,233,255,.3);
     }
 
-    .slots {
+    .slots, .materials {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
-    .slot {
-      font-size: 12px;
-      color: #cbd6e8;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
+    .slot, .mat {
+      border: 1px solid rgba(255,255,255,.1);
       border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      color: #d4deef;
       padding: 6px 9px;
+      font-size: 12px;
       font-weight: 800;
     }
 
-    .unknown {
-      color: var(--red);
-      font-weight: 1000;
+    .mat { color: #ffe4aa; background: rgba(249,201,107,.08); }
+
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      border-left: 3px solid rgba(97,233,255,.7);
+      padding-left: 10px;
     }
 
     .empty {
       grid-column: 1 / -1;
-      padding: 40px;
+      padding: 42px;
+      border: 1px dashed rgba(255,255,255,.22);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(255,255,255,.045);
       text-align: center;
-      border: 1px dashed rgba(255,255,255,0.2);
-      border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(255,255,255,0.04);
     }
 
-    .footer-note {
-      margin-top: 28px;
-      padding: 18px;
-      border-radius: var(--radius);
+    .price-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-weight: 1000;
+    }
+
+    .arc-coin {
+      position: relative;
+      display: inline-block;
+      width: 15px;
+      height: 18px;
+      border: 4px solid currentColor;
+      border-radius: 50%;
+      vertical-align: -3px;
+      filter: drop-shadow(0 0 8px rgba(249,201,107,.25));
+    }
+
+    .arc-coin::before,
+    .arc-coin::after {
+      content: "";
+      position: absolute;
+      top: -7px;
+      bottom: -7px;
+      width: 4px;
+      border-radius: 99px;
+      background: currentColor;
+    }
+
+    .arc-coin::before { left: 50%; transform: translateX(-50%); }
+    .arc-coin::after { right: -7px; }
+
+    .appendix {
+      margin-top: 30px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.045);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.045);
+      padding: 20px;
       color: var(--muted);
-      line-height: 1.8;
-      font-size: 14px;
+      line-height: 1.85;
     }
 
-    @media (max-width: 980px) {
-      .panel { grid-template-columns: 1fr; }
+    .appendix strong { color: var(--text); }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .dashboard { grid-template-columns: 1fr; }
       .grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-top { flex-direction: column; }
+      .controls { grid-template-columns: 1fr 1fr; }
     }
 
-    @media (max-width: 680px) {
-      .shell { width: min(100% - 24px, 1240px); padding-top: 20px; }
-      .hero { padding: 24px; border-radius: 26px; }
-      .search-wrap { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
+      .shell { width: min(100% - 24px, 1320px); padding-top: 20px; }
+      .hero { border-radius: 28px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .dock { position: static; border-radius: 24px; }
+      .controls { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
-      .meta { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
     }
   </style>
 </head>
 <body>
   <main class="shell">
     <section class="hero">
-      <div class="hero-top">
+      <div class="hero-grid">
         <div>
           <div class="badge"><span class="pulse"></span> ARC RAIDERS WEAPON DATABASE</div>
-          <h1>醋飯槍枝<br /><span>資訊站</span></h1>
+          <h1>醋飯槍枝<br><span>資訊站</span></h1>
           <p class="subtitle">
-            整合突擊步槍、戰鬥步槍、衝鋒槍、霰彈槍、手槍、手炮、輕機槍、狙擊步槍與特殊武器資料。可搜尋、分類篩選、依傷害／射速／射程排序，快速找到最適合你的作戰配置。
+            這是一份以玩家查詢為核心設計的武器資料庫：整合分類、彈藥、裝甲穿透、價格、等級成長、模組插槽與升級材料。你可以快速搜尋武器、切換等級、排序排行榜，找到最適合醋飯小隊的作戰配置。
           </p>
         </div>
-        <div class="hero-actions" id="heroStats"></div>
+        <div class="hero-stats" id="heroStats"></div>
       </div>
     </section>
 
-    <section class="panel">
-      <div class="toolbar">
-        <div class="search-wrap">
-          <input id="searchInput" type="search" placeholder="搜尋武器名稱、英文、彈藥、射擊模式、模組插槽…" />
-          <select id="sortSelect">
-            <option value="default">預設排序</option>
-            <option value="damage">傷害最高</option>
-            <option value="fireRate">射速最高</option>
-            <option value="range">射程最遠</option>
-            <option value="slots">模組最多</option>
-          </select>
-        </div>
-        <div class="chips" id="chips"></div>
+    <section class="dock">
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="搜尋武器、英文、彈藥、材料、穿透、特色…">
+        <select id="sortSelect">
+          <option value="default">預設排序</option>
+          <option value="damage">傷害最高</option>
+          <option value="fireRate">射速最高</option>
+          <option value="range">射程最遠</option>
+          <option value="stability">穩定最高</option>
+          <option value="agility">敏捷最高</option>
+          <option value="stealth">潛行最高</option>
+          <option value="price">價格最高</option>
+        </select>
+        <select id="levelSelect">
+          <option value="max">顯示最高等級</option>
+          <option value="0">等級 I</option>
+          <option value="1">等級 II</option>
+          <option value="2">等級 III</option>
+          <option value="3">等級 IV</option>
+        </select>
+        <select id="ammoSelect">
+          <option value="全部">全部彈藥</option>
+        </select>
       </div>
+      <div class="chips" id="chips"></div>
+    </section>
 
-      <aside class="ranking">
-        <h3>🔥 火力排行榜｜依傷害</h3>
-        <div id="rankingList"></div>
-      </aside>
+    <section class="dashboard">
+      <div class="board"><h3>🔥 傷害排行榜</h3><div id="damageRank"></div></div>
+      <div class="board"><h3>⚡ 射速排行榜</h3><div id="speedRank"></div></div>
+      <div class="board"><h3>🎯 射程排行榜</h3><div id="rangeRank"></div></div>
     </section>
 
     <div class="section-head">
@@ -546,188 +631,293 @@
 
     <section class="grid" id="weaponGrid"></section>
 
-    <div class="footer-note">
-      <strong>資料註記：</strong>錛斧 Dolabra 的傷害、射速、射程目前以「?」呈現；遠日點 Aphelion 標註為無法升級，數值依你提供資料保留。此頁面可直接作為單檔 HTML 使用，也能後續接 API 或改成粉絲專頁工具站。
-    </div>
+    <section class="appendix">
+      <strong>資料註記：</strong>部分武器為實驗性或傳奇級，可能無法升級；部分未提供完整數值的項目會以「—」呈現。此頁面為單檔 HTML，可直接儲存為 <strong>index.html</strong> 使用，也能再改成粉絲專頁、Discord 社群或攻略網站入口頁。
+    </section>
   </main>
 
   <script>
     const weapons = [
-      { type: "突擊步槍", name: "水壺", en: "Kettle", ammo: "輕型彈藥", mode: "半自動", damage: 8.5, fireRate: 30, range: 42.8, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
-      { type: "突擊步槍", name: "響尾蛇", en: "Rattler", ammo: "中型彈藥", mode: "全自動", damage: 9, fireRate: 33.3, range: 56.2, slots: ["槍口", "下掛", "槍托"] },
-      { type: "突擊步槍", name: "琶音", en: "Arpeggio", ammo: "中型彈藥", mode: "三連發", damage: 9.5, fireRate: 18.3, range: 55.9, slots: ["槍口", "下掛", "中型彈匣", "槍托"] },
-      { type: "突擊步槍", name: "風暴", en: "Tempest", ammo: "中型彈藥", mode: "全自動", damage: 10, fireRate: 36.7, range: 55.9, slots: ["槍口", "下掛", "中型彈匣"] },
-      { type: "突擊步槍", name: "貝蒂娜", en: "Bettina", ammo: "重型彈藥", mode: "全自動", damage: 16, fireRate: 28.7, range: 52.3, slots: ["槍口", "下掛", "槍托"] },
+      { type:"突擊步槍", name:"水壺", en:"Kettle", slots:["槍口","下掛","輕型彈匣","槍托"], levels:[
+        {lv:"I", price:840, head:"2.0x", damage:8.5, fireRate:28, range:42.8, stability:69.8, agility:58.5, stealth:26, mag:20, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"快速精準但彈速低。"},
+        {lv:"II", price:2000, head:"2.0x", damage:8.5, fireRate:28, range:42.8, stability:69.8, agility:58.5, stealth:26, mag:20, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"子彈初速 +25%，換彈時間 -13%，耐用性 +10。", materials:["金屬零件","橡膠零件"]},
+        {lv:"III", price:3000, head:"2.0x", damage:8.5, fireRate:28, range:42.8, stability:69.8, agility:58.5, stealth:26, mag:20, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"子彈初速 +50%，換彈時間 -26%，耐用性 +20。", materials:["金屬零件","簡易槍械零件"]},
+        {lv:"IV", price:5000, head:"2.0x", damage:8.5, fireRate:28, range:42.8, stability:69.8, agility:58.5, stealth:26, mag:20, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"子彈初速 +75%，換彈時間 -40%，耐用性 +30。", materials:["機械零件","簡易槍械零件"]}
+      ]},
+      { type:"突擊步槍", name:"響尾蛇", en:"Rattler", slots:["槍口","下掛","槍托"], levels:[
+        {lv:"I", price:1750, damage:9, fireRate:33.3, range:56.2, stability:72.2, agility:54.8, stealth:14, mag:12, mode:"全自動", ammo:"中型", penetration:"中等", note:"廉價全自動槍械。"},
+        {lv:"II", price:3000, damage:9, fireRate:33.3, range:56.2, stability:72.2, agility:54.8, stealth:14, mag:16, mode:"全自動", ammo:"中型", penetration:"中等", note:"彈匣 +4，耐用性 +5。", materials:["金屬零件"]},
+        {lv:"III", price:5000, damage:9, fireRate:33.3, range:56.2, stability:72.2, agility:54.8, stealth:14, mag:20, mode:"全自動", ammo:"中型", penetration:"中等", note:"彈匣 +8，耐用性 +10。", materials:["機械零件","簡易槍械零件","金屬零件"]},
+        {lv:"IV", price:7000, damage:9, fireRate:33.3, range:56.2, stability:72.2, agility:54.8, stealth:14, mag:24, mode:"全自動", ammo:"中型", penetration:"中等", note:"彈匣 +12，耐用性 +15。", materials:["機械零件","簡易槍械零件","金屬零件"]}
+      ]},
+      { type:"突擊步槍", name:"三連奏", alias:"琶音", en:"Arpeggio", slots:["槍口","下掛","中型彈匣","槍托"], levels:[
+        {lv:"I", price:5500, damage:9.5, fireRate:18.3, range:55.9, stability:84, agility:57.3, stealth:14, mag:24, mode:"三連發", ammo:"中型", penetration:"中等"},
+        {lv:"II", price:8000, damage:9.5, fireRate:21.96, range:55.9, stability:84, agility:57.3, stealth:14, mag:24, mode:"三連發", ammo:"中型", penetration:"中等", note:"射速 +20%，換彈時間 -12.5%，耐用性 +10。", materials:["機械零件","簡易槍械零件"]},
+        {lv:"III", price:11500, damage:9.5, fireRate:25.62, range:55.9, stability:84, agility:57.3, stealth:14, mag:24, mode:"三連發", ammo:"中型", penetration:"中等", note:"射速 +40%，換彈時間 -25%，耐用性 +20。", materials:["機械零件","簡易槍械零件"]},
+        {lv:"IV", price:15000, damage:9.5, fireRate:29.28, range:55.9, stability:84, agility:57.3, stealth:14, mag:24, mode:"三連發", ammo:"中型", penetration:"中等", note:"射速 +60%，換彈時間 -50%，耐用性 +30。", materials:["機械零件","簡易槍械零件"]}
+      ]},
+      { type:"突擊步槍", name:"風暴", en:"Tempest", slots:["槍口","下掛","中型彈匣"], levels:[
+        {lv:"I", price:13000, damage:10, fireRate:36.7, range:55.9, stability:78.9, agility:46, stealth:14, mag:25, mode:"全自動", ammo:"中型", penetration:"中等", note:"需藍圖解鎖製作。"},
+        {lv:"II", price:17000, damage:10, fireRate:36.7, range:55.9, stability:78.9, agility:46, stealth:14, mag:25, mode:"全自動", ammo:"中型", penetration:"中等", note:"水平後坐減免 16.6%，換彈時間 -13%，耐用性 +10。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"III", price:22000, damage:10, fireRate:36.7, range:55.9, stability:78.9, agility:46, stealth:14, mag:25, mode:"全自動", ammo:"中型", penetration:"中等", note:"水平後坐減免 33.3%，換彈時間 -26%，耐用性 +20。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"IV", price:27000, damage:10, fireRate:36.7, range:55.9, stability:78.9, agility:46, stealth:14, mag:25, mode:"全自動", ammo:"中型", penetration:"中等", note:"水平後坐減免 50%，換彈時間 -40%，耐用性 +30。", materials:["高級機械零件","中型槍械零件"]}
+      ]},
+      { type:"突擊步槍", name:"貝蒂娜", en:"Bettina", slots:["槍口","下掛","槍托"], levels:[
+        {lv:"I", price:8000, damage:14, fireRate:32, range:51.3, stability:76.4, agility:48.2, stealth:14, mag:22, mode:"全自動", ammo:"重型", penetration:"強", note:"1.7.0 更新彈匣 22。"},
+        {lv:"II", price:11000, damage:14, fireRate:33.6, range:51.3, stability:76.4, agility:48.2, stealth:14, mag:22, mode:"全自動", ammo:"重型", penetration:"強", note:"射速 +5%，換彈時間 -11.1%，耐用性 +10。", materials:["高級機械零件","重型槍械零件"]},
+        {lv:"III", price:14000, damage:14, fireRate:35.2, range:51.3, stability:76.4, agility:48.2, stealth:14, mag:22, mode:"全自動", ammo:"重型", penetration:"強", note:"射速 +10%，換彈時間 -22.2%，耐用性 +20。", materials:["高級機械零件","重型槍械零件"]},
+        {lv:"IV", price:18000, damage:14, fireRate:36.8, range:51.3, stability:76.4, agility:48.2, stealth:14, mag:22, mode:"全自動", ammo:"重型", penetration:"強", note:"射速 +15%，換彈時間 -33.3%，耐用性 +30。", materials:["高級機械零件","重型槍械零件"]}
+      ]},
 
-      { type: "戰鬥步槍", name: "費羅/鐵", en: "Ferro", ammo: "重型彈藥", mode: "折管式", damage: 40, fireRate: 6.6, range: 53.1, slots: ["槍口", "下掛", "槍托"] },
-      { type: "戰鬥步槍", name: "叛逆者", en: "Renegade", ammo: "中型彈藥", mode: "槓桿式", damage: 35, fireRate: 21, range: 68.8, slots: ["槍口", "中型彈匣", "槍托"] },
-      { type: "戰鬥步槍", name: "遠日點", en: "Aphelion", ammo: "能量彈匣", mode: "雙連發", damage: 25, fireRate: 9, range: 76, slots: ["下掛", "槍托"], note: "無法升級／估算值" },
+      { type:"戰鬥步槍", name:"生鐵", alias:"費羅/鐵", en:"Ferro", slots:["槍口","下掛","槍托"], levels:[
+        {lv:"I", price:475, head:"2.5x", damage:40, fireRate:6.6, range:53.1, stability:78.1, agility:32.1, stealth:8, mag:1, mode:"撅把式", ammo:"重型", penetration:"強"},
+        {lv:"II", price:1000, head:"2.5x", damage:40, fireRate:6.6, range:53.1, stability:78.1, agility:32.1, stealth:8, mag:1, mode:"撅把式", ammo:"重型", penetration:"強", note:"換彈時間 -13%，耐用性 +10。", materials:["金屬零件","橡膠零件"]},
+        {lv:"III", price:2000, head:"2.5x", damage:40, fireRate:6.6, range:53.1, stability:78.1, agility:32.1, stealth:8, mag:1, mode:"撅把式", ammo:"重型", penetration:"強", note:"換彈時間 -26%，耐用性 +20。", materials:["金屬零件","簡易槍械零件"]},
+        {lv:"IV", price:2900, head:"2.5x", damage:40, fireRate:6.6, range:53.1, stability:78.1, agility:32.1, stealth:8, mag:1, mode:"撅把式", ammo:"重型", penetration:"強", note:"換彈時間 -39%，耐用性 +30。", materials:["機械零件","簡易槍械零件"]}
+      ]},
+      { type:"戰鬥步槍", name:"叛徒", alias:"叛逆者", en:"Renegade", slots:["槍口","中型彈匣","槍托"], levels:[
+        {lv:"I", price:7000, head:"2.25x", damage:35, fireRate:21, range:68.8, stability:85.7, agility:55.8, stealth:16, mag:8, mode:"槓桿式", ammo:"中型", penetration:"中等"},
+        {lv:"II", price:10000, head:"2.25x", damage:35, fireRate:26.25, range:68.8, stability:85.7, agility:55.8, stealth:16, mag:8, mode:"槓桿式", ammo:"中型", penetration:"中等", note:"提升射速與散布恢復，增加耐用性。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"III", price:13000, head:"2.25x", damage:35, fireRate:31.5, range:68.8, stability:85.7, agility:55.8, stealth:16, mag:8, mode:"槓桿式", ammo:"中型", penetration:"中等", note:"射速持續提升，散布恢復更快。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"IV", price:17000, head:"2.25x", damage:35, fireRate:36.75, range:68.8, stability:85.7, agility:55.8, stealth:16, mag:8, mode:"槓桿式", ammo:"中型", penetration:"中等", note:"最高射速 +75%，散布恢復時間最高 -50%。", materials:["高級機械零件","中型槍械零件"]}
+      ]},
+      { type:"戰鬥步槍", name:"遠日點", en:"Aphelion", slots:["下掛","槍托"], legendary:true, levels:[
+        {lv:"I", price:null, head:"2.0x", damage:25, fireRate:9, range:76, stability:88, agility:39, stealth:16, mag:10, mode:"兩連發", ammo:"能量彈匣", penetration:"強", note:"Experimental 實驗性傳奇武器，目前無法升級。", materials:["磁力加速器","複雜槍械零件"]}
+      ]},
 
-      { type: "衝鋒槍", name: "縫合者", en: "Stitcher", ammo: "輕型彈藥", mode: "全自動", damage: 6.5, fireRate: 45.3, range: 42.1, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
-      { type: "衝鋒槍", name: "詩篇", en: "Canto", ammo: "中型彈藥", mode: "全自動", damage: 6.5, fireRate: 56.7, range: 51, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
-      { type: "衝鋒槍", name: "短尾貓", en: "Bobcat", ammo: "輕型彈藥", mode: "全自動", damage: 6, fireRate: 66.7, range: 44, slots: ["槍口", "下掛", "輕型彈匣", "槍托"] },
+      { type:"衝鋒槍", name:"釘機", alias:"縫合者", en:"Stitcher", slots:["槍口","下掛","輕型彈匣","槍托"], levels:[
+        {lv:"I", price:800, damage:6.5, fireRate:45.3, range:42.1, stability:45.3, agility:73.8, stealth:19, mag:20, mode:"全自動", ammo:"輕型", penetration:"極弱"},
+        {lv:"II", price:2000, damage:6.5, fireRate:45.3, range:42.1, stability:45.3, agility:73.8, stealth:19, mag:20, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"水平後坐減免 16.6%，換彈時間 -13%。", materials:["金屬零件","橡膠零件"]},
+        {lv:"III", price:3000, damage:6.5, fireRate:45.3, range:42.1, stability:45.3, agility:73.8, stealth:19, mag:20, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"水平後坐減免 33.3%，換彈時間 -26%。", materials:["金屬零件","簡易槍械零件"]},
+        {lv:"IV", price:5000, damage:6.5, fireRate:45.3, range:42.1, stability:45.3, agility:73.8, stealth:19, mag:20, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"水平後坐減免 50%，換彈時間 -40%。", materials:["機械零件","簡易槍械零件"]}
+      ]},
+      { type:"衝鋒槍", name:"山貓", alias:"短尾貓", en:"Bobcat", slots:["槍口","下掛","輕型彈匣","槍托"], levels:[
+        {lv:"I", price:13000, damage:6, fireRate:66.7, range:44, stability:45.9, agility:73.1, stealth:21, mag:null, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"需藍圖解鎖製作。"},
+        {lv:"II", price:17000, damage:6, fireRate:66.7, range:44, stability:45.9, agility:73.1, stealth:21, mag:null, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"散布減免 15%。", materials:["高級機械零件","輕型槍械零件"]},
+        {lv:"III", price:22000, damage:6, fireRate:66.7, range:44, stability:45.9, agility:73.1, stealth:21, mag:null, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"散布減免 30%。", materials:["高級機械零件","輕型槍械零件"]},
+        {lv:"IV", price:27000, damage:6, fireRate:66.7, range:44, stability:45.9, agility:73.1, stealth:21, mag:null, mode:"全自動", ammo:"輕型", penetration:"極弱", note:"散布減免 50%，水平後坐力最高減免 45%，換彈時間 -40%。", materials:["高級機械零件","輕型槍械零件"]}
+      ]},
+      { type:"衝鋒槍", name:"詩篇", en:"Canto", slots:["槍口","下掛","輕型彈匣","槍托"], levels:[
+        {lv:"I", price:null, damage:6.5, fireRate:56.7, range:51, stability:null, agility:null, stealth:null, mag:null, mode:"全自動", ammo:"中型", penetration:"中等", note:"簡表資料收錄。"}
+      ]},
 
-      { type: "霰彈槍", name: "公牛", en: "Il Toro", ammo: "霰彈", mode: "泵動式", damage: 67.5, fireRate: 14, range: 20, slots: ["霰彈槍口", "下掛", "霰彈彈匣", "槍托"] },
-      { type: "霰彈槍", name: "火山", en: "Vulcano", ammo: "霰彈", mode: "半自動", damage: 49.5, fireRate: 26.3, range: 26, slots: ["霰彈槍口", "下掛", "霰彈彈匣", "槍托"] },
-      { type: "霰彈槍", name: "錛斧", en: "Dolabra", ammo: "能量彈匣", mode: "半自動", damage: null, fireRate: null, range: null, slots: ["無"] },
+      { type:"霰彈槍", name:"公牛", en:"Il Toro", slots:["霰彈槍口","下掛","霰彈彈匣","槍托"], levels:[
+        {lv:"I", price:5000, damage:67.5, fireRate:14.3, range:20, stability:80.6, agility:null, stealth:null, mag:5, mode:"泵動式", ammo:"霰彈", penetration:"弱"},
+        {lv:"II", price:7000, damage:67.5, fireRate:16.8, range:20, stability:80.6, agility:null, stealth:null, mag:6, mode:"泵動式", ammo:"霰彈", penetration:"弱", materials:["簡易槍械零件"]},
+        {lv:"III", price:10000, damage:67.5, fireRate:19.31, range:20, stability:80.6, agility:null, stealth:null, mag:7, mode:"泵動式", ammo:"霰彈", penetration:"弱", materials:["簡易槍械零件","機械零件"]},
+        {lv:"IV", price:13000, damage:67.5, fireRate:21.45, range:20, stability:80.6, agility:null, stealth:null, mag:8, mode:"泵動式", ammo:"霰彈", penetration:"弱", materials:["簡易槍械零件","機械零件"]}
+      ]},
+      { type:"霰彈槍", name:"火山", en:"Vulcano", slots:["霰彈槍口","下掛","霰彈彈匣","槍托"], levels:[
+        {lv:"I", price:10000, damage:49.5, fireRate:26.3, range:26, stability:null, agility:null, stealth:null, mag:6, mode:"半自動", ammo:"霰彈", penetration:"弱", note:"需藍圖解鎖製作。"},
+        {lv:"II", price:13000, damage:49.5, fireRate:28.93, range:26, stability:null, agility:null, stealth:null, mag:6, mode:"半自動", ammo:"霰彈", penetration:"弱", note:"換彈減免 13%。", materials:["高級機械零件","重型槍械零件"]},
+        {lv:"III", price:17000, damage:49.5, fireRate:31.56, range:26, stability:null, agility:null, stealth:null, mag:6, mode:"半自動", ammo:"霰彈", penetration:"弱", note:"換彈減免 26%。", materials:["高級機械零件","重型槍械零件"]},
+        {lv:"IV", price:22000, damage:49.5, fireRate:34.19, range:26, stability:null, agility:null, stealth:null, mag:6, mode:"半自動", ammo:"霰彈", penetration:"弱", note:"換彈減免 40%。", materials:["高級機械零件","重型槍械零件"]}
+      ]},
+      { type:"霰彈槍", name:"錛斧", en:"Dolabra", slots:["無"], levels:[
+        {lv:"I", price:null, damage:null, fireRate:null, range:null, stability:null, agility:null, stealth:null, mag:null, mode:"半自動", ammo:"能量彈匣", penetration:null, note:"目前資料未完整收錄。"}
+      ]},
 
-      { type: "手槍", name: "髮夾", en: "Hairpin", ammo: "輕型彈藥", mode: "滑套式", damage: 20, fireRate: 9, range: 38.6, slots: ["輕型彈匣"] },
-      { type: "手槍", name: "諧歌劇", en: "Burletta", ammo: "輕型彈藥", mode: "半自動", damage: 10, fireRate: 28, range: 41.7, slots: ["槍口", "輕型彈匣"] },
-      { type: "手槍", name: "獵人", en: "Venator", ammo: "中型彈藥", mode: "半自動", damage: 16, fireRate: 36.7, range: 48.4, slots: ["下掛", "中型彈匣"] },
+      { type:"手槍", name:"發夾", alias:"髮夾", en:"Hairpin", slots:["輕型彈匣"], levels:[
+        {lv:"I", price:450, damage:20, fireRate:9, range:38.6, stability:90.9, agility:78.3, stealth:70, mag:null, mode:"滑套式", ammo:"輕型", penetration:"極弱", note:"內置消音器。"},
+        {lv:"II", price:1000, damage:20, fireRate:9.9, range:38.6, stability:90.9, agility:78.3, stealth:70, mag:null, mode:"滑套式", ammo:"輕型", penetration:"極弱", note:"換彈減免 13%。", materials:["金屬零件","橡膠零件"]},
+        {lv:"III", price:2000, damage:20, fireRate:10.8, range:38.6, stability:90.9, agility:78.3, stealth:70, mag:null, mode:"滑套式", ammo:"輕型", penetration:"極弱", note:"換彈減免 26%。", materials:["簡易槍械零件","機械零件"]},
+        {lv:"IV", price:2900, damage:20, fireRate:11.7, range:38.6, stability:90.9, agility:78.3, stealth:70, mag:null, mode:"滑套式", ammo:"輕型", penetration:"極弱", note:"換彈減免 40%。", materials:["簡易槍械零件","機械零件"]}
+      ]},
+      { type:"手槍", name:"喜歌劇", alias:"諧歌劇", en:"Burletta", slots:["槍口","輕型彈匣"], levels:[
+        {lv:"I", price:2900, damage:10, fireRate:28, range:41.7, stability:74.5, agility:84.4, stealth:null, mag:12, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"需任務藍圖製作。"},
+        {lv:"II", price:5000, damage:10, fireRate:28, range:41.7, stability:74.5, agility:84.4, stealth:null, mag:12, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"換彈減免 16.6%。", materials:["簡易槍械零件","機械零件"]},
+        {lv:"III", price:7000, damage:10, fireRate:28, range:41.7, stability:74.5, agility:84.4, stealth:null, mag:12, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"換彈減免 33.3%。", materials:["簡易槍械零件","機械零件"]},
+        {lv:"IV", price:10000, damage:10, fireRate:28, range:41.7, stability:74.5, agility:84.4, stealth:null, mag:12, mode:"半自動", ammo:"輕型", penetration:"極弱", note:"換彈減免 50%。", materials:["簡易槍械零件","機械零件"]}
+      ]},
+      { type:"手槍", name:"維納托爾", alias:"獵人", en:"Venator", slots:["下掛","中型彈匣"], levels:[
+        {lv:"I", price:7000, head:"2.5x", damage:16, fireRate:36.7, range:48.4, stability:null, agility:null, stealth:null, mag:null, mode:"半自動", ammo:"中型", penetration:"中等", note:"雙發射擊機制。"},
+        {lv:"II", price:10000, head:"2.5x", damage:16, fireRate:41.471, range:48.4, stability:null, agility:null, stealth:null, mag:null, mode:"半自動", ammo:"中型", penetration:"中等", note:"換彈減免 16%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"III", price:13000, head:"2.5x", damage:16, fireRate:46.242, range:48.4, stability:null, agility:null, stealth:null, mag:null, mode:"半自動", ammo:"中型", penetration:"中等", note:"換彈減免 33%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"IV", price:17000, head:"2.5x", damage:16, fireRate:51.38, range:48.4, stability:null, agility:null, stealth:null, mag:null, mode:"半自動", ammo:"中型", penetration:"中等", note:"換彈減免 50%。", materials:["高級機械零件","中型槍械零件"]}
+      ]},
 
-      { type: "手炮", name: "鐵砧", en: "Anvil", ammo: "重型彈藥", mode: "單動式", damage: 40, fireRate: 16.3, range: 50.2, slots: ["槍口", "科技模組"] },
+      { type:"手炮", name:"鐵砧", en:"Anvil", slots:["槍口","科技模組"], levels:[
+        {lv:"I", price:5000, head:"2.5x", damage:40, fireRate:16.3, range:50.2, stability:null, agility:null, stealth:null, mag:null, mode:"單動式", ammo:"重型", penetration:"強", note:"需藍圖解鎖製作。"},
+        {lv:"II", price:7000, head:"2.5x", damage:40, fireRate:20.375, range:50.2, stability:null, agility:null, stealth:null, mag:null, mode:"單動式", ammo:"重型", penetration:"強", note:"散布恢復 +6.5%。", materials:["簡易槍械零件","機械零件"]},
+        {lv:"III", price:10000, head:"2.5x", damage:40, fireRate:24.45, range:50.2, stability:null, agility:null, stealth:null, mag:null, mode:"單動式", ammo:"重型", penetration:"強", note:"散布恢復 +12.5%。", materials:["簡易槍械零件","機械零件"]},
+        {lv:"IV", price:13000, head:"2.5x", damage:40, fireRate:28.525, range:50.2, stability:null, agility:null, stealth:null, mag:null, mode:"單動式", ammo:"重型", penetration:"強", note:"散布恢復 +18.75%。", materials:["簡易槍械零件","機械零件"]}
+      ]},
 
-      { type: "輕機槍", name: "洪流", en: "Torrente", ammo: "中型彈藥", mode: "全自動", damage: 8, fireRate: 58.3, range: 49.9, slots: ["槍口", "中型彈匣", "槍托"] },
+      { type:"輕機槍", name:"奔流", alias:"洪流", en:"Torrente", slots:["槍口","中型彈匣","槍托"], levels:[
+        {lv:"I", price:7000, damage:8, fireRate:58.3, range:49.9, stability:null, agility:37.7, stealth:1, mag:60, mode:"全自動", ammo:"中型", penetration:"中等", note:"蹲伏時精準。"},
+        {lv:"II", price:10000, damage:8, fireRate:58.3, range:49.9, stability:null, agility:37.7, stealth:1, mag:70, mode:"全自動", ammo:"中型", penetration:"中等", note:"換彈減免 15%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"III", price:13000, damage:8, fireRate:58.3, range:49.9, stability:null, agility:37.7, stealth:1, mag:80, mode:"全自動", ammo:"中型", penetration:"中等", note:"換彈減免 30%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"IV", price:17000, damage:8, fireRate:58.3, range:49.9, stability:null, agility:37.7, stealth:1, mag:90, mode:"全自動", ammo:"中型", penetration:"中等", note:"換彈減免 45%。", materials:["高級機械零件","中型槍械零件"]}
+      ]},
 
-      { type: "狙擊步槍", name: "魚鷹", en: "Osprey", ammo: "中型彈藥", mode: "栓動式", damage: 45, fireRate: 17.7, range: 80.3, slots: ["槍口", "下掛", "中型彈匣", "槍托"] },
-      { type: "狙擊步槍", name: "木星", en: "Jupiter", ammo: "能量彈匣", mode: "栓動式", damage: 60, fireRate: 7.7, range: 71.7, slots: ["無"] },
+      { type:"狙擊步槍", name:"魚鷹", en:"Osprey", slots:["槍口","下掛","中型彈匣","槍托"], levels:[
+        {lv:"I", price:7000, damage:45, fireRate:17.7, range:80.3, stability:89.4, agility:null, stealth:null, mag:null, mode:"栓動式", ammo:"中型", penetration:"中等", note:"自帶瞄準鏡。"},
+        {lv:"II", price:10000, damage:45, fireRate:17.7, range:80.3, stability:89.4, agility:null, stealth:null, mag:null, mode:"栓動式", ammo:"中型", penetration:"中等", note:"栓動耗時 -20%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"III", price:13000, damage:45, fireRate:17.7, range:80.3, stability:89.4, agility:null, stealth:null, mag:null, mode:"栓動式", ammo:"中型", penetration:"中等", note:"栓動耗時 -40%。", materials:["高級機械零件","中型槍械零件"]},
+        {lv:"IV", price:17000, damage:45, fireRate:17.7, range:80.3, stability:89.4, agility:null, stealth:null, mag:null, mode:"栓動式", ammo:"中型", penetration:"中等", note:"栓動耗時 -60%。", materials:["高級機械零件","中型槍械零件"]}
+      ]},
+      { type:"狙擊步槍", name:"木星", en:"Jupiter", slots:["無"], legendary:true, levels:[
+        {lv:"I", price:27500, damage:60, fireRate:7.7, range:71.7, stability:null, agility:null, stealth:null, mag:5, mode:"栓動式", ammo:"能量彈匣", penetration:"極強", note:"實驗性高傷傳奇武器，不可升級。", materials:["磁力加速器","複雜槍械零件"]}
+      ]},
 
-      { type: "特殊武器", name: "破殼者", en: "Hullcracker", ammo: "發射器彈藥", mode: "泵動式", damage: 100, fireRate: 20.3, range: 38.9, slots: ["下掛", "槍托"] },
-      { type: "特殊武器", name: "均衡器", en: "Equalizer", ammo: "能量彈匣", mode: "全自動", damage: 8, fireRate: 33.3, range: 68.6, slots: ["無"] }
+      { type:"特殊武器", name:"破甲者", alias:"破殼者", en:"Hullcracker", slots:["下掛","槍托"], levels:[
+        {lv:"I", price:10000, damage:100, fireRate:20.3, range:38.9, stability:null, agility:null, stealth:null, mag:5, mode:"泵動式", ammo:"發射器彈藥", penetration:"極強", note:"需藍圖製作，升級主要提升射速。", materials:["高級機械零件","重型槍械零件"]}
+      ]},
+      { type:"特殊武器", name:"制裁者", alias:"均衡器", en:"Equalizer", slots:["無"], legendary:true, levels:[
+        {lv:"I", price:27500, damage:8, fireRate:33.3, range:68.6, stability:null, agility:null, stealth:null, mag:50, mode:"全自動", ammo:"能量彈匣", penetration:"極強", note:"實驗性光束傳奇武器，不可升級。", materials:["磁力加速器","複雜槍械零件"]}
+      ]}
     ];
 
-    const colors = {
-      "突擊步槍": "rgba(255, 138, 61, 0.28)",
-      "戰鬥步槍": "rgba(246, 199, 104, 0.28)",
-      "衝鋒槍": "rgba(94, 231, 255, 0.26)",
-      "霰彈槍": "rgba(255, 95, 109, 0.26)",
-      "手槍": "rgba(117, 240, 165, 0.24)",
-      "手炮": "rgba(181, 140, 255, 0.28)",
-      "輕機槍": "rgba(255, 204, 92, 0.24)",
-      "狙擊步槍": "rgba(100, 149, 255, 0.28)",
-      "特殊武器": "rgba(255, 255, 255, 0.23)"
+    const colorMap = {
+      "突擊步槍":"rgba(255,138,61,.28)", "戰鬥步槍":"rgba(249,201,107,.28)", "衝鋒槍":"rgba(97,233,255,.25)",
+      "霰彈槍":"rgba(255,100,115,.26)", "手槍":"rgba(122,243,170,.24)", "手炮":"rgba(184,140,255,.28)",
+      "輕機槍":"rgba(255,204,92,.25)", "狙擊步槍":"rgba(123,167,255,.28)", "特殊武器":"rgba(255,255,255,.23)"
     };
 
-    const max = {
-      damage: Math.max(...weapons.map(w => w.damage || 0)),
-      fireRate: Math.max(...weapons.map(w => w.fireRate || 0)),
-      range: Math.max(...weapons.map(w => w.range || 0))
-    };
+    const state = { type:"全部", cardLevels:{} };
+    const $ = s => document.querySelector(s);
+    const grid = $("#weaponGrid");
+    const searchInput = $("#searchInput");
+    const sortSelect = $("#sortSelect");
+    const levelSelect = $("#levelSelect");
+    const ammoSelect = $("#ammoSelect");
+    const chips = $("#chips");
+    const resultCount = $("#resultCount");
 
-    const grid = document.getElementById("weaponGrid");
-    const searchInput = document.getElementById("searchInput");
-    const sortSelect = document.getElementById("sortSelect");
-    const chips = document.getElementById("chips");
-    const resultCount = document.getElementById("resultCount");
-    const rankingList = document.getElementById("rankingList");
-    const heroStats = document.getElementById("heroStats");
+    const metrics = ["damage","fireRate","range","stability","agility","stealth"];
+    const max = Object.fromEntries(metrics.map(k => [k, Math.max(...weapons.flatMap(w => w.levels.map(l => Number(l[k]) || 0)))]));
 
-    let activeType = "全部";
-
-    function value(v) {
-      return v === null || v === undefined ? "?" : v;
+    function clean(v, prefix = "") {
+      if (v === null || v === undefined || v === "") return "—";
+      return prefix + v;
     }
 
-    function makeBar(label, raw, key) {
-      const percent = raw ? Math.max(4, (raw / max[key]) * 100) : 0;
-      return `
-        <div class="bar-row">
-          <div class="bar-label"><span>${label}</span><span class="${raw ? "" : "unknown"}">${value(raw)}</span></div>
-          <div class="track"><div class="fill" style="width:${percent}%"></div></div>
-        </div>
-      `;
+    function money(v) {
+      if (!v) return "—";
+      return `<span class="price-mark"><span class="arc-coin" aria-hidden="true"></span>${Number(v).toLocaleString("zh-Hant")}</span>`;
+    }
+
+    function selectedLevel(w) {
+      if (state.cardLevels[w.en] !== undefined) return Math.min(state.cardLevels[w.en], w.levels.length - 1);
+      if (levelSelect.value === "max") return w.levels.length - 1;
+      return Math.min(Number(levelSelect.value), w.levels.length - 1);
+    }
+
+    function searchable(w) {
+      return [w.type, w.name, w.alias, w.en, w.slots.join(" "), ...w.levels.flatMap(l => [l.ammo, l.penetration, l.mode, l.note, ...(l.materials || [])])].filter(Boolean).join(" ").toLowerCase();
+    }
+
+    function getList() {
+      const q = searchInput.value.trim().toLowerCase();
+      let list = weapons.filter(w => {
+        const lv = w.levels[selectedLevel(w)];
+        const typeOk = state.type === "全部" || w.type === state.type;
+        const ammoOk = ammoSelect.value === "全部" || lv.ammo === ammoSelect.value;
+        const searchOk = !q || searchable(w).includes(q);
+        return typeOk && ammoOk && searchOk;
+      });
+      const sort = sortSelect.value;
+      if (sort !== "default") {
+        list.sort((a,b) => (b.levels[selectedLevel(b)][sort] || -1) - (a.levels[selectedLevel(a)][sort] || -1));
+      }
+      return list;
+    }
+
+    function bar(label, value, key) {
+      const percent = value ? Math.max(5, (value / max[key]) * 100) : 0;
+      return `<div><div class="bar-label"><span>${label}</span><span>${clean(value)}</span></div><div class="track"><div class="fill" style="width:${percent}%"></div></div></div>`;
     }
 
     function card(w) {
-      const slotText = w.slots.map(s => `<span class="slot">${s}</span>`).join("");
-      const note = w.note ? `<span class="slot">${w.note}</span>` : "";
+      const idx = selectedLevel(w);
+      const l = w.levels[idx];
+      const tabs = ["I","II","III","IV"].map((lv, i) => {
+        const disabled = i >= w.levels.length;
+        return `<button ${disabled ? "disabled style='opacity:.28;cursor:not-allowed'" : ""} class="${i === idx ? "active" : ""}" data-weapon="${w.en}" data-level="${i}">Lv.${lv}</button>`;
+      }).join("");
+      const mats = (l.materials || []).map(m => `<span class="mat">${m}</span>`).join("");
+      const slots = w.slots.map(s => `<span class="slot">${s}</span>`).join("");
+      const aka = w.alias ? `｜又稱：${w.alias}` : "";
       return `
-        <article class="card" style="--accent:${colors[w.type] || "rgba(246,199,104,0.2)"}">
+        <article class="card" style="--accent:${colorMap[w.type] || "rgba(249,201,107,.2)"}">
           <div class="card-inner">
             <div class="card-top">
-              <div>
-                <div class="weapon-name">${w.name}</div>
-                <div class="weapon-en">${w.en}</div>
-              </div>
+              <div><div class="weapon-name">${w.name}</div><div class="weapon-en">${w.en}${aka}</div></div>
               <div class="type-tag">${w.type}</div>
             </div>
-
+            <div class="level-tabs">${tabs}</div>
             <div class="meta">
-              <div class="meta-item"><small>Ammo</small><b>${w.ammo}</b></div>
-              <div class="meta-item"><small>Mode</small><b>${w.mode}</b></div>
+              <div class="meta-item"><small>價格</small><b class="gold">${money(l.price)}</b></div>
+              <div class="meta-item"><small>彈藥 / 穿透</small><b>${clean(l.ammo)} / <span class="${l.penetration === "極強" || l.penetration === "強" ? "good" : ""}">${clean(l.penetration)}</span></b></div>
+              <div class="meta-item"><small>射擊模式</small><b>${clean(l.mode)}</b></div>
+              <div class="meta-item"><small>彈匣 / 爆頭</small><b>${clean(l.mag)} / ${clean(l.head)}</b></div>
             </div>
-
             <div class="bars">
-              ${makeBar("傷害 Damage", w.damage, "damage")}
-              ${makeBar("射速 Fire Rate", w.fireRate, "fireRate")}
-              ${makeBar("射程 Range", w.range, "range")}
+              ${bar("傷害 Damage", l.damage, "damage")}
+              ${bar("射速 Fire Rate", l.fireRate, "fireRate")}
+              ${bar("射程 Range", l.range, "range")}
+              ${bar("穩定 Stability", l.stability, "stability")}
+              ${bar("敏捷 Agility", l.agility, "agility")}
+              ${bar("潛行 Stealth", l.stealth, "stealth")}
             </div>
-
-            <div class="slots">${slotText}${note}</div>
+            <div class="slots">${slots}</div>
+            ${mats ? `<div class="materials">${mats}</div>` : ""}
+            ${l.note || w.legendary ? `<div class="note">${w.legendary ? "傳奇／實驗性武器。" : ""}${l.note || ""}</div>` : ""}
           </div>
-        </article>
-      `;
+        </article>`;
     }
 
     function renderChips() {
       const types = ["全部", ...new Set(weapons.map(w => w.type))];
-      chips.innerHTML = types.map(t => `<button class="chip ${t === activeType ? "active" : ""}" data-type="${t}">${t}</button>`).join("");
-      chips.querySelectorAll(".chip").forEach(btn => {
+      chips.innerHTML = types.map(t => `<button class="chip ${t === state.type ? "active" : ""}" data-type="${t}">${t}</button>`).join("");
+      chips.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => { state.type = btn.dataset.type; render(); }));
+    }
+
+    function renderAmmo() {
+      const current = ammoSelect.value || "全部";
+      const ammos = ["全部", ...new Set(weapons.flatMap(w => w.levels.map(l => l.ammo)).filter(Boolean))];
+      ammoSelect.innerHTML = ammos.map(a => `<option value="${a}">${a === "全部" ? "全部彈藥" : a}</option>`).join("");
+      ammoSelect.value = ammos.includes(current) ? current : "全部";
+    }
+
+    function topList(key, target) {
+      const rows = weapons.map(w => ({w, l:w.levels[w.levels.length - 1]})).filter(x => typeof x.l[key] === "number").sort((a,b) => b.l[key] - a.l[key]).slice(0,5);
+      $(target).innerHTML = rows.map((x,i) => `<div class="rank-row"><div class="num">${i+1}</div><div><div class="rank-name">${x.w.name} <span style="color:var(--muted);font-weight:800">${x.w.en}</span></div><div class="rank-sub">${x.w.type}／${x.l.ammo}／Lv.${x.l.lv}</div></div><div class="rank-value">${x.l[key]}</div></div>`).join("");
+    }
+
+    function renderHero() {
+      const topDamage = weapons.map(w => ({w, l:w.levels[w.levels.length - 1]})).filter(x => x.l.damage).sort((a,b) => b.l.damage - a.l.damage)[0];
+      const legendary = weapons.filter(w => w.legendary).length;
+      $("#heroStats").innerHTML = `
+        <div class="stat"><strong>${weapons.length}</strong><small>收錄武器</small></div>
+        <div class="stat"><strong>${new Set(weapons.map(w=>w.type)).size}</strong><small>武器分類</small></div>
+        <div class="stat"><strong>${legendary}</strong><small>傳奇／實驗性</small></div>
+        <div class="stat"><strong>${topDamage.w.name}</strong><small>最高傷害 ${topDamage.l.damage}</small></div>`;
+    }
+
+    function render() {
+      renderChips();
+      renderAmmo();
+      const list = getList();
+      resultCount.textContent = `目前顯示 ${list.length} / ${weapons.length} 把武器`;
+      grid.innerHTML = list.length ? list.map(card).join("") : `<div class="empty">找不到符合條件的武器，請換個分類、彈藥或關鍵字。</div>`;
+      grid.querySelectorAll(".level-tabs button:not([disabled])").forEach(btn => {
         btn.addEventListener("click", () => {
-          activeType = btn.dataset.type;
+          state.cardLevels[btn.dataset.weapon] = Number(btn.dataset.level);
           render();
         });
       });
     }
 
-    function renderHeroStats() {
-      const weaponCount = weapons.length;
-      const typeCount = new Set(weapons.map(w => w.type)).size;
-      const highestDamage = weapons.reduce((a, b) => (a.damage || 0) > (b.damage || 0) ? a : b);
-      heroStats.innerHTML = `
-        <div class="stat-pill"><strong>${weaponCount}</strong><small>把武器</small></div>
-        <div class="stat-pill"><strong>${typeCount}</strong><small>大分類</small></div>
-        <div class="stat-pill"><strong>${highestDamage.name}</strong><small>最高傷害 ${highestDamage.damage}</small></div>
-      `;
-    }
-
-    function renderRanking() {
-      const top = [...weapons]
-        .filter(w => typeof w.damage === "number")
-        .sort((a, b) => b.damage - a.damage)
-        .slice(0, 5);
-
-      rankingList.innerHTML = top.map((w, i) => `
-        <div class="rank-row">
-          <div class="rank-num">${i + 1}</div>
-          <div>
-            <div class="rank-name">${w.name} <span style="color:var(--muted);font-weight:800;">${w.en}</span></div>
-            <div class="rank-sub">${w.type}／${w.ammo}</div>
-          </div>
-          <div class="rank-value">${w.damage}</div>
-        </div>
-      `).join("");
-    }
-
-    function getFiltered() {
-      const q = searchInput.value.trim().toLowerCase();
-      let list = weapons.filter(w => {
-        const text = [w.type, w.name, w.en, w.ammo, w.mode, ...w.slots, w.note || ""].join(" ").toLowerCase();
-        const matchType = activeType === "全部" || w.type === activeType;
-        const matchSearch = !q || text.includes(q);
-        return matchType && matchSearch;
-      });
-
-      const sort = sortSelect.value;
-      if (sort === "damage") list.sort((a, b) => (b.damage || -1) - (a.damage || -1));
-      if (sort === "fireRate") list.sort((a, b) => (b.fireRate || -1) - (a.fireRate || -1));
-      if (sort === "range") list.sort((a, b) => (b.range || -1) - (a.range || -1));
-      if (sort === "slots") list.sort((a, b) => b.slots.length - a.slots.length);
-      return list;
-    }
-
-    function render() {
-      renderChips();
-      const list = getFiltered();
-      resultCount.textContent = `目前顯示 ${list.length} / ${weapons.length} 把武器`;
-      grid.innerHTML = list.length ? list.map(card).join("") : `<div class="empty">找不到符合條件的武器，換個關鍵字或分類試試。</div>`;
-    }
-
-    searchInput.addEventListener("input", render);
+    [searchInput, sortSelect, levelSelect, ammoSelect].forEach(el => el.addEventListener("input", render));
     sortSelect.addEventListener("change", render);
+    levelSelect.addEventListener("change", () => { state.cardLevels = {}; render(); });
+    ammoSelect.addEventListener("change", render);
 
-    renderHeroStats();
-    renderRanking();
+    renderHero();
+    topList("damage", "#damageRank");
+    topList("fireRate", "#speedRank");
+    topList("range", "#rangeRank");
     render();
   </script>
 </body>
