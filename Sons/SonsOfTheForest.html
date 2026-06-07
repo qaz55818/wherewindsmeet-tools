@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>醋飯的森林之子2 指令大全</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        term: {
+                            bg: '#fdfaf6', // creamy rice
+                            surface: 'rgba(255, 255, 255, 0.65)', // light glass background
+                            border: 'rgba(255, 173, 210, 0.5)', // soft pink border
+                            green: '#86efac', // mint
+                            pink: '#ffadd2',
+                            purple: '#c084fc',
+                            text: '#475569', // slate-600
+                            textBright: '#1e293b' // slate-800
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Nunito', 'sans-serif'],
+                        'mono': ['"Space Mono"', 'monospace'],
+                        'tech': ['Nunito', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-pink': '0 0 10px rgba(255, 173, 210, 0.6), 0 0 20px rgba(255, 173, 210, 0.4)',
+                        'neon-purple': '0 0 10px rgba(192, 132, 252, 0.4), 0 0 20px rgba(192, 132, 252, 0.2)',
+                        'neon-mint': '0 0 10px rgba(187, 247, 208, 0.6), 0 0 20px rgba(187, 247, 208, 0.4)',
+                        'card-hover': '0 10px 25px -5px rgba(255, 173, 210, 0.3), 0 8px 10px -6px rgba(192, 132, 252, 0.2)'
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-pastel': 'linear-gradient(to right, #ffadd2, #c084fc, #bbf7d0)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fdfaf6;
+            color: #475569;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 173, 210, 0.15), transparent 30%),
+                radial-gradient(circle at 85% 30%, rgba(192, 132, 252, 0.1), transparent 30%),
+                radial-gradient(circle at 50% 90%, rgba(187, 247, 208, 0.15), transparent 40%);
+        }
+
+        /* Sparkles overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #ffadd2, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #86efac, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #c084fc, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #ffadd2, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #cbd5e1, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 173, 210, 0.6); border-radius: 10px; border: 2px solid #fdfaf6; }
+        ::-webkit-scrollbar-thumb:hover { background: #ffadd2; }
+
+        /* Typography & Glow */
+        .text-glow { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 173, 210, 0.6); }
+        
+        .flicker { animation: soft-flicker 3s infinite alternate; }
+        @keyframes soft-flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 173, 210, 0.6); }
+            50% { opacity: 0.9; text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 8px rgba(255, 173, 210, 0.3); }
+        }
+
+        /* Selection */
+        ::selection { background: #ffadd2; color: #1e293b; }
+
+        /* Hide sidebar scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Toast Animation */
+        @keyframes slideInUp {
+            from { transform: translateY(100%) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .toast-enter { animation: slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(255, 173, 210, 0.1);
+        }
+
+        .gradient-border {
+            position: relative;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+            border-radius: 1.5rem;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #ffadd2, #c084fc, #bbf7d0);
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .group:hover .gradient-border::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased h-screen flex flex-col md:flex-row overflow-hidden relative">
+<!-- Background Floating Sushi Elements -->
+<div class="fixed top-1/4 right-[10%] w-48 h-48 opacity-20 pointer-events-none z-0 transform rotate-12 drop-shadow-xl">
+<img alt="sushi floating" class="w-full h-full object-contain animate-pulse" src="https://lh3.googleusercontent.com/aida/AP1WRLs5nhtNRkhURm4dSV5Kto9sqPBB5EiXR3_c4ljvyrhF290lb_lcLXFLXLSTOM2jCA1xCcEPJ-cAs7O6BdC8MfVVquWvD5kYWmQUwXiaPCUZlCjCF8dmzPhj-l8okp7svx5gQc6yIpysZrSkyeDz6UP_yMCzmnVJdTNNrIECnRP6ub-K5FJhYBHMGMlRKN6WmYSj5cw5V_HReeqF9uGN6MOexEkfFmN9KfQlqYWL6W3HnD1VuqbZhjAQz5Cn"/>
+</div>
+<div class="fixed bottom-[15%] left-[20%] w-32 h-32 opacity-20 pointer-events-none z-0 transform -rotate-12 drop-shadow-xl">
+<img alt="onigiri floating" class="w-full h-full object-contain animate-bounce" src="https://lh3.googleusercontent.com/aida/AP1WRLt76QLxmitivX9fpgJ3fmGJvUm6gB3EPig3WwOSmIshCvoOhRSqCaFFphmamvIIXBW5ibKPT2j9TX9agdmxOekQyWFbAPg9GnGu6eq8pPnwSBvAIdpzZ_MjXNkSrA9KHtk-xLoXusOCi4Wezo39hGmqN2VmZAqr8Z_2Ba4PME61iF142BS2SdAdqxZLEZedDDmhcSeHsuCCRCuGlJkQqHWexn9eAhzNfRbKNVyB-OSXcCdtim7UZdnrDJ-0"/>
+</div>
+<aside class="w-full md:w-72 lg:w-80 glass-panel border-b md:border-b-0 md:border-r border-term-border flex flex-col shrink-0 h-auto md:h-full z-10 md:m-4 md:rounded-3xl relative">
+<!-- Header -->
+<div class="p-8 border-b border-white/40 relative overflow-hidden rounded-t-3xl bg-white/30">
+<img alt="onigiri deco" class="absolute -top-6 -left-6 w-24 h-24 opacity-40 transform -rotate-12 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLt76QLxmitivX9fpgJ3fmGJvUm6gB3EPig3WwOSmIshCvoOhRSqCaFFphmamvIIXBW5ibKPT2j9TX9agdmxOekQyWFbAPg9GnGu6eq8pPnwSBvAIdpzZ_MjXNkSrA9KHtk-xLoXusOCi4Wezo39hGmqN2VmZAqr8Z_2Ba4PME61iF142BS2SdAdqxZLEZedDDmhcSeHsuCCRCuGlJkQqHWexn9eAhzNfRbKNVyB-OSXcCdtim7UZdnrDJ-0"/>
+<div class="absolute top-0 right-0 p-4 opacity-80">
+<img alt="sushi deco" class="w-12 h-12 transform rotate-12 hover:scale-110 transition-transform cursor-pointer object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida/AP1WRLs5nhtNRkhURm4dSV5Kto9sqPBB5EiXR3_c4ljvyrhF290lb_lcLXFLXLSTOM2jCA1xCcEPJ-cAs7O6BdC8MfVVquWvD5kYWmQUwXiaPCUZlCjCF8dmzPhj-l8okp7svx5gQc6yIpysZrSkyeDz6UP_yMCzmnVJdTNNrIECnRP6ub-K5FJhYBHMGMlRKN6WmYSj5cw5V_HReeqF9uGN6MOexEkfFmN9KfQlqYWL6W3HnD1VuqbZhjAQz5Cn"/>
+</div>
+<h1 class="text-3xl font-extrabold text-slate-800 tracking-wider text-glow flicker uppercase relative z-10">醋飯的森林之子2<br/><span class="text-2xl text-term-pink">指令大全</span></h1>
+<p class="text-[10px] text-term-purple tracking-[0.2em] mt-2 font-mono font-bold relative z-10">DATABASE_v3.0 // CYBER PASTEL</p>
+<div class="mt-6 text-[11px] font-mono text-slate-600 bg-white/60 p-3 rounded-2xl border border-term-pink/40 shadow-sm relative z-10">
+<span class="text-term-pink font-bold">★</span> ENTER CHEATSTICK TO INIT.<br/>
+<span class="text-green-500 font-bold">★</span> PRESS F1 FOR CONSOLE.
+            </div>
+</div>
+<!-- Search -->
+<div class="p-6 border-b border-white/40 bg-white/10">
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-term-pink via-term-purple to-term-green rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+<input class="relative w-full bg-white/80 border border-white text-slate-800 font-mono text-sm px-5 py-4 rounded-2xl outline-none focus:ring-2 focus:ring-term-pink transition-all placeholder:text-slate-400 shadow-sm" id="searchInput" placeholder="搜尋指令... ✧.*" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-term-pink">search</span>
+</div>
+</div>
+<!-- Category Nav -->
+<nav class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-2 relative z-10" id="categoryNav">
+<!-- Populated by JS -->
+</nav>
+<div class="p-5 text-[10px] font-mono text-slate-500 border-t border-white/40 text-center rounded-b-3xl flex items-center justify-center gap-2 relative z-10 bg-white/20">
+<span class="material-symbols-outlined text-[14px] text-term-pink">favorite</span>
+            SYS.REQ: CLASSIFIED &amp; CUTE
+        </div>
+</aside>
+<main class="flex-1 flex flex-col h-full relative z-10 overflow-hidden md:py-4 md:pr-4">
+<!-- Header Strip -->
+<header class="h-16 glass-panel rounded-3xl border border-white/60 flex items-center px-8 justify-between shrink-0 mx-4 md:mx-0 shadow-sm mb-4 relative z-10 bg-white/40">
+<div class="flex items-center space-x-3 text-sm font-bold font-mono">
+<span class="w-3 h-3 rounded-full bg-term-pink shadow-neon-pink animate-pulse"></span>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-term-pink to-term-purple tracking-widest uppercase" id="currentCategoryText">SYS.OVERRIDE_ACTIVE</span>
+</div>
+<div class="text-xs font-mono text-slate-600 font-bold bg-white/60 px-4 py-2 rounded-full border border-white/50 flex items-center gap-2 shadow-sm">
+<img class="w-4 h-4 opacity-80 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLt76QLxmitivX9fpgJ3fmGJvUm6gB3EPig3WwOSmIshCvoOhRSqCaFFphmamvIIXBW5ibKPT2j9TX9agdmxOekQyWFbAPg9GnGu6eq8pPnwSBvAIdpzZ_MjXNkSrA9KHtk-xLoXusOCi4Wezo39hGmqN2VmZAqr8Z_2Ba4PME61iF142BS2SdAdqxZLEZedDDmhcSeHsuCCRCuGlJkQqHWexn9eAhzNfRbKNVyB-OSXcCdtim7UZdnrDJ-0"/>
+                TOTAL ENTRIES: <span class="text-term-pink ml-1 text-sm" id="entryCount">0</span>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-4 md:px-2 relative scroll-smooth rounded-3xl z-10" id="contentArea">
+<div class="max-w-6xl mx-auto space-y-10 pb-24" id="dataContainer">
+<!-- Data populated by JS -->
+</div>
+<!-- Empty State -->
+<div class="hidden h-full flex flex-col items-center justify-center text-slate-400 font-mono" id="emptyState">
+<img class="w-24 h-24 mb-4 opacity-60 object-contain drop-shadow-md" src="https://lh3.googleusercontent.com/aida/AP1WRLt76QLxmitivX9fpgJ3fmGJvUm6gB3EPig3WwOSmIshCvoOhRSqCaFFphmamvIIXBW5ibKPT2j9TX9agdmxOekQyWFbAPg9GnGu6eq8pPnwSBvAIdpzZ_MjXNkSrA9KHtk-xLoXusOCi4Wezo39hGmqN2VmZAqr8Z_2Ba4PME61iF142BS2SdAdqxZLEZedDDmhcSeHsuCCRCuGlJkQqHWexn9eAhzNfRbKNVyB-OSXcCdtim7UZdnrDJ-0"/>
+<p class="text-xl uppercase tracking-widest font-bold text-transparent bg-clip-text bg-gradient-to-r from-term-pink to-term-purple">QUERY NOT FOUND ✧</p>
+</div>
+</div>
+</main>
+<!-- Toast Container -->
+<div class="fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none" id="toastContainer"></div>
+<script>
+        // Data Structure compiled from prompt
+        const database = [
+            {
+                id: "player",
+                name: "主角狀態與能力",
+                desc: "改變玩家屬性、生存狀態",
+                items: [
+                    { title: "上帝模式", code: "godmode on", desc: "生命、飢餓、口渴值不下降 (off關閉)" },
+                    { title: "無限精力", code: "energyhack", desc: "精力回滿 (非無限鎖定)" },
+                    { title: "回滿生命", code: "regenhealth", desc: "緩慢回復生命值直至100%" },
+                    { title: "力量滿級", code: "setstrengthlevel 50", desc: "力量等級滿，同步提升生命值上限" },
+                    { title: "回復狀態欄", code: "buffstats", desc: "回復各項生存屬性" },
+                    { title: "無限材料/原木", code: "loghack on", desc: "手上有原木時無限，其他材料余量為1時不消耗 (off關閉)" },
+                    { title: "超級跑", code: "speedyrun on", desc: "跑得飛快 (建議搭配上帝模式，off關閉)" },
+                    { title: "超級跳", code: "superjump on", desc: "跳得非常高 (off關閉)" },
+                    { title: "自帶光源", code: "cavelight on", desc: "光源跟隨角色，探索洞穴好用 (off關閉)" },
+                    { title: "生成浮動光源", code: "createlight", desc: "在角色附近產生一個不可移動的光源" },
+                    { title: "無冷卻睡眠", code: "sleepcooldown off", desc: "可無限重複睡覺" },
+                    { title: "獲得所有物品", code: "addallitems", desc: "添加當前版本所有物品到背包" },
+                    { title: "刪除所有物品", code: "removeallitems", desc: "刪除背包裡的所有物品 (慎用)" },
+                    { title: "即時構建", code: "instantbookbuild on", desc: "藍圖直接生成物品，無需材料 (off關閉)" },
+                    { title: "隱身模式", code: "aighostplayer on", desc: "對敵對生物隱身" },
+                    { title: "快速存檔", code: "save [數字]", desc: "例如: save 1" }
+                ]
+            },
+            {
+                id: "companion",
+                name: "NPC / AI 夥伴",
+                desc: "凱文與弗吉尼亞控制",
+                items: [
+                    { title: "生成弗吉尼亞", code: "addcharacter virginia [數量]", desc: "添加老婆。例: addcharacter virginia 1" },
+                    { title: "滿好感度", code: "virginiasentiment 100", desc: "增加弗吉尼亞好感度至滿" },
+                    { title: "生成凱文", code: "addcharacter Robby [數量]", desc: "添加凱文" },
+                    { title: "AI上帝模式", code: "aigodmode on", desc: "所有AI開啟上帝模式 (包括敵人)" },
+                    { title: "顯示AI血量", code: "aishowhealth on", desc: "顯示AI實體的血量及名字" },
+                    { title: "命令AI休息", code: "aitestsleep on", desc: "可以強制讓老婆休息" },
+                    { title: "禁用擊倒", code: "aiknockdowndisable", desc: "不會被酋長踹倒" },
+                    { title: "開啟AI雷達", code: "airadar on", desc: "尋找生物好用" },
+                    { title: "換衣: 預設泳衣", code: "togglego C1:Virginia_cloth", desc: "需馴服後使用" },
+                    { title: "換衣: 迷彩服", code: "togglego C1:camosuit", desc: "需馴服後使用" },
+                    { title: "換衣: 花裙子", code: "togglego C1:dress", desc: "需馴服後使用" },
+                    { title: "換衣: 紅皮衣", code: "togglego C1:LeatherSuit", desc: "需馴服後使用" },
+                    { title: "換衣: 田徑上衣", code: "togglego C1:tracksuitShit", desc: "需馴服後使用" },
+                    { title: "換衣: 田徑褲", code: "togglego C1:tracksuitPants", desc: "需馴服後使用" }
+                ]
+            },
+            {
+                id: "world",
+                name: "世界設定與天氣",
+                desc: "時間、天氣、環境控制",
+                items: [
+                    { title: "設定時間", code: "settimeofday [數字]", desc: "例: settimeofday 7 (早上7點)" },
+                    { title: "調整天數", code: "jumptimeofday [數值]", desc: "例: jumptimeofday 100 (跳到100天) 或 -10 (減十天)" },
+                    { title: "鎖定時間", code: "locktimeofday on", desc: "也可指定 locktimeofday 10:00, morning 或 night" },
+                    { title: "遊戲加速", code: "Timescale [數值]", desc: "加速遊戲時間" },
+                    { title: "強制下雨", code: "forcerain", desc: "收集雨水好用 (off關閉)" },
+                    { title: "設定季節: 春", code: "season spring", desc: "需配合天數才會完全刷新環境" },
+                    { title: "設定季節: 夏", code: "season summer", desc: "" },
+                    { title: "設定季節: 秋", code: "season autumn", desc: "" },
+                    { title: "設定季節: 冬", code: "season winter", desc: "" },
+                    { title: "砍伐周圍樹木", code: "treescutall", desc: "砍完周圍的樹 (小心卡死)" },
+                    { title: "清除周圍灌木", code: "clearbushradius [半徑]", desc: "例: clearbushradius 20" },
+                    { title: "清除所有屍體", code: "removedead", desc: "被抄家後清理好用" },
+                    { title: "燃燒範圍屍體", code: "burnbodyradius [半徑]", desc: "燒酋長屍體好用" }
+                ]
+            },
+            {
+                id: "spawn_enemy",
+                name: "生成變異體與野人",
+                desc: "召喚各類敵對實體 (addcharacter)",
+                items: [
+                    { title: "棒槌酋長", code: "addcharacter Heavy 1", desc: "沒有金面具的" },
+                    { title: "金面具酋長", code: "addcharacter Heavy Faceless 1", desc: "" },
+                    { title: "隨機普通野人", code: "addcharacter cannibal [數量]", desc: "例: cannibal 10" },
+                    { title: "金面具野人", code: "addcharacter cannibal GoldMask", desc: "" },
+                    { title: "爬行小黑(男/女)", code: "addcharacter muddy", desc: "或 muddymale / muddyfemale" },
+                    { title: "紅胖子", code: "addcharacter fat", desc: "女性為 fatfemale" },
+                    { title: "肉泥怪 (鼻涕蟲)", code: "addcharacter sluggy", desc: "無法攻擊，會穿模" },
+                    { title: "娃娃怪", code: "addcharacter baby", desc: "" },
+                    { title: "無眼怪(白皮)", code: "addcharacter MrPuffy", desc: "女性為 MissPuffy" },
+                    { title: "藍光無眼怪", code: "addcharacter PuffyBossMale", desc: "女性為 PuffyBossFeMale" },
+                    { title: "多指怪", code: "addcharacter fingers", desc: "" },
+                    { title: "雙胞胎", code: "addcharacter Twins", desc: "" },
+                    { title: "惡魔", code: "addcharacter Demon", desc: "怕十字架和金甲" },
+                    { title: "香腸怪", code: "addcharacter John2", desc: "雙頭" },
+                    { title: "大惡魔", code: "addcharacter demonboss", desc: "掉落5個怪異護甲" },
+                    { title: "富豪/富婆(岳父母)", code: "addcharacter mrpuffton", desc: "富婆為 mrspuffton" },
+                    { title: "多手怪(一代)", code: "addcharacter armsy", desc: "" },
+                    { title: "多腳怪(一代)", code: "addcharacter creepyvirginia", desc: "" },
+                    { title: "最終Boss肉山", code: "addcharacter BossMutant", desc: "" },
+                    { title: "範圍秒殺", code: "killradius [數量]", desc: "殺死身邊生物 (會殺死同伴，慎用)" }
+                ]
+            },
+            {
+                id: "spawn_animal",
+                name: "生成動物",
+                desc: "召喚各類野生動物",
+                items: [
+                    { title: "鹿", code: "addcharacter deer", desc: "3塊肉" },
+                    { title: "駝鹿", code: "addcharacter moose", desc: "5塊肉" },
+                    { title: "海龜", code: "addcharacter turtle", desc: "掉落龜殼" },
+                    { title: "淡水龜", code: "addcharacter landturtle", desc: "不給龜殼" },
+                    { title: "海鷗", code: "addcharacter seagull", desc: "海邊" },
+                    { title: "鴨子", code: "addcharacter duck", desc: "建議在水邊生成" },
+                    { title: "蜂鳥", code: "addcharacter Hummingbird", desc: "" },
+                    { title: "兔子 / 松鼠", code: "addcharacter rabbit", desc: "松鼠為 squirrel" },
+                    { title: "鯊魚", code: "addcharacter shark", desc: "目前殺了沒東西" }
+                ]
+            },
+            {
+                id: "items",
+                name: "獲取指定物品",
+                desc: "使用 additem [ID] 或 spawnitem",
+                items: [
+                    { title: "添加指定物品", code: "additem [ID]", desc: "例: additem 386" },
+                    { title: "高爾夫球車", code: "addprefab golfcart 1", desc: "生成在面前" },
+                    { title: "獨輪平衡車", code: "additem 630", desc: "或 spawnitem knightV" },
+                    { title: "滑翔翼", code: "additem 626", desc: "或 spawnitem hangglider" },
+                    { title: "武士刀", code: "additem 367", desc: "最強近戰" },
+                    { title: "電擊槍", code: "additem 353", desc: "子彈 ID: 369" },
+                    { title: "散彈槍", code: "additem 358", desc: "鉛彈 ID: 364, 塊彈 ID: 363" },
+                    { title: "左輪手槍", code: "additem 386", desc: "9mm子彈 ID: 362" },
+                    { title: "複合弓", code: "additem 360", desc: "碳纖維箭 ID: 373" },
+                    { title: "十字弩", code: "additem 365", desc: "十字弩箭 ID: 368" },
+                    { title: "電擊棒", code: "additem 396", desc: "" },
+                    { title: "彎刀", code: "additem 359", desc: "" },
+                    { title: "現代斧", code: "additem 356", desc: "綜合最強" },
+                    { title: "消防斧", code: "additem 431", desc: "防禦最強" },
+                    { title: "繩索槍", code: "additem 522", desc: "鋼線索 ID: 523" },
+                    { title: "鏟子", code: "additem 485", desc: "" },
+                    { title: "黃金盔甲", code: "additem 572", desc: "怪異盔甲 ID: 593" },
+                    { title: "黃金面具", code: "additem 435", desc: "紅色面具 ID: 391" },
+                    { title: "索拉菲特礦石", code: "additem 664", desc: "鎬 ID: 663" },
+                    { title: "生命補充劑", code: "additem 455", desc: "Plus版本 ID: 456" },
+                    { title: "精力補充劑", code: "additem 461", desc: "Plus版本 ID: 462" }
+                ]
+            },
+            {
+                id: "ui_system",
+                name: "UI與系統工具",
+                desc: "介面顯示與連線設定",
+                items: [
+                    { title: "顯示/隱藏 HUD", code: "showhud off", desc: "截圖好用 (on開啟)" },
+                    { title: "顯示/隱藏 UI", code: "showui off", desc: "同上 (on開啟)" },
+                    { title: "隱藏玩家名字", code: "showinworldui off", desc: "(on恢復顯示)" },
+                    { title: "自由視角", code: "freecamera on", desc: "QE控制高度；滑鼠右鍵轉動" },
+                    { title: "顯示具體數值", code: "vitalsshowdebug on", desc: "顯示血量、體力等" },
+                    { title: "傳送座標", code: "goto x y z", desc: "例: goto 1476 78.5 70" },
+                    { title: "踢出玩家", code: "kickplayers [名稱]", desc: "多人模式，需房主權限" },
+                    { title: "還原所有設定", code: "clearallsettings", desc: "恢復默認設置" }
+                ]
+            },
+            {
+                id: "coordinates",
+                name: "重要地點座標",
+                desc: "使用 goto 傳送 (請先在洞外傳送)",
+                items: [
+                    { title: "武士刀 (住宅掩體)", code: "goto 1234 241 -654", desc: "需紫卡" },
+                    { title: "散彈槍 (B隊墓)", code: "goto -1340 98 1411", desc: "需鏟子" },
+                    { title: "左輪手槍 (掩體C)", code: "goto 1140 121 1048", desc: "需鏟子" },
+                    { title: "電擊槍 (潛水洞)", code: "goto -648 19 1515", desc: "" },
+                    { title: "現代斧 (A隊營地)", code: "goto -703 104 446", desc: "" },
+                    { title: "消防斧 (掩體A)", code: "goto -416 79 712", desc: "需鏟子" },
+                    { title: "複合弓 (掩體B)", code: "goto -1120 272 -1040", desc: "" },
+                    { title: "十字弩 (食品倉庫)", code: "goto -1025 65 986", desc: "" },
+                    { title: "繩索槍洞口", code: "goto -1113 131 -166", desc: "繩索槍本體: -1202 129 -277" },
+                    { title: "鏟子洞穴入口", code: "goto -532 197 124", desc: "鏟子本體: -429 137 -103" },
+                    { title: "黃金甲洞口1", code: "goto -538 285 -634", desc: "黃金甲本體: 187 139 -666" },
+                    { title: "鎬洞穴出口", code: "goto 1487 79 746", desc: "鎬本體: 1417 80 734" },
+                    { title: "結局洞口", code: "goto 1756 42 553", desc: "豪華地堡" },
+                    { title: "神器1", code: "goto -624 -22 1398", desc: "潛水器洞穴內" },
+                    { title: "神器2", code: "goto -1082 87 -131", desc: "繩索槍洞穴內" },
+                    { title: "神器3", code: "goto -410 206 -880", desc: "" },
+                    { title: "神器4", code: "goto 1287 48 646", desc: "" },
+                    { title: "神器5", code: "goto 1725 -30 1050", desc: "木屋下索拉菲特礦坑內" },
+                    { title: "全地圖最高點", code: "goto 202 738 144", desc: "雪山山巔" }
+                ]
+            }
+        ];
+
+        const navContainer = document.getElementById('categoryNav');
+        const dataContainer = document.getElementById('dataContainer');
+        const searchInput = document.getElementById('searchInput');
+        const emptyState = document.getElementById('emptyState');
+        const currentCategoryText = document.getElementById('currentCategoryText');
+        const entryCount = document.getElementById('entryCount');
+        const toastContainer = document.getElementById('toastContainer');
+
+        let activeCategoryId = database[0].id;
+
+        const categoryIcons = {
+            "player": "person",
+            "companion": "group",
+            "world": "public",
+            "spawn_enemy": "pest_control",
+            "spawn_animal": "pets",
+            "items": "category",
+            "ui_system": "settings_system_daydream",
+            "coordinates": "explore"
+        };
+
+        // Init Build
+        function init() {
+            buildNavigation();
+            renderContent();
+            setupSearch();
+        }
+
+        function buildNavigation() {
+            navContainer.innerHTML = '';
+            database.forEach(cat => {
+                const btn = document.createElement('button');
+                const icon = categoryIcons[cat.id] || "folder";
+                btn.className = `w-full text-left px-5 py-4 font-bold uppercase tracking-wider text-sm transition-all rounded-2xl flex justify-between items-center group mb-2
+                    ${activeCategoryId === cat.id 
+                        ? 'bg-gradient-to-r from-term-pink/20 to-term-purple/20 text-slate-800 shadow-sm border border-term-pink/50' 
+                        : 'border border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-800 hover:border-white/60'}`;
+                
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-xl ${activeCategoryId === cat.id ? 'text-term-pink' : 'text-slate-500 group-hover:text-term-pink transition-colors'}">${icon}</span>
+                        <span>${cat.name}</span>
+                    </div>
+                    <span class="text-xs font-mono font-bold py-1 px-2 rounded-full ${activeCategoryId === cat.id ? 'bg-term-purple/20 text-term-purple' : 'bg-white/60 text-slate-500 group-hover:bg-white/80 group-hover:text-term-pink border border-white'}">${cat.items.length}</span>
+                `;
+                
+                btn.onclick = () => {
+                    activeCategoryId = cat.id;
+                    searchInput.value = ''; // clear search on cat change
+                    buildNavigation();
+                    renderContent();
+                    
+                    // Mobile behavior: Scroll to content
+                    if(window.innerWidth < 768) {
+                         document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+                navContainer.appendChild(btn);
+            });
+        }
+
+        function renderContent(searchQuery = '') {
+            dataContainer.innerHTML = '';
+            let totalRendered = 0;
+            let categoriesToRender = [];
+
+            if (searchQuery) {
+                // Filter mode: Search across all categories
+                const q = searchQuery.toLowerCase();
+                categoriesToRender = database.map(cat => {
+                    return {
+                        ...cat,
+                        items: cat.items.filter(item => 
+                            item.title.toLowerCase().includes(q) || 
+                            item.code.toLowerCase().includes(q) || 
+                            (item.desc && item.desc.toLowerCase().includes(q))
+                        )
+                    }
+                }).filter(cat => cat.items.length > 0);
+                
+                currentCategoryText.innerText = "SYS.SEARCH_RESULTS ✧";
+            } else {
+                // Normal mode: Show active category
+                categoriesToRender = database.filter(cat => cat.id === activeCategoryId);
+                const activeCatData = database.find(c => c.id === activeCategoryId);
+                currentCategoryText.innerText = `DIR // ${activeCatData.name} ✧`;
+            }
+
+            if (categoriesToRender.length === 0) {
+                emptyState.classList.remove('hidden');
+                dataContainer.classList.add('hidden');
+                entryCount.innerText = '0';
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            dataContainer.classList.remove('hidden');
+
+            categoriesToRender.forEach(cat => {
+                // Add Section Header if searching (to show context)
+                if(searchQuery) {
+                     const header = document.createElement('h2');
+                     header.className = "text-xl font-bold text-slate-800 border-b border-term-pink/30 pb-3 mt-10 mb-6 uppercase tracking-widest flex items-center gap-2";
+                     header.innerHTML = `<span class="material-symbols-outlined text-term-pink">auto_awesome</span> [ ${cat.name} ]`;
+                     dataContainer.appendChild(header);
+                } else {
+                     const descBox = document.createElement('div');
+                     descBox.className = "bg-white/60 border border-term-pink/30 rounded-2xl p-4 mb-8 flex items-start gap-3 shadow-sm relative overflow-hidden";
+                     descBox.innerHTML = `
+                        <img src="https://lh3.googleusercontent.com/aida/AP1WRLs5nhtNRkhURm4dSV5Kto9sqPBB5EiXR3_c4ljvyrhF290lb_lcLXFLXLSTOM2jCA1xCcEPJ-cAs7O6BdC8MfVVquWvD5kYWmQUwXiaPCUZlCjCF8dmzPhj-l8okp7svx5gQc6yIpysZrSkyeDz6UP_yMCzmnVJdTNNrIECnRP6ub-K5FJhYBHMGMlRKN6WmYSj5cw5V_HReeqF9uGN6MOexEkfFmN9KfQlqYWL6W3HnD1VuqbZhjAQz5Cn" class="absolute -right-2 -bottom-2 w-16 h-16 opacity-30 transform -rotate-12 object-contain drop-shadow-sm">
+                        <span class="material-symbols-outlined text-term-pink mt-0.5 relative z-10">info</span>
+                        <p class="text-sm font-mono text-slate-700 font-bold relative z-10">${cat.desc}</p>
+                     `;
+                     dataContainer.appendChild(descBox);
+                }
+
+                // Grid for items
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-1 xl:grid-cols-2 gap-6";
+
+                cat.items.forEach(item => {
+                    totalRendered++;
+                    const card = document.createElement('div');
+                    card.className = "group glass-panel gradient-border p-6 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between bg-white/50";
+                    
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-bold text-xl text-slate-800 tracking-wide flex items-center gap-2">
+                                    ${item.title}
+                                </h3>
+                                <span class="material-symbols-outlined text-term-pink/40 group-hover:text-term-pink transition-colors text-lg">star</span>
+                            </div>
+                            <div class="bg-white/70 rounded-xl border border-term-pink/20 p-4 font-mono text-sm text-term-purple mb-4 break-all shadow-sm relative overflow-hidden group-hover:border-term-pink/50 transition-colors">
+                                <div class="absolute inset-0 bg-gradient-to-r from-term-pink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <span class="relative z-10 font-bold">${item.code}</span>
+                            </div>
+                            ${item.desc ? `<p class="font-sans font-semibold text-sm text-slate-600 leading-relaxed mb-4">${item.desc}</p>` : ''}
+                        </div>
+                        <div class="mt-2 flex justify-end">
+                            <button onclick="copyToClipboard('${item.code.replace(/'/g, "\\'")}')" 
+                                    class="bg-white/80 hover:bg-gradient-to-r hover:from-term-pink hover:to-term-purple border border-term-pink/30 hover:border-transparent text-slate-700 hover:text-white rounded-full px-5 py-2 text-xs font-bold tracking-widest transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-neon-pink">
+                                <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                <span>COPY</span>
+                            </button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                dataContainer.appendChild(grid);
+            });
+
+            entryCount.innerText = totalRendered;
+        }
+
+        function setupSearch() {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                renderContent(query);
+            });
+        }
+
+        function copyToClipboard(text) {
+            // Modern Clipboard API fallback
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast(text));
+            } else {
+                // Fallback for older browsers or non-secure contexts (like some iframes)
+                let textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(text);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                textArea.remove();
+            }
+        }
+
+        function showToast(text) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-enter bg-gradient-to-r from-term-pink via-term-purple to-term-green p-[2px] rounded-2xl shadow-neon-purple w-max max-w-[90vw]';
+            toast.innerHTML = `
+                <div class="bg-white/95 rounded-2xl px-5 py-4 flex items-center gap-4 relative overflow-hidden backdrop-blur-md">
+                    <img src="https://lh3.googleusercontent.com/aida/AP1WRLt76QLxmitivX9fpgJ3fmGJvUm6gB3EPig3WwOSmIshCvoOhRSqCaFFphmamvIIXBW5ibKPT2j9TX9agdmxOekQyWFbAPg9GnGu6eq8pPnwSBvAIdpzZ_MjXNkSrA9KHtk-xLoXusOCi4Wezo39hGmqN2VmZAqr8Z_2Ba4PME61iF142BS2SdAdqxZLEZedDDmhcSeHsuCCRCuGlJkQqHWexn9eAhzNfRbKNVyB-OSXcCdtim7UZdnrDJ-0" class="absolute -right-2 -top-2 w-12 h-12 opacity-30 transform rotate-12 object-contain">
+                    <div class="bg-term-pink/20 text-term-pink rounded-full p-1.5 flex items-center justify-center relative z-10">
+                        <span class="material-symbols-outlined text-[18px]">check</span>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="font-bold tracking-wider uppercase text-sm text-slate-800 flex items-center gap-1">
+                            COPIED TO CLIPBOARD <span class="material-symbols-outlined text-[14px] text-term-pink">favorite</span>
+                        </div>
+                        <div class="text-slate-500 text-xs mt-1 font-mono font-bold truncate max-w-[200px]">${text}</div>
+                    </div>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(100%) scale(0.9)';
+                toast.style.transition = 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        // Initialize on load
+        window.onload = init;
+    </script>
+</body></html>
