@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW" style="-webkit-text-size-adjust: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>輕軌延伸朴子市區 - 黃嫈珺競選政見</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#ac2a5d",
+                        "primary-container": "#ff6b9d",
+                        secondary: "#5e4dbb",
+                        "tertiary-fixed": "#79f7ea",
+                        surface: "#f9f9ff",
+                        "on-surface": "#121c2c",
+                        "on-surface-variant": "#574146",
+                        "primary-fixed-dim": "#ffb1c5",
+                    },
+                    fontFamily: {
+                        headline: ["Plus Jakarta Sans", "Noto Sans TC", "sans-serif"],
+                        body: ["Noto Sans TC", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+            background-color: #f9f9ff;
+            color: #121c2c;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        a, button { touch-action: manipulation; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 10px 30px rgba(172, 42, 93, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .blob-bg {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        /* 進場動畫設定 */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* 軌道動畫 */
+        .track-container {
+            position: relative;
+            padding-left: 28px;
+            border-left: 3px solid rgba(172, 42, 93, 0.15); /* primary color with low opacity */
+            margin-left: 8px;
+        }
+        
+        .track-gradient-line {
+            position: absolute;
+            top: 0;
+            left: -3px;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ac2a5d, #5e4dbb, transparent);
+            transform-origin: top;
+            animation: growLine 2s ease-out forwards;
+        }
+
+        @keyframes growLine {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .train-indicator {
+            position: absolute;
+            left: -8px; /* Center over the 3px border */
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ac2a5d;
+            box-shadow: 0 0 12px rgba(172, 42, 93, 0.8), inset 0 0 0 3px white;
+            animation: trainMove 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes trainMove {
+            0% { top: 0%; }
+            100% { top: calc(100% - 14px); }
+        }
+
+        .station-dot {
+            position: absolute;
+            left: -34.5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #5e4dbb;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-body text-on-surface bg-surface relative min-h-screen">
+    <!-- 防彈容器：防止橫向捲動 -->
+    <div class="relative w-full max-w-[100vw] overflow-x-hidden min-h-screen pb-32">
+        
+        <!-- 背景裝飾光暈 -->
+        <div class="blob-bg bg-primary w-96 h-96 top-[-5%] left-[-10%]"></div>
+        <div class="blob-bg bg-secondary w-80 h-80 top-[40%] right-[-10%] animation-delay-2000"></div>
+
+        <!-- TopAppBar -->
+        <header class="fixed top-0 w-full z-50 glass-panel shadow-sm flex items-center justify-between px-4 h-16 backdrop-blur-md">
+            <a href="index.html" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 active:scale-95 transition-all text-primary">
+                <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+            </a>
+            <span class="font-headline font-bold text-lg text-primary">政策詳情</span>
+            <div class="w-10"></div> <!-- 佔位，確保標題置中 -->
+        </header>
+
+        <!-- Main Content -->
+        <main class="pt-24 px-5 max-w-lg mx-auto">
+            
+            <!-- 區塊一：標題與影片 -->
+            <section class="text-center relative z-10 fade-in-up delay-100">
+                <div class="inline-flex items-center justify-center gap-1 px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs mb-4 border border-secondary/20">
+                    <span class="material-symbols-outlined text-[14px]">train</span>
+                    核心政見 02
+                </div>
+                <h1 class="text-3xl font-headline font-extrabold text-on-surface mb-8 tracking-wide">
+                    輕軌延伸朴子市區
+                </h1>
+
+                <!-- FB Reel 影片容器：完美置中與裝飾邊框 -->
+                <div class="video-wrapper relative w-fit mx-auto rounded-[2rem] overflow-hidden ambient-shadow bg-white/40 p-2 backdrop-blur-sm border border-white/60">
+                    <iframe 
+                        src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2831228123894088%2F&show_text=false&width=267&t=0" 
+                        width="267" 
+                        height="476" 
+                        class="rounded-[1.5rem]"
+                        style="border:none;overflow:hidden" 
+                        scrolling="no" 
+                        frameborder="0" 
+                        allowfullscreen="true" 
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- 區塊二：藝術文案與玻璃擬態卡片 -->
+            <section class="relative z-10 mt-10 mb-12 fade-in-up delay-200">
+                <div class="relative p-8 rounded-[2rem] glass-panel overflow-hidden ambient-shadow text-center">
+                    <!-- 卡片內部發光裝飾 -->
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-secondary/20 rounded-full blur-2xl"></div>
+                    
+                    <span class="material-symbols-outlined absolute top-4 left-4 text-6xl text-primary/10 select-none -z-10 rotate-180">format_quote</span>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-center gap-3 mb-5 opacity-80">
+                            <span class="w-8 h-[1px] bg-gradient-to-r from-transparent to-primary"></span>
+                            <span class="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">The Future Line</span>
+                            <span class="w-8 h-[1px] bg-gradient-to-l from-transparent to-primary"></span>
+                        </div>
+                        
+                        <h2 class="text-2xl font-headline font-extrabold mb-5 leading-relaxed">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary block text-lg mb-1">循著光影，軌動未來</span>
+                            串聯傳統與科技的<br>
+                            <span class="relative inline-block mt-1 z-10">
+                                時代動脈
+                                <svg class="absolute -bottom-2 left-0 w-full h-3 text-primary-fixed-dim/80 -z-10" preserveAspectRatio="none" viewBox="0 0 100 10">
+                                    <path d="M0,5 Q50,10 100,2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="6"></path>
+                                </svg>
+                            </span>
+                        </h2>
+                        
+                        <p class="text-on-surface-variant text-[15px] leading-loose font-medium mb-6">
+                            這不只是一條輕軌，更是我們對下一代的承諾。<br>
+                            讓嘉義捷運藍線，成為引導繁榮的微血管；<br>
+                            讓高科技的活水，溫柔地流進充滿底蘊的朴子。
+                        </p>
+                        
+                        <div class="pt-5 border-t border-primary/10">
+                            <strong class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-lg font-extrabold tracking-widest block">
+                                出門即輕軌，留鄉能立業
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 區塊三：路線圖與說明 (帶有 CSS 軌道動畫) -->
+            <section class="mt-8 relative fade-in-up delay-300">
+                <h2 class="text-xl font-headline font-bold text-on-surface mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-secondary rounded-full inline-block"></span>
+                    發展藍圖與效益
+                </h2>
+
+                <div class="glass-panel rounded-3xl p-6 ambient-shadow">
+                    <!-- 自訂時間軸容器 -->
+                    <div class="track-container space-y-8 py-2">
+                        <!-- 動畫軌道線 -->
+                        <div class="track-gradient-line"></div>
+                        <!-- 動畫輕軌車廂點 -->
+                        <div class="train-indicator"></div>
+
+                        <!-- 項目 1 -->
+                        <div class="relative fade-in-up delay-400">
+                            <div class="station-dot top-[6px]"></div>
+                            <h3 class="text-lg font-bold text-primary mb-2">爭取嘉義捷運藍線</h3>
+                            <p class="text-sm text-on-surface-variant leading-relaxed">
+                                積極向中央與縣府爭取，將原規劃之嘉義捷運藍線，自高鐵嘉義站進一步延伸進入朴子市區，深入生活圈。
+                            </p>
+                        </div>
+                        
+                        <!-- 項目 2 -->
+                        <div class="relative fade-in-up delay-500">
+                            <div class="station-dot top-[6px]"></div>
+                            <h3 class="text-lg font-bold text-secondary mb-2">串聯科技雙引擎</h3>
+                            <p class="text-sm text-on-surface-variant leading-relaxed">
+                                透過輕軌，將朴子市區與「台積電特區」及「嘉科」無縫接軌。縮短通勤時間，打造科技新城的一日生活圈。
+                            </p>
+                        </div>
+
+                        <!-- 項目 3 -->
+                        <div class="relative fade-in-up delay-500">
+                            <div class="station-dot top-[6px]"></div>
+                            <h3 class="text-lg font-bold text-primary mb-2">留住青壯人口</h3>
+                            <p class="text-sm text-on-surface-variant leading-relaxed">
+                                完善的大眾運輸是都市發展的命脈。便利的交通網絡能將高科技產業的就業人口與消費紅利留在朴子，促進地方創生。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Fixed Bottom Action Button -->
+        <div class="fixed bottom-0 left-0 w-full p-4 z-50 bg-gradient-to-t from-surface via-surface/90 to-transparent pb-8">
+            <button class="w-full max-w-lg mx-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-container text-white font-bold text-lg py-4 rounded-full ambient-shadow active:scale-[0.98] transition-transform">
+                <span>支持這項政見</span>
+                <span class="material-symbols-outlined">thumb_up</span>
+            </button>
+        </div>
+
+    </div>
+</body>
+</html>
