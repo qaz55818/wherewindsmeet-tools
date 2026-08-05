@@ -1,10 +1,12 @@
-<!DOCTYPE html><html class="light" lang="zh-TW" style=""><head>
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+<head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>政見詳情 - 永續城市</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -84,16 +86,6 @@
                         "display-lg-mobile": ["Plus Jakarta Sans"],
                         "body-md": ["Noto Sans TC"],
                         "title-sm": ["Noto Sans TC"]
-                    },
-                    "fontSize": {
-                        "body-sm": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-md-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
-                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
-                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
-                        "display-lg-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "800" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "title-sm": ["20px", { "lineHeight": "1.5", "fontWeight": "700" }]
                     }
                 }
             }
@@ -101,151 +93,276 @@
     </script>
 <style>
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px -10px rgba(94, 77, 187, 0.08);
         }
         
         .bg-gradient-mesh {
             background-color: #f9f9ff;
             background-image: 
-                radial-gradient(at 0% 0%, hsla(338, 61%, 85%, 0.4) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(246, 60%, 85%, 0.4) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(175, 59%, 85%, 0.4) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(338, 61%, 85%, 0.4) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(338, 61%, 85%, 0.45) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(246, 60%, 85%, 0.45) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(175, 59%, 85%, 0.45) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(338, 61%, 85%, 0.45) 0px, transparent 50%);
         }
         
         .hex-shape {
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         }
+
+        /* Entrance Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-fade-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-scale-in {
+            animation: scaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Toast notification animation */
+        #toast {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
     </style>
 </head>
-<body class="bg-gradient-mesh text-on-background font-body-md antialiased pt-16 pb-24 md:pb-8 selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<body class="bg-gradient-mesh text-on-background font-body-md antialiased pt-20 pb-24 md:pb-12 selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface-dim/60 backdrop-blur-xl border-b border-surface-variant/30 shadow-sm shadow-primary/5">
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-xl border-b border-surface-variant/30 shadow-sm shadow-primary/5 animate-fade-down">
 <div class="flex justify-between items-center px-sm h-16 w-full max-w-[1200px] mx-auto">
-<button class="text-on-surface hover:text-primary transition-colors active:scale-95 transition-transform duration-200 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-white/20 border border-white/30">
+<button onclick="goBack()" class="text-on-surface hover:text-primary transition-all active:scale-95 duration-200 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-white/30 border border-white/50 shadow-sm hover:bg-white/60">
 <span class="material-symbols-outlined">arrow_back</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">黃嫈珺競選政見</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container bg-surface-container-high flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
-<img alt="陳小慈" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4F3qo2fV7MexC_MtkORnlKq3vTMUKERaEOabiqaTcdSDaLDq2WbrtvHoL2rKJsN_vtMR-h-tb6vjiBNlypUJDPGMknx-csAaWDz4FJ5OKkHfSPpetfEnMoXblTx35o4etTFn4t5wS2s-QxXBVJYv8XnA6Jp9XnlZUsmk4mdxx2COkpQXN8Hp-0-yXVKvriA7tQvgEMwEHDCOsrHc6kPwgsEaKYiDIfuSYgEgzbeK-i1eAgYWCIVMVD2QaKtnglSOEl6g">
+<h1 class="font-headline-md-mobile text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary tracking-tight">黃嫈珺競選政見</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container bg-surface-container-high flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity shadow-sm">
+<img alt="黃嫈珺" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4F3qo2fV7MexC_MtkORnlKq3vTMUKERaEOabiqaTcdSDaLDq2WbrtvHoL2rKJsN_vtMR-h-tb6vjiBNlypUJDPGMknx-csAaWDz4FJ5OKkHfSPpetfEnMoXblTx35o4etTFn4t5wS2s-QxXBVJYv8XnA6Jp9XnlZUsmk4mdxx2COkpQXN8Hp-0-yXVKvriA7tQvgEMwEHDCOsrHc6kPwgsEaKYiDIfuSYgEgzbeK-i1eAgYWCIVMVD2QaKtnglSOEl6g" onerror="this.src='https://placehold.co/100x100/ac2a5d/ffffff?text=黃'">
 </div>
 </div>
 </header>
+
+<!-- Main Container -->
 <main class="max-w-container-max mx-auto px-4 md:px-gutter mt-sm relative z-10">
-<!-- Video Hero Section (Facebook Reel) -->
-<section class="relative w-full max-w-md mx-auto rounded-2xl overflow-hidden mb-lg shadow-[0_20px_40px_-15px_rgba(172,42,93,0.2)] aspect-[9/16] bg-black border border-white/50">
-    <!-- Facebook Embed Iframe -->
-    <iframe 
-        src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1381471280591174%2F&show_text=false&width=267&t=0" 
-        class="absolute top-0 left-0 w-full h-full" 
-        style="border:none;overflow:hidden" 
-        scrolling="no" 
-        frameborder="0" 
-        allowfullscreen="true" 
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-    </iframe>
-</section>
-<!-- Policy Header & Intro -->
-<section class="mb-lg max-w-3xl mx-auto text-center">
-<div class="inline-flex items-center gap-2 bg-gradient-to-r from-tertiary-container/30 to-tertiary-fixed/30 text-tertiary px-4 py-1.5 rounded-full text-sm font-label-caps tracking-widest mb-6 border border-tertiary/10 shadow-sm">
-<span class="material-symbols-outlined text-sm">eco</span>
-                永續城市
+    
+    <!-- Video Hero Section (Facebook Reel) -->
+    <section class="relative w-full max-w-md mx-auto rounded-3xl overflow-hidden mb-12 shadow-[0_25px_50px_-15px_rgba(172,42,93,0.25)] aspect-[9/16] bg-black border-2 border-white/60 animate-scale-in">
+        <iframe 
+            src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1381471280591174%2F&show_text=false&width=267&t=0" 
+            class="absolute top-0 left-0 w-full h-full" 
+            style="border:none;overflow:hidden" 
+            scrolling="no" 
+            frameborder="0" 
+            allowfullscreen="true" 
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
+    </section>
+
+    <!-- Policy Header & Intro with Refined Typography -->
+    <section class="mb-14 max-w-3xl mx-auto text-center animate-fade-up">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-tertiary-container/20 to-tertiary-fixed/30 text-tertiary px-5 py-2 rounded-full text-sm font-bold tracking-wider mb-6 border border-tertiary/20 shadow-sm">
+            <span class="material-symbols-outlined text-base">eco</span>
+            永續城市 • 前瞻未來
+        </div>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary via-primary to-secondary mb-6 leading-tight pb-1 tracking-tight">
+            建構嘉義朴子世界貿易展覽館
+        </h2>
+        <div class="glass-card p-6 md:p-8 rounded-3xl text-left shadow-lg border border-white/80">
+            <p class="text-base md:text-lg text-on-surface-variant leading-relaxed font-normal mb-4">
+                掌握半導體產業廊帶進駐嘉義的歷史發展契機，我們將在朴子市核心地帶擘劃並打造國際級的<strong class="text-primary font-bold">「世界貿易展覽館」</strong>。這不僅是嘉義對接國際貿易的重要門戶，更是活絡地方經濟、吸引高科技人才迴流的強大引擎。
+            </p>
+            <p class="text-base md:text-lg text-on-surface-variant leading-relaxed font-normal">
+                為落實社會公義與共享繁榮，我們堅定承諾：<mark class="bg-primary-fixed/50 text-on-primary-container px-2 py-0.5 rounded font-medium not-italic">展覽館營運收益的20%將提撥作為「地方共榮社會福利基金」</mark>，專款專用於朴子市的在地長照網絡、優質幼兒托育及弱勢扶助，確保科技發展的紅利溫暖每一位市民。
+            </p>
+        </div>
+    </section>
+
+    <!-- Specific Measures (List Style with Hover Micro-interactions) -->
+    <section class="mb-16 max-w-4xl mx-auto animate-fade-up" style="animation-delay: 0.1s;">
+        <h3 class="text-2xl md:text-3xl font-bold text-on-surface mb-8 flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary bg-primary/10 p-2.5 rounded-xl shadow-inner">lightbulb</span>
+            核心推動措施
+        </h3>
+        <div class="space-y-6">
+            <div class="glass-card p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1.5 transition-all duration-300 shadow-lg border border-white/80 group">
+                <div class="w-16 h-16 shrink-0 bg-gradient-to-br from-secondary-container to-secondary text-white hex-shape flex items-center justify-center shadow-lg shadow-secondary/25 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: 'FILL' 1;">architecture</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-on-surface mb-2 tracking-tight">國際級會展設施與智慧場館</h4>
+                    <p class="text-on-surface-variant leading-relaxed">規劃萬坪多功能展覽空間、大型國際會議中心及綠建築設施，全面對接全球半導體供應鏈廠商，打造南台灣首屈一指的商務與科技交流新地標。</p>
+                </div>
             </div>
-<h2 class="font-display-lg-mobile md:font-display-lg text-transparent bg-clip-text bg-gradient-to-br from-primary via-primary to-secondary mb-6 leading-tight pb-2">建構嘉義朴子世界貿易展覽館</h2>
-<p class="font-body-md text-on-surface-variant leading-relaxed text-left md:text-center text-lg px-4 md:px-8">掌握半導體產業鏈進駐嘉義的歷史契機，我們將在朴子市核心地帶打造國際級「世界貿易展覽館」。這不僅是嘉義邁向國際的門戶，更是帶動地方繁榮的引擎。我們承諾將展覽館營運收益的20%提撥為「地方共榮社會福利基金」，專款專用於朴子市的長照服務、幼兒托育及弱勢補助，讓科技發展的紅利真正落實於每一位市民的生活中。</p>
-</section>
-<!-- Specific Measures (List Style) -->
-<section class="mb-xl max-w-4xl mx-auto">
-<h3 class="font-headline-md text-on-surface mb-8 flex items-center gap-3">
-<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">lightbulb</span>
-                具體措施
-            </h3>
-<div class="space-y-6">
-<div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1 transition-transform duration-300 shadow-md active:scale-95">
-<div class="w-16 h-16 shrink-0 bg-gradient-to-br from-secondary-container to-secondary text-white hex-shape flex items-center justify-center shadow-md shadow-secondary/20">
-<span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: &quot;FILL&quot; 1;">architecture</span>
-</div>
-<div>
-<h4 class="font-title-sm text-on-surface mb-2 text-lg">國際級會展設施</h4>
-<p class="font-body-md text-on-surface-variant">規劃萬坪展覽空間與多功能會議中心，吸引全球半導體供應鏈廠商進駐參展，打造南台灣科技交流新地標。</p>
-</div>
-</div>
-<div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1 transition-transform duration-300 shadow-md active:scale-95">
-<div class="w-16 h-16 shrink-0 bg-gradient-to-br from-tertiary-container to-tertiary text-white hex-shape flex items-center justify-center shadow-md shadow-tertiary/20">
-<span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: &quot;FILL&quot; 1;">volunteer_activism</span>
-</div>
-<div>
-<h4 class="font-title-sm text-on-surface mb-2 text-lg">20%收益回饋基金</h4>
-<p class="font-body-md text-on-surface-variant">法制化營運收益提撥機制，確保每年至少20%盈餘直接挹注地方社福，建立產業與社區共榮的永續模式。</p>
-</div>
-</div>
-<div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1 transition-transform duration-300 shadow-md active:scale-95">
-<div class="w-16 h-16 shrink-0 bg-gradient-to-br from-primary-container to-primary text-white hex-shape flex items-center justify-center shadow-md shadow-primary/20">
-<span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: &quot;FILL&quot; 1;">precision_manufacturing</span>
-</div>
-<div>
-<h4 class="font-title-sm text-on-surface mb-2 text-lg">產業人才孵化器</h4>
-<p class="font-body-md text-on-surface-variant">館內設置產學合作專區，媒合在地學子與半導體企業，提供實習與就業機會，讓嘉義子弟留鄉發展。</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Implementation Timeline -->
-<section class="mb-xl max-w-3xl mx-auto">
-<h3 class="font-headline-md text-on-surface mb-8 flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary bg-tertiary/10 p-2 rounded-lg">trending_up</span>
-                執行進度
-            </h3>
-<div class="relative pl-8 md:pl-10">
-<!-- Smooth curved line -->
-<div class="absolute left-[15px] md:left-[19px] top-4 bottom-4 bg-gradient-to-b from-tertiary via-surface-variant to-surface-variant rounded-full" style="width: 2px;"></div>
-<!-- Step 1 -->
-<div class="mb-12 relative group">
-<div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-tertiary rounded-full border-4 border-background shadow-[0_0_0_4px_rgba(29,176,165,0.2)] z-10 transition-transform group-hover:scale-110"></div>
-<div class="glass-card p-6 rounded-2xl border-l-4 border-l-tertiary hover:shadow-lg transition-shadow">
-<div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
-<h4 class="font-title-sm text-on-surface text-lg">啟動期：基礎建設評估與法規修訂</h4>
-<span class="inline-block text-xs font-label-caps text-white bg-gradient-to-r from-tertiary to-tertiary-container px-4 py-1.5 rounded-full shadow-sm">進行中</span>
-</div>
-<p class="font-body-md text-on-surface-variant px-4 md:px-8">完成全市綠能潛力盤點，並啟動相關自治條例草案研擬。預計舉辦10場公民參與式說明會。</p>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="mb-12 relative opacity-70 hover:opacity-100 transition-opacity group">
-<div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-surface-variant rounded-full border-4 border-background z-10 transition-transform group-hover:scale-110 group-hover:bg-tertiary-container"></div>
-<div class="bg-surface/80 p-6 rounded-2xl border border-surface-variant/50 hover:border-surface-variant shadow-sm transition-all">
-<div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
-<h4 class="font-title-sm text-on-surface text-lg">發展期：示範區建置與資源挹注</h4>
-<span class="inline-block text-xs font-label-caps text-on-surface-variant bg-surface-container px-4 py-1.5 rounded-full border border-surface-variant">規劃中</span>
-</div>
-<p class="font-body-md text-on-surface-variant px-4 md:px-8">於三個行政區設立「零碳社區示範點」，提供補助鼓勵汰換老舊耗能設備，初步建立微電網架構。</p>
-</div>
-</div>
-<!-- Step 3 -->
-<div class="relative opacity-70 hover:opacity-100 transition-opacity group">
-<div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-surface-variant rounded-full border-4 border-background z-10 transition-transform group-hover:scale-110 group-hover:bg-tertiary-container"></div>
-<div class="bg-surface/80 p-6 rounded-2xl border border-surface-variant/50 hover:border-surface-variant shadow-sm transition-all">
-<div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
-<h4 class="font-title-sm text-on-surface text-lg">成熟期：全面推廣與永續驗證</h4>
-<span class="inline-block text-xs font-label-caps text-on-surface-variant bg-surface-container px-4 py-1.5 rounded-full border border-surface-variant">規劃中</span>
-</div>
-<p class="font-body-md text-on-surface-variant px-4 md:px-8">將示範區成功經驗擴展至全市，達成公共設施100%綠電目標，並取得國際永續城市認證。</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Call to Action -->
-<section class="flex flex-col sm:flex-row gap-4 justify-center items-center py-8 px-4 border-t border-surface-variant/30 mt-8 relative">
-<button class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-[#c2386d] text-white rounded-full font-title-sm shadow-[0_8px_20px_-6px_rgba(172,42,93,0.5)] hover:shadow-[0_12px_24px_-6px_rgba(172,42,93,0.6)] hover:-translate-y-1 active:translate-y-0 active:shadow-[0_4px_10px_-4px_rgba(172,42,93,0.5)] transition-all duration-300 flex items-center justify-center gap-2 border border-white/20"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">favorite</span>支持嫈珺</button>
-<button class="w-full sm:w-auto px-10 py-4 bg-white border border-surface-variant text-primary rounded-full font-title-sm shadow-[0_4px_12px_-6px_rgba(0,0,0,0.1)] hover:bg-surface-container-low hover:border-primary-container hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-md bg-white/60 active:scale-95">
-<span class="material-symbols-outlined">share</span>
-                分享
-            </button>
-</section>
+            
+            <div class="glass-card p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1.5 transition-all duration-300 shadow-lg border border-white/80 group">
+                <div class="w-16 h-16 shrink-0 bg-gradient-to-br from-tertiary-container to-tertiary text-white hex-shape flex items-center justify-center shadow-lg shadow-tertiary/25 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-on-surface mb-2 tracking-tight">20%收益法制化回饋社福基金</h4>
+                    <p class="text-on-surface-variant leading-relaxed">制定嚴謹的營運盈餘分潤與提撥機制，保障每年至少20%淨利直接挹注地方社會福利，建立企業發展與社區共好的永續循環模式。</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-start hover:-translate-y-1.5 transition-all duration-300 shadow-lg border border-white/80 group">
+                <div class="w-16 h-16 shrink-0 bg-gradient-to-br from-primary-container to-primary text-white hex-shape flex items-center justify-center shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-2xl drop-shadow-sm" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-on-surface mb-2 tracking-tight">在地產學合作與人才孵化基地</h4>
+                    <p class="text-on-surface-variant leading-relaxed">館內設立專業產學研發專區，深度媒合在地青年學子與科技龍頭企業，提供頂尖實習與高薪就業機會，創造嘉義子弟在家鄉安居樂業的條件。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="mb-16 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.2s;">
+        <h3 class="text-2xl md:text-3xl font-bold text-on-surface mb-8 flex items-center gap-3">
+            <span class="material-symbols-outlined text-tertiary bg-tertiary/10 p-2.5 rounded-xl shadow-inner">trending_up</span>
+            階段執行藍圖
+        </h3>
+        <div class="relative pl-8 md:pl-10">
+            <!-- Smooth curved line -->
+            <div class="absolute left-[15px] md:left-[19px] top-4 bottom-4 bg-gradient-to-b from-tertiary via-surface-variant to-surface-variant rounded-full" style="width: 3px;"></div>
+            
+            <!-- Step 1 -->
+            <div class="mb-12 relative group">
+                <div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-tertiary rounded-full border-4 border-background shadow-[0_0_0_4px_rgba(29,176,165,0.25)] z-10 transition-transform group-hover:scale-125"></div>
+                <div class="glass-card p-6 md:p-8 rounded-3xl border-l-4 border-l-tertiary hover:shadow-xl transition-all">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
+                        <h4 class="text-lg md:text-xl font-bold text-on-surface">啟動期：基礎建設評估與法規修訂</h4>
+                        <span class="inline-block text-xs font-bold text-white bg-gradient-to-r from-tertiary to-tertiary-container px-4 py-1.5 rounded-full shadow-sm tracking-wide">進行中</span>
+                    </div>
+                    <p class="text-on-surface-variant">完成基地選址與可行性評估，並啟動相關自治條例草案研擬。預計舉辦10場以上地方公民參與說明會，凝聚在地共識。</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="mb-12 relative group">
+                <div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-surface-variant rounded-full border-4 border-background z-10 transition-transform group-hover:scale-125 group-hover:bg-tertiary-container"></div>
+                <div class="glass-card p-6 md:p-8 rounded-3xl border border-surface-variant/70 hover:shadow-xl transition-all">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
+                        <h4 class="text-lg md:text-xl font-bold text-on-surface">發展期：工程招商與基金法制化</h4>
+                        <span class="inline-block text-xs font-bold text-on-surface-variant bg-surface-container px-4 py-1.5 rounded-full border border-surface-variant tracking-wide">規劃中</span>
+                    </div>
+                    <p class="text-on-surface-variant">展開展覽館主體工程發包與國際招商，同步完成「地方共榮社會福利基金」管理條例立法，確保社福專款制度健全。</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative group">
+                <div class="absolute -left-[35px] md:-left-[39px] top-4 w-6 h-6 bg-surface-variant rounded-full border-4 border-background z-10 transition-transform group-hover:scale-125 group-hover:bg-tertiary-container"></div>
+                <div class="glass-card p-6 md:p-8 rounded-3xl border border-surface-variant/70 hover:shadow-xl transition-all">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-3">
+                        <h4 class="text-lg md:text-xl font-bold text-on-surface">完工營運：國際會展啟動與紅利共享</h4>
+                        <span class="inline-block text-xs font-bold text-on-surface-variant bg-surface-container px-4 py-1.5 rounded-full border border-surface-variant tracking-wide">規劃中</span>
+                    </div>
+                    <p class="text-on-surface-variant">世貿展覽館正式落成剪綵，舉辦首屆國際半導體應用展，年度營運盈餘同步提撥首筆20%社福基金，造福朴子鄉親。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="flex flex-col sm:flex-row gap-4 justify-center items-center py-10 px-4 border-t border-surface-variant/40 mt-12 relative animate-fade-up">
+        <button onclick="supportAction()" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-[#c2386d] text-white rounded-full font-bold text-lg shadow-[0_10px_25px_-5px_rgba(172,42,93,0.5)] hover:shadow-[0_15px_30px_-5px_rgba(172,42,93,0.6)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 border border-white/25 cursor-pointer">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            支持嫈珺，共創未來
+        </button>
+        <button onclick="sharePage()" class="w-full sm:w-auto px-10 py-4 bg-white/80 border border-surface-variant text-primary rounded-full font-bold text-lg shadow-[0_6px_16px_-4px_rgba(0,0,0,0.1)] hover:bg-white hover:border-primary hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-md cursor-pointer">
+            <span class="material-symbols-outlined">share</span>
+            分享此政見
+        </button>
+    </section>
+
 </main>
 
+<!-- Floating Toast Notification -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-on-surface text-surface px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 z-50 transition-all duration-300 font-medium">
+    <span class="material-symbols-outlined text-tertiary-fixed" id="toast-icon">check_circle</span>
+    <span id="toast-msg">已複製政見連結！</span>
+</div>
 
-</body></html>
+<script>
+    // Return to home / previous page handler
+    function goBack() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            showToast("已回到首頁檢視區", "info");
+        }
+    }
+
+    // Support button interactive action
+    function supportAction() {
+        showToast("感謝您的熱情支持！讓我們一起打造永續朴子。", "favorite");
+    }
+
+    // Interactive Share function (clipboard copy fallback compatible)
+    function sharePage() {
+        const url = window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast("政見連結已成功複製，快分享給好友吧！", "link");
+            }).catch(() => {
+                fallbackCopy(url);
+            });
+        } else {
+            fallbackCopy(url);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";  // Avoid scrolling to bottom
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast("政見連結已成功複製！", "link");
+        } catch (err) {
+            showToast("複製連結失敗，請手動複製網址。", "error");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    // Toast Notification controller
+    function showToast(message, iconType = "check_circle") {
+        const toast = document.getElementById("toast");
+        const msgEl = document.getElementById("toast-msg");
+        const iconEl = document.getElementById("toast-icon");
+        
+        msgEl.textContent = message;
+        iconEl.textContent = iconType === "favorite" ? "favorite" : (iconType === "link" ? "share" : "info");
+        
+        toast.classList.remove("translate-y-20", "opacity-0");
+        toast.classList.add("translate-y-0", "opacity-100");
+        
+        setTimeout(() => {
+            toast.classList.remove("translate-y-0", "opacity-100");
+            toast.classList.add("translate-y-20", "opacity-0");
+        }, 3500);
+    }
+</script>
+
+</body>
+</html>
