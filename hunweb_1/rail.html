@@ -136,6 +136,14 @@
             border: 2px solid #5e4dbb;
             z-index: 2;
         }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
@@ -169,19 +177,53 @@
                     輕軌延伸朴子市區
                 </h1>
 
-                <!-- FB Reel 影片容器：完美置中與裝飾邊框 -->
-                <div class="video-wrapper relative w-fit mx-auto rounded-[2rem] overflow-hidden ambient-shadow bg-white/40 p-2 backdrop-blur-sm border border-white/60">
-                    <iframe 
-                        src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2831228123894088%2F&show_text=false&width=267&t=0" 
-                        width="267" 
-                        height="476" 
-                        class="rounded-[1.5rem]"
-                        style="border:none;overflow:hidden" 
-                        scrolling="no" 
-                        frameborder="0" 
-                        allowfullscreen="true" 
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                    </iframe>
+                <div class="relative w-fit mx-auto">
+                    <!-- 桌機/平板版滑動提示文字 -->
+                    <div class="absolute -right-12 top-1/2 -translate-y-1/2 flex-col items-center gap-2 opacity-50 hidden md:flex">
+                        <span class="material-symbols-outlined animate-bounce">swipe_up</span>
+                        <span class="text-xs font-bold tracking-widest text-primary" style="writing-mode: vertical-rl;">滑動觀看更多</span>
+                    </div>
+
+                    <div class="video-wrapper relative w-[283px] rounded-[2rem] overflow-hidden ambient-shadow bg-white/40 p-2 backdrop-blur-sm border border-white/60">
+                        
+                        <!-- 滑動視窗 (Scroll Container) -->
+                        <div class="h-[476px] w-full overflow-y-auto snap-y snap-mandatory hide-scrollbar rounded-[1.5rem] relative bg-black/5">
+                            
+                            <!-- 第一支影片 -->
+                            <div class="w-full h-full snap-start flex justify-center items-center bg-black/5 relative">
+                                <iframe 
+                                    src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2831228123894088%2F&show_text=false&width=267&t=0" 
+                                    width="267" 
+                                    height="476" 
+                                    style="border:none;overflow:hidden" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowfullscreen="true" 
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                </iframe>
+                            </div>
+                            
+                            <!-- 第二支影片 -->
+                            <div class="w-full h-full snap-start flex justify-center items-center bg-black/5 relative">
+                                <iframe 
+                                    src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1305516061406074%2F&show_text=false&width=267&t=0" 
+                                    width="267" 
+                                    height="476" 
+                                    style="border:none;overflow:hidden" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowfullscreen="true" 
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                </iframe>
+                            </div>
+                            
+                        </div>
+
+                        <!-- 手機版懸浮提示 (向下引導指示) -->
+                        <div class="absolute bottom-6 right-4 w-9 h-9 bg-white/90 text-primary rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(172,42,93,0.3)] pointer-events-none animate-bounce z-10 border border-primary/20 backdrop-blur-md">
+                            <span class="material-symbols-outlined text-[20px]">keyboard_double_arrow_down</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
