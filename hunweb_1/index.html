@@ -7,8 +7,8 @@
     <title class="">政見總覽 - 黃嫈珺競選政見</title>
     
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
     <script id="tailwind-config">
         tailwind.config = {
@@ -273,55 +273,98 @@
                     </h2>
                 </div>
                 
-                <!-- Asymmetrical Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 mt-8">
+                <!-- Asymmetrical Grid: 統一加入 flex flex-col justify-between 確保高度對齊與按鈕置底 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 mt-8 items-stretch">
                     
                     <!-- Policy 1: Featured (Span 2 cols on tablet) -->
-                    <!-- 加入 active:scale-[0.98] 增強行動端點擊回饋 -->
-                    <a href="top.html" class="md:col-span-2 lg:col-span-1 glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-primary/30 flex flex-col items-start gap-4 relative overflow-hidden xl:hover:scale-[1.02]">
+                    <a href="#" class="md:col-span-2 lg:col-span-1 glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-primary/30 flex flex-col justify-between h-full relative overflow-hidden xl:hover:scale-[1.02]">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/20 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed to-primary-fixed-dim flex items-center justify-center text-primary xl:group-hover:scale-110 transition-transform shadow-sm">
-                            <span class="material-symbols-outlined text-3xl" data-icon="business_center">business_center</span>
+                        
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed to-primary-fixed-dim flex items-center justify-center text-primary xl:group-hover:scale-110 transition-transform shadow-sm">
+                                <span class="material-symbols-outlined text-3xl" data-icon="business_center">business_center</span>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">嘉義朴子世貿千億商機</h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">精準抓住台積電與無人機商機，20%營收專款專用於地方老人、幼兒社福。</p>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">嘉義朴子世貿千億商機</h3>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">精準抓住台積電與無人機商機，20%營收專款專用於地方老人、幼兒社福。</p>
+                        
+                        <!-- 視覺提示 CTA -->
+                        <div class="mt-6 pt-4 border-t border-primary/10 flex items-center justify-between w-full">
+                            <span class="text-sm font-bold text-primary opacity-80 group-hover:opacity-100 transition-opacity">探索詳情</span>
+                            <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:translate-x-1">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
                         </div>
                     </a>
 
-                    <!-- Policy 2 -->
-                    <a href="rail.html" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-secondary/30 flex flex-col items-start gap-4 relative overflow-hidden mt-0 lg:mt-8 xl:hover:scale-[1.02]">
+                    <!-- Policy 2 (連結至鐵路頁面) -->
+                    <a href="rail.html" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-secondary/30 flex flex-col justify-between h-full relative overflow-hidden mt-0 lg:mt-8 xl:hover:scale-[1.02]">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed/30 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-fixed to-secondary-fixed-dim flex items-center justify-center text-secondary xl:group-hover:scale-110 transition-transform shadow-sm">
-                            <span class="material-symbols-outlined text-3xl" data-icon="train">train</span>
+                        
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-fixed to-secondary-fixed-dim flex items-center justify-center text-secondary xl:group-hover:scale-110 transition-transform shadow-sm">
+                                <span class="material-symbols-outlined text-3xl" data-icon="train">train</span>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-secondary transition-colors">輕軌延伸朴子市區</h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">延伸嘉義捷運藍線，串聯台積電特區與嘉科，將就業人口留在朴子。</p>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-secondary transition-colors">輕軌延伸朴子市區</h3>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">延伸嘉義捷運藍線，串聯台積電特區與嘉科，將就業人口留在朴子。</p>
+
+                        <!-- 視覺提示 CTA -->
+                        <div class="mt-6 pt-4 border-t border-secondary/10 flex items-center justify-between w-full">
+                            <span class="text-sm font-bold text-secondary opacity-80 group-hover:opacity-100 transition-opacity">探索詳情</span>
+                            <div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all duration-300 transform group-hover:translate-x-1">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
                         </div>
                     </a>
 
                     <!-- Policy 3 -->
-                    <a href="lead.html" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-tertiary-container/30 flex flex-col items-start gap-4 relative overflow-hidden mt-0 lg:mt-4 xl:hover:scale-[1.02]">
+                    <a href="#" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-tertiary-container/30 flex flex-col justify-between h-full relative overflow-hidden mt-0 lg:mt-4 xl:hover:scale-[1.02]">
                         <div class="absolute bottom-0 right-0 w-32 h-32 bg-tertiary-fixed/30 rounded-tl-full -z-10 transition-transform group-hover:scale-110"></div>
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-tertiary-fixed to-tertiary-fixed-dim flex items-center justify-center text-tertiary-container xl:group-hover:scale-110 transition-transform shadow-sm">
-                            <span class="material-symbols-outlined text-3xl" data-icon="pool">pool</span>
+                        
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-tertiary-fixed to-tertiary-fixed-dim flex items-center justify-center text-tertiary-container xl:group-hover:scale-110 transition-transform shadow-sm">
+                                <span class="material-symbols-outlined text-3xl" data-icon="pool">pool</span>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-tertiary-container transition-colors">設立多功能滯洪池運動中心</h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">將閒置多年的朴子游泳池打造成為結合滯洪池概念的運動休閒場域。</p>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-tertiary-container transition-colors">設立多功能滯洪池運動中心</h3>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">將閒置多年的朴子游泳池打造成為結合滯洪池概念的運動休閒場域。</p>
+
+                        <!-- 視覺提示 CTA -->
+                        <div class="mt-6 pt-4 border-t border-tertiary-container/10 flex items-center justify-between w-full">
+                            <span class="text-sm font-bold text-tertiary-container opacity-80 group-hover:opacity-100 transition-opacity">探索詳情</span>
+                            <div class="w-8 h-8 rounded-full bg-tertiary-container/10 text-tertiary-container flex items-center justify-center group-hover:bg-tertiary-container group-hover:text-white transition-all duration-300 transform group-hover:translate-x-1">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
                         </div>
                     </a>
                     
-                    <!-- Policy 4 -->
-                    <a href="medical.html" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-primary/30 flex flex-col items-start gap-4 relative overflow-hidden xl:hover:scale-[1.02]">
+                    <!-- Policy 4 (連結至醫療頁面) -->
+                    <a href="medical.html" class="glass-panel rounded-3xl p-6 ambient-shadow-1 hover:ambient-shadow-2 active:scale-[0.98] transition-all duration-300 group cursor-pointer border border-white/60 hover:border-primary/30 flex flex-col justify-between h-full relative overflow-hidden xl:hover:scale-[1.02]">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/20 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed to-primary-fixed-dim flex items-center justify-center text-primary xl:group-hover:scale-110 transition-transform shadow-sm">
-                            <span class="material-symbols-outlined text-3xl">medical_services</span>
+                        
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-fixed to-primary-fixed-dim flex items-center justify-center text-primary xl:group-hover:scale-110 transition-transform shadow-sm">
+                                <span class="material-symbols-outlined text-3xl">medical_services</span>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">周周免費接駁醫療</h3>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">提供每週固定班次接駁，串聯社區與大型醫療院所，讓長輩就醫無礙。</p>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <h3 class="font-title-sm text-title-sm text-on-surface mb-2 font-bold group-hover:text-primary transition-colors">週週免費接駁醫療</h3>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">提供每週固定班次接駁，串聯社區與大型醫療院所，讓長輩就醫無礙。</p>
+
+                        <!-- 視覺提示 CTA -->
+                        <div class="mt-6 pt-4 border-t border-primary/10 flex items-center justify-between w-full">
+                            <span class="text-sm font-bold text-primary opacity-80 group-hover:opacity-100 transition-opacity">探索詳情</span>
+                            <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:translate-x-1">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
                         </div>
                     </a>
                     
@@ -333,3 +376,5 @@
     
 </body>
 </html>
+
+
